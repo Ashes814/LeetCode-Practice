@@ -1,2 +1,6 @@
-#include <stdio.h>
-#define MaxSize 10
+#include<stdio.h>
+int main(int argc, char const *argv[])
+{
+    printf("hello world!\n");
+    return 0;
+}
