@@ -1,2 +1,3 @@
 # LeetCode-Practice
-A repo for storing LeetCode
+
+数据结构与算法学习过程中的各种代码与案例
