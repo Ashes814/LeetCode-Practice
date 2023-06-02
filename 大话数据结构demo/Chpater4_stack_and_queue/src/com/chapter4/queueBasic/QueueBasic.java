@@ -1,24 +1,24 @@
 package com.chapter4.queueBasic;
 
+
 /**
  * @author 欧欧
  * @version 1.0
  */
 public class QueueBasic {
     public static void main(String[] args) {
-        LoopQueue loopQueue = new LoopQueue(5);
-        loopQueue.enQueue(1);
-        loopQueue.enQueue(2);
-        loopQueue.enQueue(3);
-        loopQueue.enQueue(4);
-        loopQueue.enQueue(5);
+        LinkedQueue<Integer> linkedQueue= new LinkedQueue<>();
+        linkedQueue.EnQueue(1);
+        linkedQueue.EnQueue(2);
+        linkedQueue.EnQueue(3);
+        linkedQueue.EnQueue(4);
 
-        System.out.println(loopQueue.deQueue());
-        System.out.println(loopQueue.deQueue());
-        loopQueue.enQueue(6);
-        System.out.println(loopQueue.deQueue());
-        System.out.println(loopQueue.deQueue());
-        System.out.println(loopQueue.deQueue());
+        System.out.println(linkedQueue.DeQueue());
+        System.out.println(linkedQueue.DeQueue());
+        System.out.println(linkedQueue.DeQueue());
+        System.out.println(linkedQueue.DeQueue());
+        linkedQueue.EnQueue(5);
+        System.out.println(linkedQueue.DeQueue());
     }
 }
 
@@ -69,5 +69,46 @@ class LoopQueue {
 
     public void pop() {
 
+    }
+}
+class LinkedQueue<T> {
+    public Node<T> front;
+    public Node<T> rear;
+    private int size;
+    private class Node<T> {
+        public T data;
+        private Node<T> next;
+
+        public Node(T data) {
+            this.data = data;
+        }
+    }
+
+    public LinkedQueue() {
+        this.front = this.rear = new Node<T>(null);
+
+    }
+
+    public void EnQueue(T ele) {
+        Node<T> eleNode = new Node<T>(ele);
+        rear.next = eleNode;
+        rear = eleNode;
+        size++;
+    }
+
+    public T DeQueue() {
+        if (front == rear) {
+            System.out.println("Queue Empty");
+            return null;
+        }
+
+        Node<T> valueNode = front.next;
+        front.next = valueNode.next;
+
+        if (valueNode == rear) {
+            rear = front;
+        }
+        size--;
+        return valueNode.data;
     }
 }
