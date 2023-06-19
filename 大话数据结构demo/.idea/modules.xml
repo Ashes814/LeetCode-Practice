@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Chapter5_string/Chapter5_string.iml" filepath="$PROJECT_DIR$/Chapter5_string/Chapter5_string.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chpater4_stack_and_queue/Chpater4_stack_and_queue.iml" filepath="$PROJECT_DIR$/Chpater4_stack_and_queue/Chpater4_stack_and_queue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter6_tree/chapter6_tree.iml" filepath="$PROJECT_DIR$/chapter6_tree/chapter6_tree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter7_graph/chapter7_graph.iml" filepath="$PROJECT_DIR$/chapter7_graph/chapter7_graph.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/大话数据结构demo.iml" filepath="$PROJECT_DIR$/.idea/大话数据结构demo.iml" />
+    </modules>
+  </component>
+</project>

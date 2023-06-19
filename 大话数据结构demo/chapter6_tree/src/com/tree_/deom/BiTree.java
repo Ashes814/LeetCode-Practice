@@ -8,27 +8,6 @@ import java.util.Scanner;
  */
 public class BiTree {
     public static void main(String[] args) {
-        BifurTree bifurTree = new BifurTree();
-        Scanner scanner = new Scanner(System.in);
-        String data;
-        data = scanner.next();
-        createByFor(bifurTree, data);
-    }
-
-    public static void createByFor(BifurTree tree, String data) {
-
-        if (data.equals("exit")) {
-            return;
-        }
-        if (data.equals("#")) {
-            tree = null;
-        } else {
-            tree = new BifurTree(data);
-            createByFor(tree.left, data);
-            createByFor(tree.right, data);
-
-        }
-
 
     }
 
@@ -37,30 +16,40 @@ public class BiTree {
 
 class Node {
     String data;
-    BifurTree left;
-    BifurTree right;
+    Node left;
+    Node right;
 
-    Node() {
-        this.data = null;
-    }
     Node(String data) {
         this.data = data;
+        left = null;
+        right = null;
 
     }
 }
 
 
 class BifurTree {
+    Node root;
 
-    String data;
-    BifurTree left;
-    BifurTree right;
+
     public BifurTree() {
-
+        root = null;
     }
-    public BifurTree(String data) {
-        this.data = data;
-        this.left = new BifurTree();
-        this.right = new BifurTree();
+
+    public void insert(String data) {
+        root = insert(root, data);
+    }
+
+    public Node insert(Node node, String data) {
+        if (node == null) {
+            return new Node(data);
+        } else {
+            if (node.right == null) {
+                node.right = insert(node.right, data);
+            } else {
+                node.left = insert(node.left, data);
+            }
+        }
+        return node;
     }
 }
