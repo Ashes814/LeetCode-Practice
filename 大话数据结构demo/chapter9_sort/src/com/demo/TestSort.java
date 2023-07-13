@@ -6,8 +6,9 @@ package com.demo;
  */
 public class TestSort {
     public static void main(String[] args) {
-        int[] testArr = {0,1,2,3,4,5, 6,7,8};
+        int[] testArr = {50, 10, 90, 30, 70, 40, 80, 60, 20};
         SqList test = new SqList(testArr);
+        QuickSort.startSort(test);
         System.out.println(test);
     }
 }
