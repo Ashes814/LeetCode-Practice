@@ -1,6 +1,7 @@
 package AlgViliage.Level1;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
@@ -10,6 +11,14 @@ import java.util.Stack;
  */
 public class ListNodeLeetCode {
     public static void main(String[] args) {
+        ListNodeLC testListNode = new ListNodeLC(3);
+        testListNode.next = new ListNodeLC(2);
+        testListNode.next.next = new ListNodeLC(0);
+        testListNode.next.next.next = new ListNodeLC(-4);
+        testListNode.next.next.next = testListNode.next;
+
+        System.out.println(findCycleNode(testListNode).val);
+
 
     }
 
@@ -271,7 +280,55 @@ public class ListNodeLeetCode {
         return p1;
 
     }
-    public static ListNodeLC findFirstCommonNode2(ListNodeLC pHead1, ListNodeLC pHead2) {}
+
+    public static boolean detectCycle(ListNodeLC head) {
+        ListNodeLC temp = head;
+        HashSet<ListNodeLC> listNodeLCS = new HashSet<>();
+        while (temp != null) {
+            if (listNodeLCS.contains(temp)) {
+                return true;
+            } else {
+                listNodeLCS.add(temp);
+                temp = temp.next;
+            }
+
+        }
+
+        return false;
+    }
+    public static boolean detectCycleWithO1(ListNodeLC head) {
+        ListNodeLC fast = head;
+        ListNodeLC slow = head;
+
+        while (slow != null && fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+    public static ListNodeLC findCycleNode(ListNodeLC head) {
+      ListNodeLC fast = head;
+      ListNodeLC slow = head;
+      while (slow != null && fast != null && fast.next != null) {
+          slow = slow.next;
+          fast = fast.next.next;
+          if (slow == fast) {
+              slow = head;
+              break;
+          }
+      }
+      while (slow != fast) {
+          slow = slow.next;
+          fast = fast.next;
+      }
+      return slow;
+    };
+
 
 }
 
