@@ -312,6 +312,9 @@ public class ListNodeLeetCode {
 
     }
     public static ListNodeLC findCycleNode(ListNodeLC head) {
+        if (head == null) {
+            return null;
+        }
       ListNodeLC fast = head;
       ListNodeLC slow = head;
       while (slow != null && fast != null && fast.next != null) {
