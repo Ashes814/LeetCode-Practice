@@ -333,6 +333,8 @@ public class ListNodeLeetCode {
     };
 
 
+
+
 }
 
 class ListNodeLC {
@@ -342,5 +344,18 @@ class ListNodeLC {
     ListNodeLC(int x) {
         val = x;
         next = null;
+    }
+}
+
+class DoubleNode {
+    public int data;
+    public DoubleNode next;
+    public DoubleNode prev;
+    public DoubleNode(int data) {
+        this.data = data;
+    }
+
+    public void displayNode() {
+        System.out.println("{" + data + "} ");
     }
 }
