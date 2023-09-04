@@ -8,14 +8,21 @@ import java.util.List;
  */
 public class ListNodeLevel2 {
     public static void main(String[] args) {
-        ListNode head = new ListNode(1,
+        ListNode head = new ListNode(7,
                         new ListNode(2,
-                        new ListNode(3,
                         new ListNode(4,
-                        null))));
+                        new ListNode(3,
+                        new ListNode(9)))));
+        ListNode head2 = new ListNode(8,
+                        new ListNode(7,
+                        new ListNode(4,
+                        new ListNode(3))));
+        showList(head);
+        showList(head2);
 
 
-        showList(swapPairs(head));
+
+        showList(addTwoNumbers(head, head2));
     }
 
     public static void showList(ListNode head) {
@@ -136,6 +143,75 @@ public class ListNodeLevel2 {
         // swap
 
 
+    }
+    public static ListNode plusOne(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        ListNode dummyNode = new ListNode(0);
+        dummyNode.next = head;
+        ListNode rHead = reverseList(dummyNode);
+        ListNode cur = rHead;
+        while (cur != null) {
+            if (cur.val < 9) {
+                cur.val++;
+                break;
+            } else {
+                cur.val = 0;
+                cur = cur.next;
+            }
+        }
+        ListNode res = reverseList(rHead);
+        if (res.val == 0) {
+            return res.next;
+        } else {
+            return res;
+        }
+    }
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(0);
+        ListNode cur = res;
+        ListNode rL1 = reverseList(l1);
+        ListNode rL2= reverseList(l2);
+        int carry = 0;
+        int sum = 0;
+        while (rL1 != null || rL2 != null) {
+            sum = (rL1 != null ? rL1.val : 0) + (rL2 != null ? rL2.val : 0);
+            if (sum + carry < 10) {
+                cur.val = sum + carry;
+                cur.next = new ListNode(0);
+                carry = 0;
+                cur = cur.next;
+
+            } else {
+
+                sum -= 10;
+                cur.val = sum + carry;
+                cur.next = new ListNode(0);
+                cur = cur.next;
+                carry = 1;
+            }
+
+            if (rL1 == null) {
+                rL2 = rL2.next;
+            } else if (rL2 == null) {
+                rL1 = rL1.next;
+            } else {
+                rL1 = rL1.next;
+                rL2 = rL2.next;
+            }
+
+
+
+        };
+        res = reverseList(res);
+        if (carry == 1) {
+            res.val = 1;
+            return res;
+        } else {
+            return res.next;
+        }
     }
 
 }
