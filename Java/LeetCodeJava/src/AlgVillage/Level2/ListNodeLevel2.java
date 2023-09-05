@@ -8,21 +8,24 @@ import java.util.List;
  */
 public class ListNodeLevel2 {
     public static void main(String[] args) {
-        ListNode head = new ListNode(7,
+        ListNode head = new ListNode(1,
                         new ListNode(2,
-                        new ListNode(4,
                         new ListNode(3,
-                        new ListNode(9)))));
-        ListNode head2 = new ListNode(8,
-                        new ListNode(7,
                         new ListNode(4,
-                        new ListNode(3))));
-        showList(head);
-        showList(head2);
+                        new ListNode(5,
+                        new ListNode(6,
+                        new ListNode(7,
+                        new ListNode(8))))))));
+//        ListNode head2 = new ListNode(8,
+//                        new ListNode(7,
+//                        new ListNode(4,
+//                        new ListNode(3))));
+//        showList(head);
 
 
 
-        showList(addTwoNumbers(head, head2));
+
+        showList(reverseKGroup(head, 4));
     }
 
     public static void showList(ListNode head) {
@@ -242,6 +245,41 @@ public class ListNodeLevel2 {
             slow = slow.next;
         }
         return true;
+    };
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode temp = head;
+        int listLength = 0;
+        while (temp != null){
+            listLength++;
+            temp = temp.next;
+
+        }
+        int groups = listLength / k;
+        ListNode dummyNode = new ListNode(0);
+        dummyNode.next = head;
+        ListNode prev = dummyNode;
+        ListNode cur = prev.next;
+        ListNode next = cur.next;
+        for (int i = 0; i < groups; i++) {
+            for (int j = 0; j < k - 1; j++) {
+                cur.next = cur.next.next;
+                next.next = prev.next;
+                prev.next = next;
+                next = cur.next;
+
+            }
+            prev = cur;
+            cur = next;
+            if (next != null) {
+                 next = next.next;
+            }
+
+
+        }
+        return dummyNode.next;
     }
 
 }
