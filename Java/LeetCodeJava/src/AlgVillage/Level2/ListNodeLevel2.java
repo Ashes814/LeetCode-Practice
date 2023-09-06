@@ -25,7 +25,7 @@ public class ListNodeLevel2 {
 
 
 
-        showList(reverseKGroup(head, 4));
+        showList(helpEach(head));
     }
 
     public static void showList(ListNode head) {
@@ -280,6 +280,51 @@ public class ListNodeLevel2 {
 
         }
         return dummyNode.next;
+    }
+
+    public static ListNode helpEach(ListNode head) {
+        ListNode oddNode = new ListNode(-1);
+        ListNode evenNode = new ListNode(-1);
+        ListNode temp = head;
+        ListNode oddTemp = oddNode;
+        ListNode evenTemp = evenNode;
+
+        while (temp != null) {
+
+            if (temp.val % 2 != 0) {
+             if (temp.next.next == null) {
+                 evenTemp.next = temp.next;
+                 temp.next = null;
+                 oddTemp.next =temp;
+                 break;
+             }
+                oddTemp.next = temp;
+                oddTemp = oddTemp.next;
+
+
+            } else {
+                evenTemp.next = temp;
+                evenTemp = evenTemp.next;
+            }
+            temp = temp.next;
+        }
+        oddNode = oddNode.next;
+        evenNode = evenNode.next;
+
+        ListNode rEvenNode = reverseList(evenNode);
+        ListNode res = oddNode;
+        while (oddNode != null) {
+            ListNode oddNext = oddNode.next;
+            ListNode evenNext = rEvenNode.next;
+            oddNode.next = rEvenNode;
+            rEvenNode.next = oddNext;
+            rEvenNode = evenNext;
+            oddNode =  oddNext;
+
+        }
+        return res;
+
+
     }
 
 }
