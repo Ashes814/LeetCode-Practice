@@ -98,4 +98,40 @@ public class ArrayDemo {
         }
         return index;
     }
+
+    public static boolean isMonotonic(int[] nums) {
+
+        if (nums.length == 0 || nums.length == 1) {
+            return true;
+        }
+        boolean res = true;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] >=  nums[i - 1]) {
+
+            } else {
+                res = false;
+                break;
+            }
+
+        }
+
+        if (res) {
+            return res;
+        }
+        res = true;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] <=  nums[i - 1]) {
+                continue;
+            } else {
+                res = false;
+                break;
+            }
+
+        }
+
+        return res;
+
+    }
 }
