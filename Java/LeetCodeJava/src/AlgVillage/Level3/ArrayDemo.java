@@ -6,10 +6,12 @@ package AlgVillage.Level3;
  */
 public class ArrayDemo {
     public static void main(String[] args) {
-        int[] testArr = {1,3,5,7,9,0, 0, 0, 0};
-        System.out.println(removeByElement(testArr, 5, 1));
-        for (int i = 0; i < testArr.length; i++) {
-            System.out.println(testArr[i]);
+        int[] nums1 = {1,2,3, 0, 0, 0};
+        int[] nums2 = {2,5,6};
+        merge(nums1, 3, nums2, 3);
+//        System.out.println(removeByElement(testArr, 5, 1));
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.println(nums1[i]);
 
         }
 
@@ -132,6 +134,51 @@ public class ArrayDemo {
         }
 
         return res;
+
+    }
+
+    public static int searchInsert(int[] nums, int target) {
+       int left = 0;
+       int right = nums.length - 1;
+       while (right >= left) {
+           int mid = left + (right - left) / 2;
+           if (target > nums[mid]) {
+               left = mid + 1;
+           } else if (target < nums[mid]) {
+               right = mid - 1;
+           } else {
+               return mid;
+           }
+       }
+       return left;
+
+
+    }
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m + n - 1;
+        int len1 = m - 1;
+        int len2 = n - 1;
+        while (len1 >= 0 && len2 >= 0) {
+            if (nums1[len1] < nums2[len2]) {
+                nums1[i] = nums2[len2];
+                len2--;
+            } else if (nums1[len1] >= nums2[len2]) {
+                nums1[i] = nums1[len1];
+                len1--;
+            }
+            i--;
+        };
+
+        while (len1 >= 0) {
+            nums1[i] = nums1[len1];
+            i--;
+            len1--;
+        }
+        while (len2 >= 0) {
+            nums1[i] = nums2[len2];
+            i--;
+            len2--;
+        }
 
     }
 }
