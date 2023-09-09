@@ -218,4 +218,24 @@ public class ArrayDemo {
         }
         return slow;
     }
+
+    public static int[] sortArrayByParity(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (right >= left) {
+            if (nums[left] % 2 == 0) {
+                left++;
+            }
+            if (nums[right] % 2 == 1) {
+                right--;
+            }
+
+            if (nums[left] % 2 == 1 && nums[right] % 2 == 0) {
+                int temp = nums[right];
+                nums[left] = temp;
+                nums[right] = nums[left];
+            }
+        }
+        return nums;
+    }
 }
