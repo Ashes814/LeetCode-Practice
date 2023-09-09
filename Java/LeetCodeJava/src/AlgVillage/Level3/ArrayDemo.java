@@ -6,9 +6,9 @@ package AlgVillage.Level3;
  */
 public class ArrayDemo {
     public static void main(String[] args) {
-        int[] nums1 = {3, 2,2, 3};
-        int[] nums2 = {0,1,2,2,3,0,4,2};
-        System.out.println(removeElement(nums1, 3));
+        int[] nums1 = {1, 1,2};
+        int[] nums2 = {0,0,1,1,1,2,2,3,3,4};
+        System.out.println(removeDuplicates(nums1));
 //        System.out.println(removeByElement(testArr, 5, 1));
         for (int i = 0; i < nums1.length; i++) {
             System.out.println(nums1[i]);
@@ -191,6 +191,28 @@ public class ArrayDemo {
                 fast++;
                 slow++;
             } else if (nums[fast] == val) {
+                fast++;
+            }
+        }
+        return slow;
+    }
+
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length == 1) {
+            return 1;
+        }
+        if (nums.length == 0) {
+            return 0;
+        }
+        int slow = 1;
+        int fast = 1;
+        while (fast < nums.length) {
+            if (nums[fast] != nums[slow - 1]) {
+                nums[slow] = nums[fast];
+                fast++;
+                slow++;
+
+            } else if (nums[fast] == nums[slow - 1]) {
                 fast++;
             }
         }
