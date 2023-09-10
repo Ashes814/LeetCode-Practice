@@ -6,9 +6,9 @@ package AlgVillage.Level3;
  */
 public class ArrayDemo {
     public static void main(String[] args) {
-        int[] nums1 = {1, 1,2};
+        int[] nums1 = {1,2,3,4,5,6,7,8,9};
         int[] nums2 = {0,0,1,1,1,2,2,3,3,4};
-        System.out.println(removeDuplicates(nums1));
+        rotate(nums1, 0);
 //        System.out.println(removeByElement(testArr, 5, 1));
         for (int i = 0; i < nums1.length; i++) {
             System.out.println(nums1[i]);
@@ -237,5 +237,42 @@ public class ArrayDemo {
             }
         }
         return nums;
+    }
+
+    public static int[] reverseArray(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (right >= left) {
+            int temp = nums[right];
+            nums[right] = nums[left];
+            nums[left] = temp;
+            right--;
+            left++;
+        }
+        return nums;
+    }
+    public static void rotate(int[] nums, int k) {
+        if (k >= nums.length) {
+            k = k % nums.length;
+        }
+        reverseArray(nums);
+        int[] leftArray = new int[k];
+        int[] rightArray = new int[nums.length - k];
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k) {
+                leftArray[i] = nums[i];
+            } else {
+                rightArray[i - k] = nums[i];
+            }
+        }
+        reverseArray(leftArray);
+        reverseArray(rightArray);
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k) {
+                nums[i] = leftArray[i];
+            } else {
+                nums[i] = rightArray[i - k];
+            }
+        }
     }
 }
