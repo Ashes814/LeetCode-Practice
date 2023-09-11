@@ -11,7 +11,7 @@ public class ArrayDemo {
     public static void main(String[] args) {
         int[] nums1 = {0,1,2,4,5,7};
         int[] nums2 = {0,0,1,1,1,2,2,3,3,4};
-        System.out.println(summaryRanges(nums1));
+        System.out.println(replaceSpace(new StringBuffer("We are happy!")));
 //        rotate(nums1, 0);
 //        System.out.println(removeByElement(testArr, 5, 1));
 //        for (int i = 0; i < nums1.length; i++) {
@@ -313,5 +313,35 @@ public class ArrayDemo {
 
         }
         return res;
+    }
+
+    public static String replaceSpace(StringBuffer str) {
+        if (str == null) {
+            return null;
+        }
+        int numOfblank = 0;
+        int len = str.length();
+        for (int i = 0; i < len; i++) {
+            if (str.charAt(i) == ' ') {
+                numOfblank++;
+            };
+        }
+        str.setLength(len + 2 * numOfblank);
+        int fast = len - 1;
+        int slow = (len - 1 + 2 * numOfblank);
+        while (fast >= 0 && slow > fast) {
+            char c = str.charAt(fast);
+            if (c == ' ') {
+                fast--;
+                str.setCharAt(slow--, '0');
+                str.setCharAt(slow--, '2');
+                str.setCharAt(slow--, '%');
+            } else {
+                str.setCharAt(slow, c);
+                fast--;
+                slow--;
+            }
+        }
+        return str.toString();
     }
 }
