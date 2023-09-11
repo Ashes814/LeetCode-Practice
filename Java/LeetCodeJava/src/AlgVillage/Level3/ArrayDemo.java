@@ -1,19 +1,23 @@
 package AlgVillage.Level3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author 欧欧
  * @version 1.0
  */
 public class ArrayDemo {
     public static void main(String[] args) {
-        int[] nums1 = {1,2,3,4,5,6,7,8,9};
+        int[] nums1 = {0,1,2,4,5,7};
         int[] nums2 = {0,0,1,1,1,2,2,3,3,4};
-        rotate(nums1, 0);
+        System.out.println(summaryRanges(nums1));
+//        rotate(nums1, 0);
 //        System.out.println(removeByElement(testArr, 5, 1));
-        for (int i = 0; i < nums1.length; i++) {
-            System.out.println(nums1[i]);
-
-        }
+//        for (int i = 0; i < nums1.length; i++) {
+//            System.out.println(nums1[i]);
+//
+//        }
 
     }
 
@@ -274,5 +278,40 @@ public class ArrayDemo {
                 nums[i] = rightArray[i - k];
             }
         }
+    }
+
+    public static List<String> summaryRanges(int[] nums) {
+        String quote = "\"";
+        List<String> res = new ArrayList<>();
+        if (nums.length == 1) {
+            res.add("\""  + nums[0] + "\"" );
+            return res;
+        }
+        int slow = 0;
+        int fast = 1;
+        while (fast < nums.length) {
+            if ((nums[fast] - 1) == nums[fast - 1]) {
+                fast++;
+                if ((fast == nums.length)) {
+                    res.add("\"" + nums[slow]+"->" +nums[fast - 1]+"\"" );
+                }
+            } else {
+                if (nums[slow] == nums[fast - 1]) {
+                    res.add("\""  + nums[slow] + "\"" );
+                } else {
+                    res.add("\""  + nums[slow]+"->" +nums[fast - 1] + "\"" );
+                }
+
+                slow = fast;
+                fast++;
+
+
+                if ((fast == nums.length)) {
+                    res.add("\"" + nums[fast - 1] + "\"");
+                }
+            }
+
+        }
+        return res;
     }
 }
