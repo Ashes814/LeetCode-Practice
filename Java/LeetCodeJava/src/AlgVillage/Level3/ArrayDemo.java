@@ -1,7 +1,9 @@
 package AlgVillage.Level3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 欧欧
@@ -10,8 +12,8 @@ import java.util.List;
 public class ArrayDemo {
     public static void main(String[] args) {
         int[] nums1 = {0,1,2,4,5,7};
-        int[] nums2 = {0,0,1,1,1,2,2,3,3,4};
-        System.out.println(replaceSpace(new StringBuffer("We are happy!")));
+        int[] nums2 = {0,0,1,1,1,1,1,1,1,1,2,2,3,3,4};
+        System.out.println(moreThanHalfNum(nums2));
 //        rotate(nums1, 0);
 //        System.out.println(removeByElement(testArr, 5, 1));
 //        for (int i = 0; i < nums1.length; i++) {
@@ -343,5 +345,21 @@ public class ArrayDemo {
             }
         }
         return str.toString();
+    }
+
+    public static int moreThanHalfNum(int[] array) {
+        if (array == null) {
+            return 0;
+        }
+        Map<Integer, Integer> res = new HashMap<>();
+        int len = array.length;
+        for (int i = 0; i < len; i++) {
+            res.put(array[i], res.getOrDefault(array[i], 0) + 1);
+            if (res.get(array[i]) > len / 2) {
+                return array[i];
+            }
+
+        }
+        return 0;
     }
 }
