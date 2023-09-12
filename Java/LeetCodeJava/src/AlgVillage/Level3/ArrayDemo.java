@@ -11,9 +11,9 @@ import java.util.Map;
  */
 public class ArrayDemo {
     public static void main(String[] args) {
-        int[] nums1 = {0,1,2,4,5,7};
+        int[] nums1 = {0,1,1,2,2,4,5,7, 7, 5, 0};
         int[] nums2 = {0,0,1,1,1,1,1,1,1,1,2,2,3,3,4};
-        System.out.println(moreThanHalfNum(nums2));
+        System.out.println(singleNumber(nums1));
 //        rotate(nums1, 0);
 //        System.out.println(removeByElement(testArr, 5, 1));
 //        for (int i = 0; i < nums1.length; i++) {
@@ -361,5 +361,20 @@ public class ArrayDemo {
 
         }
         return 0;
+    }
+
+    public static int singleNumber(int[] nums) {
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            res = res ^ nums[i];
+        }
+        return res;
+    }
+    public static int singleNumberII(int[] nums) {
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            res = res ^ nums[i];
+        }
+        return res;
     }
 }
