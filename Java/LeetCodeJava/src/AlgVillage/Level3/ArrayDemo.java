@@ -11,15 +11,15 @@ import java.util.Map;
  */
 public class ArrayDemo {
     public static void main(String[] args) {
-        int[] nums1 = {0,1,1,2,2,4,5,7, 7, 5, 0};
+        int[] nums1 = {0,1,2};
         int[] nums2 = {0,0,1,1,1,1,1,1,1,1,2,2,3,3,4};
-        System.out.println(singleNumber(nums1));
+        sortColors(nums1);
 //        rotate(nums1, 0);
 //        System.out.println(removeByElement(testArr, 5, 1));
-//        for (int i = 0; i < nums1.length; i++) {
-//            System.out.println(nums1[i]);
-//
-//        }
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.println(nums1[i]);
+
+        }
 
     }
 
@@ -379,5 +379,38 @@ public class ArrayDemo {
         }
 
         return ones;
+    }
+    public static void sortColors(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (right >= left) {
+            if (nums[left] == 2) {
+                int temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
+                right--;
+            }
+            if (nums[left] != 2) {
+                left++;
+            }
+
+        }
+        left = 0;
+        while (right > left) {
+            if (nums[left] == 1) {
+                int temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
+                right--;
+            }
+            if (nums[left] != 1) {
+                left++;
+            }
+
+        }
+
+
+
+
     }
 }
