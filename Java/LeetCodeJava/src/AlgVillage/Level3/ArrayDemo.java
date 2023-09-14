@@ -1,9 +1,6 @@
 package AlgVillage.Level3;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 欧欧
@@ -11,9 +8,9 @@ import java.util.Map;
  */
 public class ArrayDemo {
     public static void main(String[] args) {
-        int[] nums1 = {0,1,2};
-        int[] nums2 = {0,0,1,1,1,1,1,1,1,1,2,2,3,3,4};
-        sortColors(nums1);
+        int[] nums2 = {1,1,2,2,3,4,5};
+        int[] nums1 = {0,2,2,2,2,2,6};
+        removeAllDuplicates(nums1);
 //        rotate(nums1, 0);
 //        System.out.println(removeByElement(testArr, 5, 1));
         for (int i = 0; i < nums1.length; i++) {
@@ -410,6 +407,37 @@ public class ArrayDemo {
         }
 
 
+
+
+    }
+    public static void removeAllDuplicates(int[] nums) {
+        int slow = 0;
+        int fast = 1;
+        while (fast < nums.length) {
+            if ((fast + 1 == nums.length) && (nums[fast] == nums[slow]) && (fast != slow)) {
+                for (int i = slow; i <= fast; i++) {
+                    nums[i] = 99999999;
+
+                }
+            }
+
+            if (nums[fast] == nums[slow]) {
+                fast++;
+            } else {
+                if (fast-1 != slow) {
+                    for (int i = slow; i < fast; i++) {
+                        nums[i] = 99999999;
+
+                    }
+
+                }
+
+                slow = fast;
+                fast++;
+
+            }
+        }
+        Arrays.sort(nums);
 
 
     }
