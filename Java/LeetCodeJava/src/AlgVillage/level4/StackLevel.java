@@ -1,12 +1,48 @@
 package AlgVillage.level4;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * @author 欧欧
  * @version 1.0
  */
 public class StackLevel {
+    public static void main(String[] args) {
+        String test = "(]";
+        System.out.println(isValid(test));
+    }
+
+    public static boolean isValid(String s) {
+        Stack<Character> stringStack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char item = s.charAt(i);
+            if (item == '(' || item == '[' || item == '{') {
+                stringStack.push(item);
+            } else {
+                if (stringStack.isEmpty()) {
+                    return false;
+                } else {
+                    if (item == ')' && stringStack.pop() == '(') {
+                        continue;
+                    } else if (item == ']' && stringStack.pop() == '[') {
+                        continue;
+                    } else if (item == '}' && stringStack.pop() == '{') {
+                        continue;
+                    } else {
+                        return false;
+                    }
+
+                }
+            }
+        }
+        if (stringStack.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
 
 class MyStack<T> {
