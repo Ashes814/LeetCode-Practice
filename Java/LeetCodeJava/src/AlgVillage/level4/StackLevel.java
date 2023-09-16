@@ -9,8 +9,16 @@ import java.util.Stack;
  */
 public class StackLevel {
     public static void main(String[] args) {
-        String test = "(]";
-        System.out.println(isValid(test));
+//        String test = "(]";
+//        System.out.println(isValid(test));
+        MinStack minStack = new MinStack();
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        System.out.println(minStack.getMin());
+        minStack.pop();
+        System.out.println(minStack.top());
+        System.out.println(minStack.getMin());
     }
 
     public static boolean isValid(String s) {
@@ -41,6 +49,51 @@ public class StackLevel {
         } else {
             return false;
         }
+
+    }
+}
+
+class MinStack {
+    private Stack<Integer> stack;
+    private Stack<Integer> minS;
+    public MinStack() {
+        stack = new Stack<Integer>();
+        minS = new Stack<Integer>();
+
+    }
+
+    public void push(int val) {
+        stack.push(val);
+        if (minS.isEmpty()) {
+            minS.push(val);
+        } else if (val < minS.peek()){
+            minS.push(val);
+        } else {
+            minS.push(minS.peek());
+        }
+    }
+
+    public void pop() {
+        stack.pop();
+        minS.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+//        Stack<Integer> backupStack = (Stack<Integer>) stack.clone();
+//        int minValue = backupStack.pop();
+//        while (!backupStack.isEmpty()) {
+//            int popValue = backupStack.pop();
+//            if (popValue < minValue) {
+//                minValue = popValue;
+//            }
+//        }
+
+        return minS.peek();
+
 
     }
 }
