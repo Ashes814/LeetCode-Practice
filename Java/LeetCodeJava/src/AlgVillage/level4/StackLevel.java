@@ -97,6 +97,57 @@ class MinStack {
 
     }
 }
+class MaxStack {
+    private Stack<Integer> stack;
+    private Stack<Integer> maxS;
+    public MaxStack() {
+        stack = new Stack<Integer>();
+        maxS = new Stack<Integer>();
+
+    }
+
+    public void push(int val) {
+        stack.push(val);
+        if (maxS.isEmpty()) {
+            maxS.push(val);
+        } else if (val > maxS.peek()){
+            maxS.push(val);
+        } else {
+            maxS.push(maxS.peek());
+        }
+    }
+
+    public int pop() {
+        maxS.pop();
+        return stack.pop();
+
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int peekMax() {
+
+        return maxS.peek();
+
+    }
+
+    public int popMax() {
+        int max = this.peekMax();
+        Stack<Integer> buffer = new Stack<>();
+        while (this.top() != max) {
+            buffer.push(this.pop());
+        }
+        this.pop();
+        while (!buffer.isEmpty()) {
+            this.push(buffer.pop());
+        }
+        return max;
+
+
+    }
+}
 
 class MyStack<T> {
     private Object[] stack;
