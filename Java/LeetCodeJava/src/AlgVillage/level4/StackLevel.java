@@ -1,6 +1,8 @@
 package AlgVillage.level4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -19,7 +21,7 @@ public class StackLevel {
 //        minStack.pop();
 //        System.out.println(minStack.top());
 //        System.out.println(minStack.getMin());
-        System.out.println(calculate(" 3/2 "));
+        System.out.println(calculate(" 3 + 11 / 8 + 11  * 32"));
     }
 
     public static boolean isValid(String s) {
@@ -53,50 +55,83 @@ public class StackLevel {
 
     }
     public static int calculate(String inputString) {
+        String onlySymbol = inputString.replaceAll("\\d", " ").replaceAll(" ", "");
         String s = inputString.replaceAll(" ", "");
-        Stack<String> strings = new Stack<>();
-        Stack<String> strings2 = new Stack<>();
-        String left;
-        String right;
-        String sym;
+        String[] tokens = s.split("[+\\-*\\/]");
+        char[] symbols = onlySymbol.toCharArray();
+        List<String> stack = new ArrayList<>();
+        Stack<String> stack1 = new Stack<>();
+
+        int left;
+        int right;
+        char sym;
+        String symS;
         int res;
-        for (int i = 0; i < s.length(); i++) {
+        int i = 0;
+        int j = 0;
 
-            String c = Character.toString(s.charAt(i));
-            if (c.equals("*")) {
-                left = strings.pop();
-                right = Character.toString(s.charAt(i + 1));
-                res = Integer.parseInt(left) * Integer.parseInt(right);
-                strings.push(Integer.toString(res));
-                i++;
-            } else if (c.equals("/")) {
-                left = strings.pop();
-                right = Character.toString(s.charAt(i + 1));
-                res = Integer.parseInt(left)  / Integer.parseInt(right);
-                strings.push(Integer.toString(res));
-                i++;
+        boolean isCal = false;
+        while (i < tokens.length && j < symbols.length) {
+            left = Integer.parseInt(tokens[i]);
+            right = Integer.parseInt(tokens[i + 1]);
+            sym = symbols[j];
+            stack.add(String.valueOf(left));
+            stack.add(String.valueOf(sym));
+            stack.add(String.valueOf(right));
+
+            if (j + 1 < symbols.length) {
+                stack.add(String.valueOf(symbols[j + 1]));
+            }
+
+            i += 2;
+            j += 2;
+        }
+        if (i == tokens.length - 1) {
+            stack.add(tokens[i]);
+        }
+
+        left = Integer.parseInt(stack.get(0));
+        for (int k = 0; k < stack.size() - 2;) {
+            if (!isCal) {
+                left = Integer.parseInt(stack.get(k));
+            }
+
+            symS = stack.get(k + 1);
+            right = Integer.parseInt(stack.get(k + 2));
+
+
+            if (symS.equals("*")) {
+                res = left * right;
+                stack1.push(String.valueOf(res));
+                left = res;
+                isCal = true;
+                k += 2;
+            } else if (symS.equals("/")) {
+                res = left / right;
+                stack1.push(String.valueOf(res));
+                left = res;
+                isCal = true;
+                k += 2;
             } else {
-                strings.push(c);
+                stack1.push(String.valueOf(left));
+                stack1.push(symS);
+                k += 2;
+                isCal = false;
             }
 
-        }
-        while (!strings.isEmpty()) {
-            strings2.push(strings.pop());
-        }
-        while (strings2.size() != 1) {
-            left = strings2.pop();
-            sym = strings2.pop();
-            right = strings2.pop();
-            if (sym.equals("+")) {
-                res = Integer.parseInt(left)  + Integer.parseInt(right);
-                strings2.push(Integer.toString(res));
-            } else if (sym.equals("-")) {
-                res = Integer.parseInt(left)  - Integer.parseInt(right);
-                strings2.push(Integer.toString(res));
-            }
+
+
 
         }
-        return Integer.parseInt(strings2.pop());
+        if (stack1.peek().equals("+") || stack1.peek().equals("-")) {
+            stack1.push(stack.get(stack.size() - 1));
+        }
+        return 1;
+
+
+
+
+
 
     }
 }
