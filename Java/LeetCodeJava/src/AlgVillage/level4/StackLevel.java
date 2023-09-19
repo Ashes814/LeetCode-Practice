@@ -1,9 +1,6 @@
 package AlgVillage.level4;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author 欧欧
@@ -54,80 +51,39 @@ public class StackLevel {
         }
 
     }
-    public static int calculate(String inputString) {
-        String onlySymbol = inputString.replaceAll("\\d", " ").replaceAll(" ", "");
-        String s = inputString.replaceAll(" ", "");
-        String[] tokens = s.split("[+\\-*\\/]");
-        char[] symbols = onlySymbol.toCharArray();
-        List<String> stack = new ArrayList<>();
-        Stack<String> stack1 = new Stack<>();
-
-        int left;
-        int right;
-        char sym;
-        String symS;
-        int res;
-        int i = 0;
-        int j = 0;
-
-        boolean isCal = false;
-        while (i < tokens.length && j < symbols.length) {
-            left = Integer.parseInt(tokens[i]);
-            right = Integer.parseInt(tokens[i + 1]);
-            sym = symbols[j];
-            stack.add(String.valueOf(left));
-            stack.add(String.valueOf(sym));
-            stack.add(String.valueOf(right));
-
-            if (j + 1 < symbols.length) {
-                stack.add(String.valueOf(symbols[j + 1]));
+    public static int calculate(String s) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        char preSign = '+';
+        int num = 0;
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (Character.isDigit(s.charAt(i))) {
+                num = num * 10 + s.charAt(i) - '0';
             }
+            if (!Character.isDigit(s.charAt(i)) && s.charAt(i) != ' ' || i == n - 1) {
+                switch (preSign) {
+                    case '+':
+                        stack.push(num);
+                        break;
+                    case '-':
+                        stack.push(-num);
+                        break;
+                    case '*':
+                        stack.push(stack.pop() * num);
+                        break;
+                    default:
+                        stack.push(stack.pop() / num);
 
-            i += 2;
-            j += 2;
-        }
-        if (i == tokens.length - 1) {
-            stack.add(tokens[i]);
-        }
-
-        left = Integer.parseInt(stack.get(0));
-        for (int k = 0; k < stack.size() - 2;) {
-            if (!isCal) {
-                left = Integer.parseInt(stack.get(k));
+                }
+                preSign = s.charAt(i);
+                num = 0;
             }
-
-            symS = stack.get(k + 1);
-            right = Integer.parseInt(stack.get(k + 2));
-
-
-            if (symS.equals("*")) {
-                res = left * right;
-                stack1.push(String.valueOf(res));
-                left = res;
-                isCal = true;
-                k += 2;
-            } else if (symS.equals("/")) {
-                res = left / right;
-                stack1.push(String.valueOf(res));
-                left = res;
-                isCal = true;
-                k += 2;
-            } else {
-                stack1.push(String.valueOf(left));
-                stack1.push(symS);
-                k += 2;
-                isCal = false;
-            }
-
-
-
-
         }
-        if (stack1.peek().equals("+") || stack1.peek().equals("-")) {
-            stack1.push(stack.get(stack.size() - 1));
+        int ans = 0;
+        while (!stack.isEmpty()) {
+            ans += stack.pop();
         }
-        return 1;
-
+        return ans;
 
 
 
