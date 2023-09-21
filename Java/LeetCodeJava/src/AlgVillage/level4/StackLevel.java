@@ -117,6 +117,14 @@ public class StackLevel {
         }
         return stack.pop();
     }
+    /*
+    * 1234: OK; 1 then 1; 2 then 2; 3 then 3; 4 then 4
+    * 1243 OK; 1 then 1; 2 then 2; 3 4 then 4 3
+    * 1324 OK; 1 then 1; 2 3 then 3 2; 4 then 4
+    * 1342 OK; 1 then 1; 2 3 then 3; 4 then 4 2
+    * 1423 NO; 4 in, so 3 has to be before 2
+    *
+    * */
 }
 
 class MinStack {
