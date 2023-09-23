@@ -1,9 +1,7 @@
 package AlgVillage.Level5;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.math.BigInteger;
+import java.util.*;
 
 /**
  * @author 欧欧
@@ -11,16 +9,71 @@ import java.util.Stack;
  */
 public class HashAndQueue {
     public static void main(String[] args) {
-        MyQueue obj = new MyQueue();
-        obj.push(1);
-        obj.push(2);
-        int param_3 = obj.peek();
-        int param_2 = obj.pop();
+//        MyQueue obj = new MyQueue();
+//        obj.push(1);
+//        obj.push(2);
+//        int param_3 = obj.peek();
+//        int param_2 = obj.pop();
+//
+//        boolean param_4 = obj.empty();
+//        System.out.println(param_2);
+//        System.out.println(param_2);
+//        System.out.println(param_4);
+        int[] nums = {1,0,-1,0,-2,2};
+        int[] nums1 = {2,2,2,2,2};
+        int[] nums2 = {1000000000,1000000000,1000000000,1000000000};
+//        System.out.println(1000000000+1000000000+1000000000+1000000000);
+        System.out.println(fourSum(nums2, -294967296));
+    }
 
-        boolean param_4 = obj.empty();
-        System.out.println(param_2);
-        System.out.println(param_2);
-        System.out.println(param_4);
+    public static List<List<Integer>> fourSum(int[] nums, int target) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        for (int first = 0; first < n; first++) {
+            if (first > 0 && nums[first] == nums[first - 1]) {
+                continue;
+            }
+            for (int second = first + 1; second < n; second++) {
+                 if (second > first + 1 && nums[second] == nums[second - 1]) {
+                     continue;
+                 }
+
+//                 int forth = n - 1;
+
+                for (int third = second + 1; third < n; third++) {
+                    if (third > second + 1 && nums[third] == nums[third - 1]) {
+                        continue;
+                    }
+
+                    for (int forth = third + 1; forth < n; forth++) {
+                        if (forth > third + 1 && nums[forth] == nums[forth - 1]) {
+                            continue;
+                        }
+                        long res = (long) nums[first] +(long) nums[second] +(long) nums[third] + (long) nums[forth];
+
+
+                        if (res == target) {
+                            List<Integer> list = new ArrayList<>();
+                            list.add(nums[first]);
+                            list.add(nums[second]);
+                            list.add(nums[third]);
+                            list.add(nums[forth]);
+                            ans.add(list);
+
+                        }
+                    }
+
+
+
+                }
+
+            }
+
+        }
+
+        return ans;
+
     }
 }
 
