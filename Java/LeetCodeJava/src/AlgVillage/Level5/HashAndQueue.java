@@ -230,3 +230,11 @@ class LRUCache {
         return res;
     }
 }
+
+class Company {
+    Queue<Integer> newQueue = new LinkedList<Integer>();
+    Queue<Integer> finishQueue = new LinkedList<Integer>();
+
+    public void addDemand(){}
+
+}
