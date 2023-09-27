@@ -19,11 +19,32 @@ public class HashAndQueue {
 //        System.out.println(param_2);
 //        System.out.println(param_2);
 //        System.out.println(param_4);
-        int[] nums = {1,0,-1,0,-2,2};
-        int[] nums1 = {2,2,2,2,2};
-        int[] nums2 = {1000000000,1000000000,1000000000,1000000000};
-//        System.out.println(1000000000+1000000000+1000000000+1000000000);
-        System.out.println(fourSum(nums2, -294967296));
+//        int[] nums = {1,0,-1,0,-2,2};
+//        int[] nums1 = {2,2,2,2,2};
+//        int[] nums2 = {1000000000,1000000000,1000000000,1000000000};
+////        System.out.println(1000000000+1000000000+1000000000+1000000000);
+//        System.out.println(fourSum(nums2, -294967296));
+        Company testCompany = new Company();
+        testCompany.addDemand(1);
+        testCompany.addDemand(2);
+        testCompany.addDemand(3);
+        testCompany.addDemand(4);
+        testCompany.addDemand(5);
+        testCompany.printQueue();
+        testCompany.work();
+        testCompany.work();
+        testCompany.work();
+        testCompany.printQueue();
+        testCompany.addDemand(6);
+        testCompany.addDemand(7);
+        testCompany.addDemand(8);
+        testCompany.addDemand(9);
+        testCompany.printQueue();
+        testCompany.work();
+        testCompany.work();
+        testCompany.work();
+        testCompany.work();
+        testCompany.printQueue();
     }
 
     public static List<List<Integer>> fourSum(int[] nums, int target) {
@@ -235,6 +256,31 @@ class Company {
     Queue<Integer> newQueue = new LinkedList<Integer>();
     Queue<Integer> finishQueue = new LinkedList<Integer>();
 
-    public void addDemand(){}
+    public void addDemand(int demand){
+        newQueue.add(demand);
+    }
+    public void work() {
+        finishQueue.add(newQueue.poll());
+    }
+    public void printQueue() {
+        System.out.println("New Queue");
+        for (int i = 0; i < newQueue.size(); i++) {
+            int res = newQueue.poll();
+            System.out.println(res);
+            newQueue.add(res);
+
+
+        }
+
+        System.out.println("Finish Queue");
+        for (int i = 0; i < finishQueue.size(); i++) {
+            int res = finishQueue.poll();
+            System.out.println(res);
+            finishQueue.add(res);
+
+
+        }
+    }
+
 
 }
