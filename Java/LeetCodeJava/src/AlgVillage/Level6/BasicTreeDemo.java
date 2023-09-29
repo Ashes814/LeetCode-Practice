@@ -10,12 +10,13 @@ import java.util.Map;
  */
 public class BasicTreeDemo {
     public static void main(String[] args) {
-        int[] preorder = {3,9,20,15,7};
+        int[] preorder = {9,15,7,20,3};
         int[] inorder = {9,3,15,20,7};
-        int[] preorder1 = {1,2,3,4,5,6,8,7,9,10,11,12,13,15,14};
+        int[] preorder1 = {8,7,6,5,4,3,2,10,15,14,13,12,11,9,1};
         int[] inorder1 = {3,4,8,6,7,5,2,1,10,9,11,15,13,14,12};
         int[] preorder2 = {-1};
         int[] inorder2 = {-1};
+        TreeNode tree = buildTreeBack(preorder, inorder);
     }
 
     public static TreeNode buildTree(int[] pre, int[] in) {
@@ -44,6 +45,37 @@ public class BasicTreeDemo {
         int pIndex = map.get(rootVal);
         root.left = buildTree(pre, preLeft + 1, pIndex - inLeft + preLeft , map, inLeft, pIndex - 1);
         root.right = buildTree(pre, pIndex - inLeft + preLeft + 1, preRight , map, pIndex + 1, inRight);
+        return root;
+    }
+
+    public static TreeNode buildTreeBack(int[] back, int[] in) {
+        int backLen = back.length;
+        int inLen = in.length;
+
+        if (backLen != inLen) {
+            throw new RuntimeException("Incorrect input data.");
+        }
+
+        Map<Integer, Integer> map = new HashMap<>(backLen);
+        for (int i = 0; i < inLen; i++) {
+            map.put(in[i], i);
+        }
+
+        return buildTreeBack(back, 0, backLen - 1, map, 0, inLen - 1);
+    }
+
+    private static TreeNode buildTreeBack(int[] back, int backLeft, int backRight, Map<Integer, Integer> map, int inLeft, int inRight) {
+        if (backLeft > backRight || inLeft > inRight) {
+            return null;
+        }
+
+        int rootVal = back[backRight];
+        TreeNode root = new TreeNode(rootVal);
+        int pIndex = map.get(rootVal);
+        root.left = buildTreeBack(back, backLeft, backRight - inRight + pIndex - 1 , map, inLeft, pIndex - 1);
+        root.right = buildTreeBack(back, backRight - inRight + pIndex, backRight - 1 , map, pIndex + 1, inRight);
+
+
         return root;
     }
 }
