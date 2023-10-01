@@ -1,8 +1,7 @@
 package AlgVillage.Level6;
 
 import java.sql.Array;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 欧欧
@@ -17,6 +16,8 @@ public class BasicTreeDemo {
         int[] preorder2 = {-1};
         int[] inorder2 = {-1};
         TreeNode tree = buildTreeBack(preorder, inorder);
+        List<List<Integer>> level = simpleLevelOrder(tree);
+        System.out.println(level);
     }
 
     public static TreeNode buildTree(int[] pre, int[] in) {
@@ -77,6 +78,48 @@ public class BasicTreeDemo {
 
 
         return root;
+    }
+
+    public static List<List<Integer>> simpleLevelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<List<Integer>>();
+
+        }
+
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        ArrayList<Integer> inner = new ArrayList<>();
+
+        int size = 0;
+        queue.add(root);
+        size++;
+        while (!queue.isEmpty()) {
+
+            root = queue.poll();
+
+
+            inner.add(root.val);
+            size--;
+
+
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+
+            if (size == 0) {
+                res.add(inner);
+                size = queue.size();
+                inner = new ArrayList<>();
+            }
+        }
+
+
+        return res;
+
     }
 }
 
