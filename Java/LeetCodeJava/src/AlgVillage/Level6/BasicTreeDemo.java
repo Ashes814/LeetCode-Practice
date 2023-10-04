@@ -15,8 +15,14 @@ public class BasicTreeDemo {
         int[] inorder1 = {3,4,8,6,7,5,2,1,10,9,11,15,13,14,12};
         int[] preorder2 = {-1};
         int[] inorder2 = {-1};
-        TreeNode tree = buildTreeBack(preorder, inorder);
-        List<List<Integer>> level = simpleLevelOrder(tree);
+        int[] preorder3 = {1,2,4,5,3};
+        int[] inorder3 = {4,2,5,1,3};
+        int[] preorder4 = {1,2,4,3,5};
+        int[] inorder4 = {4,2,1,3,5};
+        TreeNode tree = buildTree(preorder3, inorder3);
+//        System.out.println(tree);
+        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), null), new TreeNode(3, null, new TreeNode(5)));
+        List<List<Integer>> level = zigzagLevelOrder(root);
         System.out.println(level);
     }
 
@@ -120,6 +126,68 @@ public class BasicTreeDemo {
 
         return res;
 
+    }
+
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> levelOrder = new LinkedList<>();
+        if (root == null) {
+            return levelOrder;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            List<Integer> level = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                TreeNode left = node.left;
+                TreeNode right = node.right;
+                if (left != null) {
+                    queue.offer(left);
+                }
+                if (right != null) {
+                    queue.offer(right);
+                }
+
+            }
+            levelOrder.add(0, level); //栈, 把前面添加的挪到后面出
+
+        }
+        return levelOrder;
+    }
+
+    public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<List<Integer>>();
+        if (root == null) {
+            return res;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        boolean isOrderLeft = true;
+        while (!queue.isEmpty()) {
+            Deque<Integer> levelList = new LinkedList<Integer>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode curNode = queue.poll();
+                if (isOrderLeft) {
+                    levelList.offerLast(curNode.val);
+                } else {
+                    levelList.offerFirst(curNode.val);
+                }
+                if (curNode.left != null) {
+                    queue.offer(curNode.left);
+                }
+                if (curNode.right != null) {
+                    queue.offer(curNode.right);
+                }
+            }
+            res.add(new LinkedList<Integer>(levelList));
+            isOrderLeft = !isOrderLeft;
+        }
+
+
+        return res;
     }
 }
 
