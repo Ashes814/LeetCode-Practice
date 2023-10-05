@@ -19,11 +19,12 @@ public class BasicTreeDemo {
         int[] inorder3 = {4,2,5,1,3};
         int[] preorder4 = {1,2,4,3,5};
         int[] inorder4 = {4,2,1,3,5};
-        TreeNode tree = buildTree(preorder3, inorder3);
+//        TreeNode tree = buildTree(preorder3, inorder3);
 //        System.out.println(tree);
-        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), null), new TreeNode(3, null, new TreeNode(5)));
-        List<List<Integer>> level = zigzagLevelOrder(root);
-        System.out.println(level);
+//        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), null), new TreeNode(3, null, new TreeNode(5)));
+//        List<List<Integer>> level = zigzagLevelOrder(root);
+//        System.out.println(level);
+        Node NTree = new Node(1, new ArrayList<Node>())
     }
 
     public static TreeNode buildTree(int[] pre, int[] in) {
@@ -189,7 +190,49 @@ public class BasicTreeDemo {
 
         return res;
     }
+
+    public List<List<Integer>> levelOrderN(Node root) {
+       List<List<Integer>> value = new ArrayList<>();
+       Deque<Node> q = new ArrayDeque<>();
+       if (root != null) {
+           q.addLast(root);
+       }
+       while (!q.isEmpty()) {
+           Deque<Node> next = new ArrayDeque<>();
+           List<Integer> nd = new ArrayList<>();
+           while (!q.isEmpty()) {
+               Node cur = q.pollFirst();
+               nd.add(cur.val);
+               for (Node chd: cur.children) {
+                   if (chd != null) {
+                       next.add(chd);
+                   }
+               }
+           }
+           q = next;
+           value.add(nd);
+       }
+       return value;
+    }
+
+
 }
+
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
 
 class TreeNode {
     int val;
