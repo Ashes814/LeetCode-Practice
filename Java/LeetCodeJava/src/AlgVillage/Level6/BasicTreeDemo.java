@@ -23,8 +23,8 @@ public class BasicTreeDemo {
 //        System.out.println(tree);
 //        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), null), new TreeNode(3, null, new TreeNode(5)));
 //        List<List<Integer>> level = zigzagLevelOrder(root);
-//        System.out.println(level);
-        Node NTree = new Node(1, new ArrayList<Node>())
+//        System.out.println(l);
+//        Node NTree = new Node(1, new ArrayList<Node>())
     }
 
     public static TreeNode buildTree(int[] pre, int[] in) {
@@ -213,6 +213,53 @@ public class BasicTreeDemo {
            value.add(nd);
        }
        return value;
+    }
+
+    public List<Integer> largestValues(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<Integer>();
+
+        }
+
+        List<Integer> res = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        int innerMax = root.val;
+
+        int size = 0;
+        queue.add(root);
+        size++;
+        while (!queue.isEmpty()) {
+
+            root = queue.poll();
+
+            if (root.val > innerMax) {
+                innerMax = root.val;
+            }
+
+            size--;
+
+
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+
+            if (size == 0) {
+                res.add(innerMax);
+                size = queue.size();
+                if (!queue.isEmpty()) {
+                    innerMax = queue.peekFirst().val;
+                }
+
+            }
+        }
+
+
+        return res;
+
     }
 
 
