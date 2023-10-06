@@ -261,6 +261,55 @@ public class BasicTreeDemo {
         return res;
 
     }
+    public List<Double> averageValues(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<Double>();
+
+        }
+
+        List<Double> res = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        ArrayList<Integer> inner = new ArrayList<>();
+
+        int size = 0;
+        queue.add(root);
+        size++;
+        while (!queue.isEmpty()) {
+
+            root = queue.poll();
+
+
+            inner.add(root.val);
+            size--;
+
+
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+
+            if (size == 0) {
+                double sum = 0;
+                int n = inner.size();
+                double average;
+
+                for (Integer i:inner) {
+                    sum += i;
+                }
+                average = sum / n;
+                res.add(average);
+                size = queue.size();
+                inner = new ArrayList<>();
+            }
+        }
+
+
+        return res;
+
+    }
 
 
 }
