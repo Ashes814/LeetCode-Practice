@@ -312,6 +312,42 @@ public class BasicTreeDemo {
     }
 
 
+    public List<Integer> rightSideView(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<Integer>();
+
+        }
+        List<Integer> res = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        ArrayList<Integer> inner = new ArrayList<>();
+
+        int size = 0;
+        queue.add(root);
+        size++;
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            inner.add(root.val);
+            size--;
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+            if (size == 0) {
+                res.add(root.val);
+                size = queue.size();
+                inner = new ArrayList<>();
+            }
+        }
+
+
+        return res;
+
+    }
+
+
+
 }
 
 class Node {
