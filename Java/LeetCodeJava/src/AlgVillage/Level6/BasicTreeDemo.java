@@ -345,6 +345,30 @@ public class BasicTreeDemo {
         return res;
 
     }
+    public static int findBottomLeftValue(TreeNode root) {
+        if (root.left == null && root.right == null) {
+            return root.val;
+        }
+
+
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        TreeNode tempNode = new TreeNode();
+
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            tempNode = queue.poll();
+
+            if (tempNode.right != null) {
+                queue.add(tempNode.right);
+            }
+            if (tempNode.left != null) {
+                queue.add(tempNode.left);
+            }
+
+        }
+        return tempNode.val;
+
+    }
 
 
 
