@@ -21,10 +21,13 @@ public class BasicTreeDemo {
         int[] inorder4 = {4,2,1,3,5};
 //        TreeNode tree = buildTree(preorder3, inorder3);
 //        System.out.println(tree);
-//        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), null), new TreeNode(3, null, new TreeNode(5)));
+        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), null), new TreeNode(3, null, new TreeNode(5)));
 //        List<List<Integer>> level = zigzagLevelOrder(root);
 //        System.out.println(l);
+
 //        Node NTree = new Node(1, new ArrayList<Node>())
+        List<Integer> res = leftSideView(root);
+        System.out.println(res);
     }
 
     public static TreeNode buildTree(int[] pre, int[] in) {
@@ -367,6 +370,41 @@ public class BasicTreeDemo {
 
         }
         return tempNode.val;
+
+    }
+
+    public static List<Integer> leftSideView(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<Integer>();
+
+        }
+        List<Integer> res = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        ArrayList<Integer> inner = new ArrayList<>();
+
+        int size = 0;
+        queue.add(root);
+        size++;
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            inner.add(root.val);
+            size--;
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+
+            if (size == 0) {
+                res.add(root.val);
+                size = queue.size();
+                inner = new ArrayList<>();
+            }
+        }
+
+
+        return res;
 
     }
 
