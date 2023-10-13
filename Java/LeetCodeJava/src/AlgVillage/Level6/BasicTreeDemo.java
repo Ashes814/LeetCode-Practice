@@ -425,15 +425,9 @@ public class BasicTreeDemo {
         res.add(root.val);
         preOrder(root.left, res);
         preOrder(root.right, res);
-    } public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        preOrder(root, res);
-        return res;
-
-
-
-
     }
+
+
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         inOrder(root, res);
@@ -452,6 +446,26 @@ public class BasicTreeDemo {
         inOrder(root.left, res);
         res.add(root.val);
         inOrder(root.right, res);
+    }
+
+    public List<Integer> preOrderT(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return null;
+        }
+
+        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                res.add(node.val);
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.pop();
+            node = node.right;
+        }
+        return res;
     }
 
 }
