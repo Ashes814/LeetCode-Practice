@@ -1,5 +1,7 @@
 package AlgVillage.Level7;
 
+import apple.laf.JRSUIUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,31 @@ public class BifurTreeDFS {
         res.add(root.val);
         preOrder(root.left, res);
         preOrder(root.right, res);
+
+    }
+
+    public static boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+
+        }
+
+        return check(root.left, root.right);
+    }
+
+    public static boolean check(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null || q == null) {
+            return false;
+        }
+
+        if (p.val != q.val) {
+            return false;
+        }
+
+        return check(p.left, q.right) && check(p.right, q.left);
 
     }
 }
