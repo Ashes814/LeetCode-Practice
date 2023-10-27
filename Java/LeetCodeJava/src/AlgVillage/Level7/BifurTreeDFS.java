@@ -11,7 +11,10 @@ import java.util.List;
  */
 public class BifurTreeDFS {
     public static void main(String[] args) {
+        TreeNode tree = new TreeNode(5, new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)), null),
+                new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1))));
 
+        System.out.println(hasPathSum(tree, 22));
     }
 
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -31,7 +34,6 @@ public class BifurTreeDFS {
 
 
     }
-
     public static void preOrder(TreeNode root, List<Integer> res) {
         if (root == null) {
             return;
@@ -42,7 +44,6 @@ public class BifurTreeDFS {
         preOrder(root.right, res);
 
     }
-
     public static boolean isSymmetric(TreeNode root) {
         if (root == null) {
             return true;
@@ -51,7 +52,6 @@ public class BifurTreeDFS {
 
         return check(root.left, root.right);
     }
-
     public static boolean check(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
@@ -67,7 +67,6 @@ public class BifurTreeDFS {
         return check(p.left, q.right) && check(p.right, q.left);
 
     }
-
     public static TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
         if (t1 == null) {
             return t2;
@@ -83,13 +82,11 @@ public class BifurTreeDFS {
         return merged;
 
     }
-
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<>();
         dfs(root, "", res);
         return res;
     }
-
     void dfs(TreeNode root, String path, List<String> res) {
         if (root == null) return;
         if (root.left == null && root.right == null) {
@@ -98,6 +95,26 @@ public class BifurTreeDFS {
         }
         dfs(root.left, path + root.val + "->", res);
         dfs(root.right, path + root.val + "->", res);
+    }
+
+    public static boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        int sum = 0;
+        return dfsSum(root, targetSum, sum);
+    }
+
+    public static boolean dfsSum(TreeNode root, int targetSum, int sum) {
+
+        if (root == null) return false;
+        sum += root.val;
+        if ((root.left == null) && (root.right == null)) {
+            if (sum == targetSum) {
+                return true;
+            }
+        }
+
+        return (dfsSum(root.left, targetSum, sum)) || (dfsSum(root.right, targetSum, sum));
+
     }
 }
 
