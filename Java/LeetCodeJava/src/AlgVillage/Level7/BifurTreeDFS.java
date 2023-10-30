@@ -11,10 +11,13 @@ import java.util.List;
  */
 public class BifurTreeDFS {
     public static void main(String[] args) {
-        TreeNode tree = new TreeNode(5, new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)), null),
-                new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1))));
+//        TreeNode tree = new TreeNode(5, new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)), null),
+//                new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1))));
+        TreeNode tree = new TreeNode(4, new TreeNode(2, new TreeNode(1), new TreeNode(3)),
+                new TreeNode(7, new TreeNode(6), new TreeNode(9)));
 
-        System.out.println(hasPathSum(tree, 22));
+        TreeNode res = invertTree(tree);
+        System.out.println(res);
     }
 
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -116,6 +119,23 @@ public class BifurTreeDFS {
         return (dfsSum(root.left, targetSum, sum)) || (dfsSum(root.right, targetSum, sum));
 
     }
+
+    public static TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        invertTree(root.left);
+        invertTree(root.right);
+
+        return root;
+
+    }
+
+
 }
 
 
