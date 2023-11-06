@@ -22,9 +22,9 @@ public class BifurTreeDFS {
 
 //        TreeNode res = invertTree(tree);
 
-        Node nTreeNode = new Node(1, new ArrayList<Node>().add(new Node(3, new ArrayList<Node>().add(new Node(5)).add(new Node(6))))
-                .add(new Node(2))
-                .add(new Node(4)));
+//        Node nTreeNode = new Node(1, new ArrayList<Node>().add(new Node(3, new ArrayList<Node>().add(new Node(5)).add(new Node(6))))
+//                .add(new Node(2))
+//                .add(new Node(4)));
         int res = minDepth(tree);
         System.out.println(res);
     }
