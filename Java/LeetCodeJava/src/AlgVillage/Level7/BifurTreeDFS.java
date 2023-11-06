@@ -3,6 +3,8 @@ package AlgVillage.Level7;
 import apple.laf.JRSUIUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,10 +17,14 @@ public class BifurTreeDFS {
 //                new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1))));
 //        TreeNode tree = new TreeNode(4, new TreeNode(2, new TreeNode(1), new TreeNode(3)),
 //                new TreeNode(7, new TreeNode(6), new TreeNode(9)));
-        TreeNode tree = new TreeNode(3, new TreeNode(9),
-                new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+//        TreeNode tree = new TreeNode(3, new TreeNode(9),
+//                new TreeNode(20, new TreeNode(15), new TreeNode(7)));
 
 //        TreeNode res = invertTree(tree);
+
+        Node nTreeNode = new Node(1, new ArrayList<Node>().add(new Node(3, new ArrayList<Node>().add(new Node(5)).add(new Node(6))))
+                .add(new Node(2))
+                .add(new Node(4)));
         int res = minDepth(tree);
         System.out.println(res);
     }
@@ -185,10 +191,38 @@ public class BifurTreeDFS {
 
     }
 
+    public static int nTreeMaxDepth(Node root){
+        if (root == null) {
+            return 0;
+        } else if (root.children.isEmpty()) {
+            return 1;
+        } else {
+            List<Integer> heights = new LinkedList<>();
+            for (Node item: root.children) {
+                heights.add(nTreeMaxDepth(item));
+            }
+            return Collections.max(heights) + 1;
+        }
+    }
+
 
 }
 
+class Node {
+    public int val;
+    public List<Node> children;
 
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
 class TreeNode {
        int val;
        TreeNode left;
