@@ -25,8 +25,8 @@ public class BifurTreeDFS {
 //        Node nTreeNode = new Node(1, new ArrayList<Node>().add(new Node(3, new ArrayList<Node>().add(new Node(5)).add(new Node(6))))
 //                .add(new Node(2))
 //                .add(new Node(4)));
-        int res = minDepth(tree);
-        System.out.println(res);
+//        int res = minDepth(tree);
+//        System.out.println(res);
     }
 
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -203,6 +203,16 @@ public class BifurTreeDFS {
             }
             return Collections.max(heights) + 1;
         }
+    }
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left == null && right == null) return null;
+        if (left == null) return right;
+        if (right == null) return left;
+        return root;
+
     }
 
 
