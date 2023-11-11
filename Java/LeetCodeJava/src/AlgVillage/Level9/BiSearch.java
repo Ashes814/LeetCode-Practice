@@ -6,8 +6,8 @@ package AlgVillage.Level9;
  */
 public class BiSearch {
     public static void main(String[] args) {
-        int[] testArray = {1, 2, 3,4, 5,6,8,9,9,19 };
-        System.out.println(binarySearchRecursion(testArray, 0, 9, 19));
+        int[] testArray = {1, 2, 3,4, 5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,8,9,9,9,9,9,9,9,9,9,9,19 };
+        System.out.println(binarySearchRecursionEqual(testArray, 0, testArray.length, 6));
 
 
     }
@@ -48,5 +48,37 @@ public class BiSearch {
         return binarySearchLoop(array, low, high, target);
 
     }
+
+    public static int binarySearchRecursionEqual(int[] array, int low, int high, int target) {
+        if (low > high) {
+            return -1;
+        }
+
+        int m =low + ((high - low) >> 1);
+        if (target < array[m]) {
+            high = m - 1;
+        };
+        if (target > array[m]) {
+            low = m + 1;
+        }
+        if (target == array[m]) {
+            for (int i = m; i >= 0; i--) {
+                if (i == 0) {
+                    return i;
+                }
+                if (target != array[i - 1]) {
+                    return i;
+                } else {
+                    continue;
+                }
+            }
+            return m;
+        }
+        return binarySearchLoop(array, low, high, target);
+
+    }
+
+
+
 }
 
