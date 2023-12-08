@@ -8,7 +8,7 @@ public class BronzeQuichSort {
     public static void main(String [] args) {
 
         int[] testArray = {26, 53, 48,15,13,48,32,15};
-        quickSort(testArray, 0, testArray.length - 1);
+        quickSort2(testArray, 0, testArray.length - 1);
         for (int i = 0; i < testArray.length - 1; i++) {
             System.out.println(testArray[i]);
         }
@@ -37,5 +37,33 @@ public class BronzeQuichSort {
             quickSort(arr, pivotIndex + 1, right);
         }
 
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        while (low < high) {
+            while (low < high && arr[high] >= pivot) {
+                high--;
+
+            }
+            arr[low] = arr[high];
+
+            while (low < high && arr[low] <= pivot) {
+                low++;
+
+            }
+            arr[high] = arr[low];
+        }
+        arr[low] = pivot;
+        return low;
+    }
+
+    public static void quickSort2(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, low, high);
+            quickSort2(arr, low, pivotIndex - 1);
+            quickSort2(arr, pivotIndex + 1, high);
+
+        }
     }
 }
