@@ -8,11 +8,15 @@ public class BronzeQuichSort {
     public static void main(String [] args) {
 
         int[] testArray = {26, 53, 48,15,13,48,32,15};
+        int[] temp = new int[testArray.length];
 //        quickSort2(testArray, 0, testArray.length - 1);
 //        for (int i = 0; i < testArray.length - 1; i++) {
 //            System.out.println(testArray[i]);
 //        }
-        findKthLargest(testArray, 3);
+        mergeSort(testArray, 0, testArray.length - 1, temp);
+        for (int i = 0; i < testArray.length; i++) {
+            System.out.println(testArray[i]);
+        }
     }
 
     public static void quickSort(int[] arr, int left, int right) {
@@ -86,5 +90,37 @@ public class BronzeQuichSort {
     public static int findKthLargest(int[] nums, int k) {
         int n = nums.length;
         return quickSelect(nums, 0, n - 1, n - k);
+    }
+
+    public static void merge(int[] nums, int low, int high, int[] temp) {
+        int middle = (low + high) / 2;
+        int left = low;
+        int right = middle + 1;
+        int index = left;
+        while (left <= middle && right <= high) {
+            if (nums[left] < nums[right]) {
+                temp[index++] = nums[left++];
+            } else {
+                temp[index++] = nums[right++];
+            }
+        }
+        while (left <= middle) {
+            temp[index++] = nums[left++];
+        }
+        while (right <= high) {
+            temp[index++] = nums[right++];
+        }
+        for (int i = low; i <= high; i++) {
+            nums[i] = temp[i];
+        }
+    }
+    public static void mergeSort(int[] nums, int low, int high, int[] temp) {
+        if (low >= high) {
+            return;
+        }
+        mergeSort(nums, low, (low + high) / 2, temp);
+        mergeSort(nums, (low + high) / 2 + 1, high, temp);
+        merge(nums, low, high, temp);
+
     }
 }
