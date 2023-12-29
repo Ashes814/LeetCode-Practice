@@ -60,4 +60,17 @@ public class BitCalculation {
         }
         return reversed;
     }
+
+    public static int getSum(int a, int b) {
+        while (b != 0) {
+            int sign = (a & b) << 1; //进位部分
+            a = a ^ b; //不进位部分
+            b = sign; //之后每次循环相当于吧不进位部分a与进位部分sign相加，若sign位0，则表示不用再加不进位部分了，退出循环
+        }
+        return a;
+    }
+
+    public static int multiply(int a, int b) {
+
+    }
 }
