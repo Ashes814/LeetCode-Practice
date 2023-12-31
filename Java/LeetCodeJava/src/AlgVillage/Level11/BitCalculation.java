@@ -11,7 +11,7 @@ public class BitCalculation {
 //        for (int i = 0; i < test.length ; i++) {
 //            System.out.println(test[i]);
 //        }
-        System.out.println(reverseBits(94967293));
+        System.out.println(multiply(5,3));
     }
 
     // Leetcode 191
@@ -71,6 +71,20 @@ public class BitCalculation {
     }
 
     public static int multiply(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        int ans = 0;
+        for (int i = 0; min != 0; i++) {
 
+            if ((min & 1) == 1) {
+                ans += max;
+            }
+
+            // min 右移一位，相当于除以2
+            min >>= 1;
+            // min 除以2后，相当于max 乘 2
+            max += max;
+        }
+        return ans;
     }
 }
