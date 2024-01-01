@@ -9,18 +9,27 @@ import java.util.Arrays;
  */
 public class StringAlgorithm {
     public static void main(String[] args) {
-        String testString = "abcde";
-        System.out.println(testString.);
+        String testString = "aBcde";
+        System.out.println(toLowerCase(testString));
     }
 
     public static String toLowerCase(String s) {
         ArrayList<Character> res = new ArrayList<>();
         for (char c: s.toCharArray()) {
-            if (c < 97) {
-                res.add(c + 33)
+            if (c <= 90 && c >=65) {
+                char newC = (char) (c + 32);
+                res.add(newC);
+            } else {
+                res.add(c);
             }
         }
 
-        return
+        StringBuilder sb = new StringBuilder();
+        for (char c : res) {
+            sb.append(c);
+        }
+
+
+        return sb.toString();
     }
 }
