@@ -9,9 +9,10 @@ import java.util.Arrays;
  */
 public class StringAlgorithm {
     public static void main(String[] args) {
-        char[] testString = {'a', 'b','c'};
+        String testString = "abcd";
+        System.out.println(reverseStr(testString, 2));
 //        System.out.println(myAtoi("       -123213"));
-        reverseString(testString);
+//        reverseString(testString);
     }
 
     public static String toLowerCase(String s) {
@@ -86,5 +87,23 @@ public class StringAlgorithm {
             tail--;
             head++;
         }
+    }
+
+    public static String reverseStr(String s, int k) {
+        char[] sArray = s.toCharArray();
+        int sLen = sArray.length;
+        int group = 0;
+        char temp;
+        for (int i = 0; i < sLen; i++) {
+
+            if (i == 2*k - 1) {
+                reverseString(Arrays.copyOfRange(sArray, group, group + k));
+                group += 2 * k;
+                if (i == sLen - 1) {
+                    return sArray.toString();
+                }
+            }
+        }
+        return null;
     }
 }
