@@ -90,20 +90,24 @@ public class StringAlgorithm {
     }
 
     public static String reverseStr(String s, int k) {
-        char[] sArray = s.toCharArray();
-        int sLen = sArray.length;
-        int group = 0;
-        char temp;
-        for (int i = 0; i < sLen; i++) {
-
-            if (i == 2*k - 1) {
-                reverseString(Arrays.copyOfRange(sArray, group, group + k));
-                group += 2 * k;
-                if (i == sLen - 1) {
-                    return sArray.toString();
-                }
-            }
+        if (s == null || s.length() == 0) {
+            return s;
         }
-        return null;
+        int n = s.length();
+        char[] arr = s.toCharArray();
+        for (int i = 0; i < n; i += 2*k) {
+            reverse(arr, i, Math.min(i + k, n) - 1);
+        }
+        return new String(arr);
+    }
+
+    public static void reverse(char[] arr, int left, int right) {
+        while (left < right) {
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = arr[left];
+            left++;
+            right--;
+        }
     }
 }
