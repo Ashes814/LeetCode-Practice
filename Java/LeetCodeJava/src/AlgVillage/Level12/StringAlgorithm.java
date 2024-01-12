@@ -2,6 +2,7 @@ package AlgVillage.Level12;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author 欧欧
@@ -13,7 +14,8 @@ public class StringAlgorithm {
 //        System.out.println(isAlp('a') && isAlp('c'));
 //        System.out.println(myAtoi("       -123213"));
 //        reverseString(testString);
-        System.out.println(reverseOnlyLetters("Test1ng-Leet=code-Q!"));
+//        System.out.println(reverseOnlyLetters("Test1ng-Leet=code-Q!"));
+        System.out.println(reverseWords("the sky is blue"));
     }
 
     public static String toLowerCase(String s) {
@@ -143,5 +145,40 @@ public class StringAlgorithm {
 
         }
         return new String(sArray);
+    }
+
+    public static String reverseWords(String s) {
+        char[] sArray = s.toCharArray();
+        List<Character> newS = new ArrayList<Character>();
+        for (int i = sArray.length - 1; i >= 0;) {
+            int end = i;
+            while (sArray[end] == ' ') {
+                end--;
+            }
+            int start = end;
+            while ((start > 0) && (sArray[start] != ' ') ) {
+                start--;
+            }
+            if (start == 0) {
+                start--;
+            }
+
+
+            for (int j = start + 1; j <= end; j++) {
+                newS.add(sArray[j]);
+            }
+            if (start > 0) {
+                newS.add(' ');
+            }
+
+            i = start - 1;
+
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Character ch: newS) {
+            sb.append(ch);
+        }
+
+        return sb.toString();
     }
 }
