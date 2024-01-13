@@ -16,6 +16,8 @@ public class StringAlgorithm {
 //        reverseString(testString);
 //        System.out.println(reverseOnlyLetters("Test1ng-Leet=code-Q!"));
         System.out.println(reverseWords("the sky is blue"));
+        System.out.println(reverseWords("  hello world  "));
+        System.out.println(reverseWords("a good   example"));
     }
 
     public static String toLowerCase(String s) {
@@ -148,7 +150,26 @@ public class StringAlgorithm {
     }
 
     public static String reverseWords(String s) {
-        char[] sArray = s.toCharArray();
+        char[] sArrayTemp = s.toCharArray();
+        int arrayStart = 0;
+        int arrayEnd = sArrayTemp.length - 1;
+        for (char c: sArrayTemp) {
+            if (c == ' ') {
+                arrayStart++;
+            } else {
+                break;
+            }
+        }
+        for (int i = sArrayTemp.length - 1; i >= 0; i--){
+            if (sArrayTemp[arrayEnd] == ' ') {
+                arrayEnd--;
+            } else {
+                break;
+            }
+        }
+        int length = arrayEnd - arrayStart + 1;
+        char[] sArray = new char[length];
+        System.arraycopy(sArrayTemp, arrayStart, sArray, 0, length);
         List<Character> newS = new ArrayList<Character>();
         for (int i = sArray.length - 1; i >= 0;) {
             int end = i;
