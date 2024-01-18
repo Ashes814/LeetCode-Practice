@@ -15,10 +15,12 @@ public class StringAlgorithm {
 //        System.out.println(myAtoi("       -123213"));
 //        reverseString(testString);
 //        System.out.println(reverseOnlyLetters("Test1ng-Leet=code-Q!"));
-        System.out.println(reverseWords("the sky is blue"));
-        System.out.println(reverseWords("  hello world  "));
-        System.out.println(reverseWords("a good   example"));
+//        System.out.println(reverseWords("the sky is blue"));
+//        System.out.println(reverseWords("  hello world  "));
+//        System.out.println(reverseWords("a good   example"));
+        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
     }
+
 
     public static String toLowerCase(String s) {
         ArrayList<Character> res = new ArrayList<>();
@@ -201,5 +203,35 @@ public class StringAlgorithm {
         }
 
         return sb.toString();
+    }
+
+    public static boolean isPalindrome(String s) {
+        // Leetcode 125 - double pointer
+        char[] sArray = s.toCharArray();
+        int start = 0;
+        int end = s.length() - 1;
+
+        while (end >= start) {
+            if (sArray[start] < 48 ||
+                    (sArray[start] < 65 && sArray[start] > 57) ||
+                     sArray[start] > 122 ||
+                    (sArray[start] < 97 && sArray[start] > 90)) {
+                start++;
+                continue;
+            }
+            if (sArray[end] < 48 ||
+                    (sArray[end] < 65 && sArray[end] > 57) ||
+                    sArray[end] > 122 ||
+                    (sArray[end] < 97 && sArray[end] > 90)) {
+                end--;
+                continue;
+            }
+            if (Character.toLowerCase(sArray[start]) != Character.toLowerCase(sArray[end])) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
     }
 }
