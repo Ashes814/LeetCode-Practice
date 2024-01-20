@@ -2,6 +2,7 @@ package AlgVillage.Level12;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -233,5 +234,21 @@ public class StringAlgorithm {
             end--;
         }
         return true;
+    }
+
+    public static int firstUniqChar(String s) {
+        char[] sArray = s.toCharArray();
+        HashMap<Character, Integer> charMap = new HashMap<>();
+        for (char c: sArray) {
+            charMap.put(c, charMap.getOrDefault(c, 0) + 1);
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            if (charMap.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+
     }
 }
