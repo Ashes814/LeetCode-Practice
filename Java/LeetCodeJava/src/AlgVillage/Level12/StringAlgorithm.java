@@ -251,4 +251,26 @@ public class StringAlgorithm {
         return -1;
 
     }
+
+    public static boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        HashMap<Character, Integer> charMapS = new HashMap<>();
+        HashMap<Character, Integer> charMapT = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            charMapS.put(s.charAt(i), charMapS.getOrDefault(s.charAt(i), 0) + 1);
+            charMapT.put(t.charAt(i), charMapT.getOrDefault(t.charAt(i), 0) + 1);
+
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (charMapS.get(s.charAt(i)).equals(charMapT.get(s.charAt(i)))) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+
+    }
 }
