@@ -19,7 +19,9 @@ public class StringAlgorithm {
 //        System.out.println(reverseWords("the sky is blue"));
 //        System.out.println(reverseWords("  hello world  "));
 //        System.out.println(reverseWords("a good   example"));
-        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
+//        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
+        String[] testArray = {"flower","flow","flight"};
+        System.out.println(longestCommonPrefix(testArray));
     }
 
 
@@ -271,6 +273,24 @@ public class StringAlgorithm {
             }
         }
         return true;
+
+    }
+
+    public static String longestCommonPrefix(String[] strs) {
+
+       for (int j = 0; j < strs[0].length(); j++) {
+           for (int i = 0; i < strs.length - 1; i++) {
+               if (j >= strs[i + 1].length()) {
+                   return strs[0].substring(0, j);
+               }
+               if (strs[i].charAt(j) == strs[i + 1].charAt(j)) {
+                    continue;
+               } else {
+                   return strs[0].substring(0, j);
+               }
+           }
+       }
+       return strs[0];
 
     }
 }
