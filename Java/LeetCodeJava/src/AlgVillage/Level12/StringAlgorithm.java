@@ -308,7 +308,7 @@ public class StringAlgorithm {
                         num /= 10;
 
                     }
-                    reverse2(chars, anchor, write - 1);
+//                    reverse2(chars, anchor, write - 1);
                 }
                 left = read + 1;
             }
