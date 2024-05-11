@@ -6,7 +6,9 @@ package AlgVillage.Level13;
  */
 public class MathAlgorithms {
     public static void main(String[] args) {
-        System.out.println(trailingZeros());
+        int a = (int) Math.pow(2, 31);
+        int b = (int) Math.pow(2, 32);
+        System.out.println(b > a);
     }
 
     public static int arraySign(int[] nums) {
@@ -40,6 +42,17 @@ public class MathAlgorithms {
         }
         return n_counts;
 
+    }
+
+    public static int reverse(int x) {
+        int sign = 1;
+        if (x >= 0) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+
+        int unsignedX = sign * x;
     }
 
 
