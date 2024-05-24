@@ -44,16 +44,16 @@ public class MathAlgorithms {
 
     }
 
-    public static int reverse(int x) {
-        int sign = 1;
-        if (x >= 0) {
-            sign = 1;
-        } else {
-            sign = -1;
-        }
-
-        int unsignedX = sign * x;
-    }
+//    public static int reverse(int x) {
+//        int sign = 1;
+//        if (x >= 0) {
+//            sign = 1;
+//        } else {
+//            sign = -1;
+//        }
+//
+//        int unsignedX = sign * x;
+//    }
 
 
 }
