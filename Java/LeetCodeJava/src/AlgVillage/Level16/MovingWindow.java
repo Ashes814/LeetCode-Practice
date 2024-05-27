@@ -6,11 +6,13 @@ import java.util.Map;
 
 public class MovingWindow {
     public static void main(String[] args) {
-        int[] testArray = {1, 12, 13, 15, 5, 3};
+        int[] testArray = {1,8,6,2,5,4,8,3,7};
+        int [] testArray2 = {1, 1};
 //        System.out.println(findMaxAverage(testArray, 4));
 //        System.out.println(findLengthOfLCIS(testArray));
 //        System.out.println(lengthOfLongestSubstring("abcabcbb"));
-        System.out.println(lengthOfLongestSubstringTwoDistinct("aabbcccd"));
+//        System.out.println(lengthOfLongestSubstringTwoDistinct("aabbcccd"));
+        System.out.println(maxArea(testArray2));
     }
 
     public static double calAverage(int start, int k, int[] nums) {
@@ -142,6 +144,22 @@ public class MovingWindow {
        }
        return min == Integer.MAX_VALUE ? 0 : min;
 
+    }
+
+    public static int maxArea(int[] height) {
+        int left = 0, right = height.length - 1, area = 0, curArea = 0;
+        while (right > left) {
+            curArea = (right - left) * (Math.min(height[left], height[right]));
+            if (curArea > area) {
+                area = curArea;
+            }
+            if (height[right] > height[left]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return area;
     }
 
 
