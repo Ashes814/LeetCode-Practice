@@ -1,5 +1,7 @@
 package AlgVillage.Level16;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +14,8 @@ public class MovingWindow {
 //        System.out.println(findLengthOfLCIS(testArray));
 //        System.out.println(lengthOfLongestSubstring("abcabcbb"));
 //        System.out.println(lengthOfLongestSubstringTwoDistinct("aabbcccd"));
-        System.out.println(maxArea(testArray2));
+//        System.out.println(maxArea(testArray2));
+        System.out.println(checkInclusion("ab", "eidboaooo"));
     }
 
     public static double calAverage(int start, int k, int[] nums) {
@@ -160,6 +163,35 @@ public class MovingWindow {
             }
         }
         return area;
+    }
+
+    public static boolean ifResort(String s1, String s2) {
+        int[] charArrayS1 = new int[26];
+        int[] charArrayS2 = new int[26];
+
+        for (int i = 0; i < s1.length(); i++) {
+            charArrayS1[s1.charAt(i) - 'a']++;
+            charArrayS2[s2.charAt(i) - 'a']++;
+
+        }
+
+        return Arrays.equals(charArrayS1, charArrayS2);
+    }
+
+    public static boolean checkInclusion(String s1, String s2) {
+        int s1Length = s1.length();
+        int s2Length = s2.length();
+        if (s1Length > s2Length) return false;
+
+        int start = 0;
+        while (start <= s2Length - s1Length) {
+            if (ifResort(s1, s2.substring(start, start + s1Length))) {
+                return true;
+            }
+            start++;
+        }
+        return false;
+
     }
 
 
