@@ -1,10 +1,12 @@
 package AlgVillage.Level16;
 
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
 
 public class MovingWindow {
     public static void main(String[] args) {
@@ -192,6 +194,28 @@ public class MovingWindow {
         }
         return false;
 
+    }
+
+
+    public static List<Integer> findAnagrams(String s, String p) {
+        int sLen = s.length();
+        int pLen = p.length();
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (sLen < pLen) {
+            return res;
+        }
+
+        int start = 0;
+
+        while (start <= sLen - pLen) {
+            if (ifResort(s.substring(start, start+pLen), p)) {
+                res.add(start);
+            }
+            start++;
+
+        }
+        return res;
     }
 
 
