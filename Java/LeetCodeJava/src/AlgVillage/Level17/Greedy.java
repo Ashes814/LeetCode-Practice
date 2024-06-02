@@ -105,4 +105,18 @@ public class Greedy {
         return res;
 
     }
+
+    public static boolean canAttendMeetings(int[][] intervals) {
+        Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
+
+        int curEnd = 0;
+        for (int i = 0; i < intervals.length - 1; i++) {
+            curEnd = intervals[i][1];
+            if (curEnd > intervals[i + 1][0]) {
+                return false;
+            }
+
+        }
+        return true;
+    }
 }
