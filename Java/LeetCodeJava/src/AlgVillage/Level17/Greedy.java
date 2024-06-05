@@ -5,10 +5,10 @@ public class Greedy {
     public static void main(String[] args) {
 
 
-        int[] testG = {5, 5, 10, 10, 20};
-        int[] testS = {1,2,3};
+        int[][] testG ={{1,3},{6,9}};
+        int[] testS = {2,5};
 //        System.out.println(findContentChildren(testG, testS));
-        System.out.println(lemonadeChange(testG));
+        System.out.println(insert(testG, testS));
 
     }
 
@@ -134,6 +134,29 @@ public class Greedy {
         }
 
         return Arrays.copyOf(res, idx+1);
+
+    }
+
+    public static int[][] insert(int[][] intervals, int[] newInterval) {
+        int[][] res = new int[intervals.length + 1][2];
+        int idx = 0;
+        int i = 0;
+        while (i < intervals.length && intervals[i][1] < newInterval[0]) {
+            res[idx++] = intervals[i++];
+        }
+
+        while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
+        }
+        res[idx++] = newInterval;
+
+        while (i < intervals.length && intervals[i][0] > newInterval[1]) {
+            res[idx++] = intervals[i++];
+        }
+
+        return Arrays.copyOf(res, idx);
 
     }
 }
