@@ -8,8 +8,8 @@ public class Greedy {
         int[][] testG ={{1,3},{6,9}};
         int[] testS = {2,5};
 //        System.out.println(findContentChildren(testG, testS));
-        System.out.println(insert(testG, testS));
-
+//        System.out.println(insert(testG, testS));
+        System.out.println(partitionLabels(new String("ababcbacadefegdehijhklij")));
     }
 
     public static int findContentChildren(int[] g, int[] s) {
@@ -157,6 +157,29 @@ public class Greedy {
         }
 
         return Arrays.copyOf(res, idx);
+
+    }
+
+    public static List<Integer> partitionLabels(String s) {
+        char[] sArray = s.toCharArray();
+        int[] endCharIndex = new int[26];
+        for (int i = 0; i < sArray.length; i++) {
+            endCharIndex[sArray[i] - 'a'] = i;
+        }
+
+        List<Integer> res = new ArrayList<>();
+        int idx = 0;
+        int last = -1;
+        for (int i = 0; i < sArray.length; i++) {
+            idx = Math.max(idx, endCharIndex[sArray[i] - 'a']);
+            if (i == idx) {
+                res.add(i - last);
+                last = i;
+            }
+
+        }
+
+        return res;
 
     }
 }
