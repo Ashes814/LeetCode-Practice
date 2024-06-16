@@ -15,11 +15,21 @@ public class BackTracing {
         }
 
         Deque<Integer> path = new ArrayDeque<>();
-        dfs(n, k, 1, path, res);
-        return res;
+        dfs(n, k, 1, path, resultList);
+        return resultList;
     }
 
     public static void dfs(int n, int k, int startIndex, Deque<Integer> path, List<List<Integer>> resultList) {
+        if (path.size() == k) {
+           resultList.add(new ArrayList<>(path));
+           return;
+        }
 
+        for (int i = startIndex; i <= n ; i++) {
+            path.addLast(i);
+            dfs(n, k, i + 1, path, resultList);
+            path.removeLast();
+
+        }
     }
 }
