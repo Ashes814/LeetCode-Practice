@@ -32,4 +32,48 @@ public class BackTracing {
 
         }
     }
+
+    public void dfs2(TreeNode root, List<Integer> temp, List<String> ans) {
+        if (root == null) return;
+        temp.add(root.val);
+        if (root.left == null && root.right == null) {
+            ans.add(getPathString(temp));
+        }
+        dfs2(root.left, temp, ans);
+        dfs2(root.right, temp, ans);
+        temp.remove(temp.size() - 1);
+
+    }
+
+    public String getPathString(List<Integer> temp) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(temp.get(0));
+        for (int i = 1; i < temp.size(); i++) {
+            sb.append("->").append(temp.get(i));
+        }
+        return sb.toString();
+    }
+
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> ans = new ArrayList<>();
+        dfs2(root, new ArrayList<>(), ans);
+        return ans;
+
+
+    }
+
 }
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+}
+}
+
