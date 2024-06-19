@@ -62,6 +62,31 @@ public class BackTracing {
 
     }
 
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        dfs3(root, targetSum, path, res);
+        return res;
+
+    }
+
+    public void dfs3(TreeNode root, int targetSum, LinkedList<Integer> path, List<List<Integer>> res) {
+        if (root == null) {
+            return;
+        }
+
+        targetSum -= root.val;
+        path.add(root.val);
+        if (targetSum == 0 && root.left == null && root.right == null) {
+            res.add(new LinkedList(path));
+        }
+
+        dfs3(root.left, targetSum, path, res);
+        dfs3(root.right, targetSum, path, res);
+        path.removeLast();
+
+    }
+
 }
 
 class TreeNode {
