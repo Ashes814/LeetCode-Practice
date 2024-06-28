@@ -55,6 +55,38 @@ class LinkedListDemo {
         tempNode.next = nodeInsert;
         return head;
     }
+
+    public static ListNode deleteNode(ListNode head, int position) {
+        // head 为空
+        if (head == null) {
+            return null;
+        }
+
+        // 处理越界情况这里是size因为删除的位置不可能是size + 1，与插入不同
+        int size = getListLength(head);
+        if (position > size  || position < 1) {
+            System.out.println("Position out of range!");
+            return head;
+        }
+
+        // 删除第一个结点
+        if (position == 1) {
+            return head.next;
+        }
+
+        // 删除中间的结点
+        ListNode tempNode = head;
+        int count = 1;
+        while (count < position - 1) {
+            tempNode = tempNode.next;
+            count++;
+        }
+        tempNode.next = tempNode.next.next;
+
+        return head;
+
+
+    }
 }
 
 
