@@ -1,5 +1,10 @@
 package AlgBlog.LinkedListBlog;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class LinkedList01 {
     static int arr[] = new int[5];
 
@@ -86,6 +91,28 @@ class LinkedListDemo {
         return head;
 
 
+    }
+
+    // Using Hash or Set to solve common node problem
+    public static ListNode findFirstCommonNodeBySet(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        Set<ListNode> nodeSetA = new HashSet<ListNode>();
+        while (headA != null) {
+            nodeSetA.add(headA);
+            headA = headA.next;
+        }
+
+        while (headB != null) {
+            if (nodeSetA.contains(headB)) {
+                return headB;
+            } else {
+                headB = headB.next;
+            }
+        }
+        return null;
     }
 }
 
