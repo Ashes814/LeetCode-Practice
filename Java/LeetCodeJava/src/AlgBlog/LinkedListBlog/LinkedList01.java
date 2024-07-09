@@ -127,7 +127,7 @@ class LinkedListDemo {
             headB = headB.next;
         }
 
-
+        // Using a preNode to represent the last same node
         ListNode preNode = null;
         while (!stackA.isEmpty() && !stackB.isEmpty()) {
             if (stackA.peek() == stackB.peek()) {
@@ -138,6 +138,36 @@ class LinkedListDemo {
             }
         }
         return preNode;
+
+    }
+
+    public static boolean isPalindrome(ListNode head) {
+        Stack<ListNode> tempStack = new Stack<>();
+        ListNode tempNode = head;
+        int nodeLength = 0;
+        while (tempNode != null) {
+            tempStack.add(tempNode);
+            tempNode = tempNode.next;
+            nodeLength++;
+        }
+
+        nodeLength = nodeLength / 2;
+        ListNode tempNode2 = head;
+
+        while (nodeLength != 0) {
+            if (tempNode2.val != tempStack.pop().val) {
+                return false;
+            }
+            nodeLength--;
+            tempNode2 = tempNode2.next;
+
+        }
+        return true;
+
+
+
+
+
 
     }
 }
