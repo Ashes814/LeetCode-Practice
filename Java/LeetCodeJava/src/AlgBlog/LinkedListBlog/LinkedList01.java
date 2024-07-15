@@ -192,6 +192,33 @@ class LinkedListDemo {
         return newHead.next;
 
     }
+
+    // Leetcode 1669
+    public static ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        ListNode endList = list1;
+        int i = 0;
+        while (i <= b) {
+            endList = endList.next;
+            i++;
+        }
+
+        ListNode startList = list1;
+        int j = 1;
+        while (j < a) {
+            startList = startList.next;
+            j++;
+        }
+        startList.next = list2;
+
+        ListNode resList = list1;
+        while (resList.next != null) {
+            resList = resList.next;
+        }
+        resList.next = endList;
+        return list1;
+
+    }
+
 }
 
 
