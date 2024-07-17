@@ -219,6 +219,17 @@ class LinkedListDemo {
 
     }
 
+    // Leetcode 876
+    public static ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (slow.next != null && fast != null &&fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
 }
 
 
