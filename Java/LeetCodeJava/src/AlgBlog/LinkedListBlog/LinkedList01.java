@@ -6,8 +6,12 @@ public class LinkedList01 {
     static int arr[] = new int[5];
 
     public static void main(String[] args) {
-        System.out.println(arr[0]);
-        System.out.println(1 + "10" + 3 + "2");
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        System.out.println(LinkedListDemo.rotateRight(head, 2));
     }
 }
 
@@ -247,6 +251,46 @@ class LinkedListDemo {
             fast = fast.next;
         }
         return slow;
+
+    }
+
+    /**
+     * leet code 61
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode rotateRight(ListNode head, int k) {
+        if (k == 0 || head == null) {
+            return head;
+        }
+        ListNode tempNode1 = head;
+        int nodeLength = 0;
+        while (tempNode1 != null) {
+            nodeLength++;
+            tempNode1 = tempNode1.next;
+        }
+
+        int moveK = k % nodeLength;
+        if (moveK == 0) {
+            return head;
+        }
+
+        ListNode preNode = getKthFromEnd(head, moveK);
+        int preK = nodeLength - moveK;
+        ListNode postNode = head;
+        while (preK != 1) {
+            postNode = postNode.next;
+            preK--;
+        }
+        postNode.next = null;
+
+        ListNode resNode = preNode;
+        while (resNode.next != null) {
+            resNode = resNode.next;
+        }
+        resNode.next = head;
+        return preNode;
 
     }
 
