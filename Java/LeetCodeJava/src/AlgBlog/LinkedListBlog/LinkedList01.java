@@ -8,13 +8,14 @@ public class LinkedList01 {
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
-        head.next.next = new ListNode(6);
-        head.next.next.next = new ListNode(3);
-        head.next.next.next.next = new ListNode(4);
-        head.next.next.next.next.next = new ListNode(5);
-        head.next.next.next.next.next.next = new ListNode(6);
-        System.out.println(LinkedListDemo.removeElements(head, 6));
+//        head.next.next = new ListNode(6);
+//        head.next.next.next = new ListNode(3);
+//        head.next.next.next.next = new ListNode(4);
+//        head.next.next.next.next.next = new ListNode(5);
+//        head.next.next.next.next.next.next = new ListNode(6);
+//        System.out.println(LinkedListDemo.removeElements(head, 6));
 //        System.out.println(LinkedListDemo.rotateRight(head, 2));
+        System.out.println(LinkedListDemo.removeNthFromEnd(head, 1));
     }
 }
 
@@ -314,6 +315,30 @@ class LinkedListDemo {
             }
 
         }
+        return dummyHead.next;
+
+
+    }
+
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode slow = dummyHead;
+        ListNode fast = head;
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+            if (fast == null) {
+                break;
+            }
+        }
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+
+        }
+
+        slow.next = slow.next.next;
         return dummyHead.next;
 
 
