@@ -344,6 +344,24 @@ class LinkedListDemo {
 
     }
 
+    public static ListNode deleteDuplicates(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode tempNode = head;
+        while (tempNode.next != null) {
+            while (tempNode.val == tempNode.next.val) {
+                tempNode.next = tempNode.next.next;
+                if (tempNode == null || tempNode.next == null ) {
+                    return head;
+                }
+            }
+            tempNode = tempNode.next;
+
+        }
+        return head;
+    }
+
 }
 
 
