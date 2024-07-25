@@ -7,15 +7,16 @@ public class LinkedList01 {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-//        head.next.next = new ListNode(6);
-//        head.next.next.next = new ListNode(3);
-//        head.next.next.next.next = new ListNode(4);
-//        head.next.next.next.next.next = new ListNode(5);
-//        head.next.next.next.next.next.next = new ListNode(6);
-//        System.out.println(LinkedListDemo.removeElements(head, 6));
+        head.next = new ListNode(1);
+        head.next.next = new ListNode(1);
+        head.next.next.next = new ListNode(1);
+        head.next.next.next.next = new ListNode(1);
+        head.next.next.next.next.next = new ListNode(1);
+        head.next.next.next.next.next.next = new ListNode(1);
+//        System.out.println(LinkedListDemo.removeElements(head, 5));
 //        System.out.println(LinkedListDemo.rotateRight(head, 2));
-        System.out.println(LinkedListDemo.removeNthFromEnd(head, 1));
+//        System.out.println(LinkedListDemo.removeNthFromEnd(head, 1));
+        System.out.println(LinkedListDemo.deleteDuplicatesAll(head));
     }
 }
 
@@ -352,7 +353,7 @@ class LinkedListDemo {
         while (tempNode.next != null) {
             while (tempNode.val == tempNode.next.val) {
                 tempNode.next = tempNode.next.next;
-                if (tempNode == null || tempNode.next == null ) {
+                if (tempNode.next == null ) {
                     return head;
                 }
             }
@@ -360,6 +361,34 @@ class LinkedListDemo {
 
         }
         return head;
+    }
+
+    public static ListNode deleteDuplicatesAll(ListNode head) {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode first = dummyHead;
+        ListNode second = head;
+
+        while (second != null) {
+            int curVal = second.val;
+            if (second.next == null || second.val != second.next.val) {
+                first.next = second;
+                first = first.next;
+                second = second.next;
+            } else {
+                while (second.val == curVal) {
+                    second = second.next;
+                    if (second == null) {
+                        first.next = null;
+                        return dummyHead.next;
+                    }
+
+                }
+
+            }
+        }
+        return dummyHead.next;
+
     }
 
 }
