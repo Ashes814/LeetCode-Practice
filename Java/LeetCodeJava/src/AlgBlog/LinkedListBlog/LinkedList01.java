@@ -391,6 +391,25 @@ class LinkedListDemo {
 
     }
 
+    public static ListNode commonListNode(ListNode headA, ListNode headB) {
+        ListNode headAB = headA;
+        ListNode headBA = headB;
+
+        while (headAB != headBA) {
+            headAB = headAB.next;
+            headBA = headBA.next;
+            if (headAB != headBA) {
+                if (headAB == null) {
+                    headAB = headB;
+                }
+                if (headBA == null) {
+                    headBA = headA;
+                }
+            }
+
+        }
+        return headAB;
+
 }
 
 
