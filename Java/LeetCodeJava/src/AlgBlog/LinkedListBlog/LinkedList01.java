@@ -2,6 +2,9 @@ package AlgBlog.LinkedListBlog;
 
 import java.util.*;
 
+
+
+
 public class LinkedList01 {
     static int arr[] = new int[5];
 
@@ -27,7 +30,7 @@ class LinkedListDemo {
         ListNode node = head;
 
         // 从头至尾遍历整个链表
-        while (node != null ) {
+        while (node != null) {
             length++;
             node = node.next;
         }
@@ -75,7 +78,7 @@ class LinkedListDemo {
 
         // 处理越界情况这里是size因为删除的位置不可能是size + 1，与插入不同
         int size = getListLength(head);
-        if (position > size  || position < 1) {
+        if (position > size || position < 1) {
             System.out.println("Position out of range!");
             return head;
         }
@@ -175,10 +178,6 @@ class LinkedListDemo {
         return true;
 
 
-
-
-
-
     }
 
     // Leetcode 21
@@ -232,7 +231,7 @@ class LinkedListDemo {
     public static ListNode middleNode(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
-        while (slow.next != null && fast != null &&fast.next != null) {
+        while (slow.next != null && fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -261,6 +260,7 @@ class LinkedListDemo {
 
     /**
      * leet code 61
+     *
      * @param head
      * @param k
      * @return
@@ -353,7 +353,7 @@ class LinkedListDemo {
         while (tempNode.next != null) {
             while (tempNode.val == tempNode.next.val) {
                 tempNode.next = tempNode.next.next;
-                if (tempNode.next == null ) {
+                if (tempNode.next == null) {
                     return head;
                 }
             }
@@ -410,8 +410,49 @@ class LinkedListDemo {
         }
         return headAB;
 
-}
+    }
 
+    public static ListNode findFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+        if (pHead1 == null || pHead2 == null) {
+            return null;
+        }
+        ListNode current1 = pHead1;
+        ListNode current2 = pHead2;
+        int l1 = 0, l2 = 0;
+
+        while (current1 != null) {
+            current1 = current1.next;
+            l1++;
+        }
+        while (current2 != null) {
+            current2 = current2.next;
+            l2++;
+        }
+        current1 = pHead1;
+        current2 = pHead2;
+
+        int sub = l1 > l2 ? l1 - l2 : l2 - l1;
+        if (l1 > l2) {
+            int a = 0;
+            while (a < sub) {
+                current1 = current1.next;
+                a++;
+            }
+        } else {
+            int a = 0;
+            while (a < sub) {
+                current2 = current2.next;
+                a++;
+            }
+        }
+
+        while (current1 != current2) {
+            current1 = current1.next;
+            current2 = current2.next;
+        }
+        return current1;
+    }
+}
 
 
 
