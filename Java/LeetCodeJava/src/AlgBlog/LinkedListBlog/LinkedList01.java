@@ -452,6 +452,19 @@ class LinkedListDemo {
         }
         return current1;
     }
+
+    public boolean hasCycle(ListNode head) {
+        HashSet tempSet = new HashSet();
+        tempSet.add(head);
+        while (head != null) {
+            head = head.next;
+            if (tempSet.contains(head)) {
+                return true;
+            }
+            tempSet.add(head);
+        }
+        return false;
+    }
 }
 
 
