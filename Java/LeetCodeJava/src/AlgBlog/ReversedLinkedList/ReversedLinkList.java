@@ -32,6 +32,19 @@ public class ReversedLinkList {
         tempRes.next = null;
         return res.next;
     }
+
+    public static ListNode reverseList02(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+
+        while (cur != null) {
+            ListNode tempNext = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tempNext;
+        }
+        return pre;
+    }
 }
 
  class ListNode {
