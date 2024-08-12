@@ -89,6 +89,57 @@ public class ReversedLinkList {
             return head;
         }
     }
+
+    public static ListNode reverseBetween02(ListNode head, int left, int right) {
+//        ListNode dummyHead = new ListNode(-1);
+//        dummyHead.next = head;
+//        ListNode pre = dummyHead;
+//        ListNode leftNode = head;
+//        ListNode rightNode = head;
+//        int rightIndicator = 0;
+//        for (int i = 0; i < left - 1; i++) {
+//            pre = pre.next;
+//            leftNode = leftNode.next;
+//            rightNode = rightNode.next;
+//            rightIndicator++;
+//        }
+//
+//        for (int r = rightIndicator; r < right - 1; r++) {
+//            rightNode = rightNode.next;
+//        }
+//        ListNode succ = rightNode.next;
+//
+//        rightNode.next = null;
+//        pre.next = null;
+//        ListNode newReversedList = reverseList(leftNode);
+//        pre.next = newReversedList;
+//        while (pre.next != null) {
+//            pre = pre.next;
+//        }
+//        pre.next = succ;
+//        return dummyHead.next;
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+        ListNode pre = dummyNode;
+
+        for (int i = 0; i< left - 1; i++) {
+            pre = pre.next;
+        }
+
+        ListNode rightNode = pre;
+        for (int i = 0; i < right - left - 1; i++) {
+            rightNode = rightNode.next;
+        }
+
+        ListNode leftNode = pre.next;
+        ListNode succ = rightNode.next;
+        rightNode.next = null;
+        reverseList(leftNode);
+        pre.next = rightNode;
+        leftNode.next = succ;
+        return dummyNode.next;
+    }
+
 }
 
  class ListNode {
