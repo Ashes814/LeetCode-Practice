@@ -140,6 +140,22 @@ public class ReversedLinkList {
         return dummyNode.next;
     }
 
+    public static ListNode swapPairs(ListNode head) {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode cur = head;
+        ListNode pre = dummyHead;
+        while (cur != null && cur.next != null) {
+            ListNode curNext = cur.next;
+            cur.next = curNext.next;
+            curNext.next = cur;
+            pre.next = curNext;
+            pre = cur;
+            cur = cur.next;
+        }
+        return dummyHead.next;
+    }
+
 }
 
  class ListNode {
