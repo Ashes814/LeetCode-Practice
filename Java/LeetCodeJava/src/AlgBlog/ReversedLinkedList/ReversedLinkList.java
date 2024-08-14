@@ -6,12 +6,12 @@ import java.util.Stack;
 public class ReversedLinkList {
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(3);
-        head.next = new ListNode(5);
-//        head.next.next = new ListNode(3);
+        ListNode head = new ListNode();
+//        head.next = new ListNode(9);
+//        head.next.next = new ListNode(9);
 //        head.next.next.next = new ListNode(4);
 //        head.next.next.next.next = new ListNode(5);
-        System.out.println(reverseBetween(head, 1, 2));
+        System.out.println(listPlus1Stack(head));
     }
 
     public static ListNode reverseList(ListNode head) {
@@ -154,6 +154,47 @@ public class ReversedLinkList {
             cur = cur.next;
         }
         return dummyHead.next;
+    }
+
+
+    public static ListNode listPlus1Stack(ListNode head) {
+        Stack<ListNode> nodeStack = new Stack<>();
+        while (head != null) {
+            nodeStack.push(head);
+            head = head.next;
+        }
+
+        int adder = 0;
+        ListNode pre = nodeStack.pop();
+        if (pre.val + 1 >= 10) {
+            pre.val = pre.val + 1 - 10;
+            adder = 1;
+        } else {
+            pre.val = pre.val + 1;
+        }
+        while (!nodeStack.isEmpty()) {
+            ListNode cur = nodeStack.pop();
+            if (adder == 1) {
+                if (cur.val + 1 >= 10) {
+                    cur.val = cur.val + 1 - 10;
+                } else {
+                    cur.val = cur.val + 1;
+                    adder = 0;
+                }
+
+
+
+            }
+            cur.next = pre;
+            pre = cur;
+
+        }
+        if (adder == 1) {
+            ListNode res = new ListNode(1);
+            res.next = pre;
+            return res;
+        }
+        return pre;
     }
 
 }
