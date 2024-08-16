@@ -6,11 +6,12 @@ import java.util.Stack;
 public class ReversedLinkList {
 
     public static void main(String[] args) {
-        ListNode head = new ListNode();
+//        ListNode head = new ListNode();
 //        head.next = new ListNode(9);
 //        head.next.next = new ListNode(9);
 //        head.next.next.next = new ListNode(4);
 //        head.next.next.next.next = new ListNode(5);
+        ListNode
         System.out.println(listPlus1Stack(head));
     }
 
@@ -195,6 +196,140 @@ public class ReversedLinkList {
             return res;
         }
         return pre;
+    }
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> l1Stack = new Stack<>();
+        Stack<Integer> l2Stack = new Stack<>();
+
+        while (l1 != null ) {
+            l1Stack.add(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            l2Stack.add(l2.val);
+            l2 = l2.next;
+        }
+
+        Integer carry = 0;
+        ListNode preNode = null;
+        while (!l1Stack.isEmpty() && !l2Stack.isEmpty()) {
+            Integer newVal = l1Stack.pop() + l2Stack.pop();
+            if (carry == 1) {
+                if (newVal + 1 >= 10) {
+                    carry = 1;
+                    newVal = newVal - 10 + 1 ;
+                } else {
+                    newVal = newVal + 1;
+                    carry = 0;
+                }
+
+            } else {
+                if (newVal >= 10) {
+                    carry = 1;
+                    newVal = newVal - 10;
+                } else {
+                    carry = 0;
+                }
+            }
+            ListNode newNode = new ListNode(newVal);
+            newNode.next = preNode;
+            preNode = newNode;
+        }
+
+
+        while (!l1Stack.isEmpty()) {
+            Integer newVal = l1Stack.pop();
+            if (carry == 1) {
+                if (newVal + 1 >= 10) {
+                    carry = 1;
+                    newVal = newVal - 10 + 1;
+                } else {
+                    newVal = newVal + 1;
+                    carry = 0;
+                }
+
+            } else {
+                if (newVal >= 10) {
+                    carry = 1;
+                    newVal = newVal - 10;
+                } else {
+                    carry = 0;
+                }
+            }
+            ListNode newNode = new ListNode(newVal);
+            newNode.next = preNode;
+            preNode = newNode;
+        }
+
+        while (!l2Stack.isEmpty()) {
+            Integer newVal = l2Stack.pop();
+            if (carry == 1) {
+                if (newVal + 1 >= 10) {
+                    carry = 1;
+                    newVal = newVal - 10 + 1;
+                } else {
+                    newVal = newVal + 1;
+                    carry = 0;
+                }
+
+            } else {
+                if (newVal >= 10) {
+                    carry = 1;
+                    newVal = newVal - 10;
+                } else {
+                    carry = 0;
+                }
+            }
+            ListNode newNode = new ListNode(newVal);
+            newNode.next = preNode;
+            preNode = newNode;
+        }
+
+        if (carry == 1) {
+            preNode.val = preNode.val - 10;
+            ListNode res =  new ListNode(1);
+            res.next = preNode;
+            return res;
+        }
+
+        return preNode;
+
+
+
+
+    }
+
+    public static Boolean isPalindrome02(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode slow = head, fast = head;
+        ListNode pre = head, prepre = null;
+
+        while (fast != null && fast.next != null) {
+            pre = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+
+            // reverse first half
+            pre.next = prepre;
+            prepre = pre;
+        }
+
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        while (pre != null && slow != null) {
+            if (pre.val != slow.val) {
+                return false;
+            }
+            pre = pre.next;
+            slow = slow.next;
+        }
+
+        return true;
     }
 
 }
