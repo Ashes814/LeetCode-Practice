@@ -6,13 +6,13 @@ import java.util.Stack;
 public class ReversedLinkList {
 
     public static void main(String[] args) {
-//        ListNode head = new ListNode();
-//        head.next = new ListNode(9);
-//        head.next.next = new ListNode(9);
-//        head.next.next.next = new ListNode(4);
-//        head.next.next.next.next = new ListNode(5);
-        ListNode
-        System.out.println(listPlus1Stack(head));
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        head.next.next.next.next.next = new ListNode(6);
+        System.out.println(reverseKGroup(head, 7));
     }
 
     public static ListNode reverseList(ListNode head) {
@@ -330,6 +330,47 @@ public class ReversedLinkList {
         }
 
         return true;
+    }
+
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+
+        ListNode pre = dummyHead;
+        ListNode cur = head;
+
+        while (cur != null) {
+            ListNode explorer = cur;
+            int i = 0;
+            while (i < k) {
+
+                if (explorer == null) {
+                    return dummyHead.next;
+                } else {
+                    explorer = explorer.next;
+                }
+
+                i++;
+            }
+
+
+
+            for (int j = 0; j < k - 1; j++) {
+                ListNode curNext = cur.next;
+                cur.next = cur.next.next;
+                curNext.next = pre.next;
+                pre.next = curNext;
+
+            }
+            pre = cur;
+            cur = cur.next;
+
+
+
+        }
+
+        return dummyHead.next;
+
     }
 
 }
