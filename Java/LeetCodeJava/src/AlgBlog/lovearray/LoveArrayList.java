@@ -2,20 +2,20 @@ package AlgBlog.lovearray;
 
 public class LoveArrayList {
     public static void main(String[] args) {
-        int[] nums = new int[]{1,2,3,5,0,0,0,0,0};
-        System.out.println(addByElementSequence(nums, 4, 4));
-        System.out.println("=====================");
-        for (int num : nums) {
-            System.out.print(num);
-        }
-        System.out.println("=====================");
-        int[] nums2 = new int[]{1,2,3,5,0,0,0,0,0};
-        System.out.println(addByElementSequence02(nums2, 4, 4));
-        System.out.println("=====================");
-        for (int num : nums2) {
-            System.out.print(num);
-        }
-
+        int[] nums = new int[]{1,2,3,4,5,6,7,8,9};
+//        System.out.println(addByElementSequence(nums, 4, 4));
+//        System.out.println("=====================");
+//        for (int num : nums) {
+//            System.out.print(num);
+//        }
+//        System.out.println("=====================");
+//        int[] nums2 = new int[]{1,2,3,5,0,0,0,0,0};
+//        System.out.println(addByElementSequence02(nums2, 4, 4));
+//        System.out.println("=====================");
+//        for (int num : nums2) {
+//            System.out.print(num);
+//        }
+        System.out.println(removeByElement(nums, 9, 9));
 
     }
 
@@ -55,5 +55,24 @@ public class LoveArrayList {
         }
         arr[0] = element;
         return 0;
+    }
+
+    public static int removeByElement(int[] arr, int size, int element) {
+        if (size > arr.length) {
+            return -1;
+        }
+        int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (element == arr[i]) {
+                index = i;
+                for (int j = index; j < size - 1; j++) {
+                    arr[j] = arr[j + 1];
+                }
+                size--;
+                return index;
+            }
+
+        }
+        return index;
     }
 }
