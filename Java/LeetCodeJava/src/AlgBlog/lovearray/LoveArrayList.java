@@ -2,7 +2,7 @@ package AlgBlog.lovearray;
 
 public class LoveArrayList {
     public static void main(String[] args) {
-        int[] nums = new int[]{1,2,3,4,5,6,7,8,9};
+//        int[] nums = new int[]{1,2,3,4,5,6,7,8,9};
 //        System.out.println(addByElementSequence(nums, 4, 4));
 //        System.out.println("=====================");
 //        for (int num : nums) {
@@ -15,7 +15,9 @@ public class LoveArrayList {
 //        for (int num : nums2) {
 //            System.out.print(num);
 //        }
-        System.out.println(removeByElement(nums, 9, 9));
+//        System.out.println(removeByElement(nums, 9, 9));
+        int[] nums = {2, 2, 2, 1,1};
+        System.out.println(isMonotonic(nums));
 
     }
 
@@ -74,5 +76,36 @@ public class LoveArrayList {
 
         }
         return index;
+    }
+
+    public static boolean isMonotonic(int[] nums) {
+        boolean res = true;
+        if (nums.length <= 1) {
+            return true;
+        }
+
+        int rise = 2;
+
+        for (int i = 0; i < nums.length - 1; i++) {
+          if (rise == 1) {
+              if (nums[i] > nums[i + 1]) {
+                  return false;
+              }
+          } else if (rise == 0) {
+              if (nums[i] < nums[i + 1]) {
+                  return false;
+              }
+          } else {
+              if (nums[i] > nums[i + 1]) {
+                  rise = 0;
+              } else if (nums[i] < nums[i + 1]) {
+                  rise = 1;
+              } else {
+                  rise = 2;
+              }
+          }
+
+        }
+        return res;
     }
 }
