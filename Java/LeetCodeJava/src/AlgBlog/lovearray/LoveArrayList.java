@@ -108,4 +108,23 @@ public class LoveArrayList {
         }
         return res;
     }
+
+    public static int searchInsert(int[] nums, int target) {
+        int nums_length = nums.length;
+        int left = 0;
+        int right = nums_length - 1;
+        int ans = nums_length;
+
+        while (right > left) {
+            int mid = ((right - left) >> 1) + left;
+            if (target <= nums[mid]) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+
+    }
 }
