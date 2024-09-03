@@ -16,9 +16,11 @@ public class LoveArrayList {
 //            System.out.print(num);
 //        }
 //        System.out.println(removeByElement(nums, 9, 9));
-        int[] nums1 = {1, 2, 3, 0, 0, 0};
-        int[] nums2 = {2, 5, 6};
-        merge(nums1,3, nums2, 3);
+//        int[] nums1 = {1, 2, 3, 0, 0, 0};
+//        int[] nums2 = {2, 5, 6};
+//        merge(nums1,3, nums2, 3);
+        int[] nums = {0,1,2,2,3,0,4,2};
+        System.out.println(removeElement(nums, 2));
 
     }
 
@@ -158,6 +160,29 @@ public class LoveArrayList {
 
 
         }
+
+    }
+
+    public static int removeElement(int[] nums, int val) {
+
+        int slow = 0;
+        int fast = 0;
+        while (slow < nums.length && val != nums[slow]) {
+            slow++;
+            fast++;
+        }
+        while (fast < nums.length) {
+            while (fast < nums.length && val == nums[fast]) {
+                fast++;
+            }
+            if (fast == nums.length) {
+                break;
+            }
+            nums[slow] = nums[fast];
+            slow++;
+            fast++;
+        }
+        return slow;
 
     }
 }
