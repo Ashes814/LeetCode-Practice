@@ -185,4 +185,25 @@ public class LoveArrayList {
         return slow;
 
     }
+
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        } else if (nums.length == 1) {
+            return 1;
+        }
+        int slow = 0;
+        int fast = 0;
+
+        while (fast < nums.length) {
+            if (nums[slow] == nums[fast]) {
+                fast++;
+            } else {
+                slow++;
+                nums[slow] = nums[fast];
+            }
+        }
+        return slow+1;
+
+    }
 }
