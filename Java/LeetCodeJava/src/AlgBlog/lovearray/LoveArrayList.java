@@ -19,8 +19,9 @@ public class LoveArrayList {
 //        int[] nums1 = {1, 2, 3, 0, 0, 0};
 //        int[] nums2 = {2, 5, 6};
 //        merge(nums1,3, nums2, 3);
-        int[] nums = {0,1,2,2,3,0,4,2};
-        System.out.println(removeElement(nums, 2));
+        int[] nums = {3,1,2,4};
+//        System.out.println(removeElement(nums, 2));
+        System.out.println(sortArrayByParity(nums));
 
     }
 
@@ -205,5 +206,39 @@ public class LoveArrayList {
         }
         return slow+1;
 
+    }
+
+    public static int[] sortArrayByParity(int[] nums) {
+        if (nums.length == 0 || nums.length == 1) {
+            return nums;
+        }
+
+        int odd = 0;
+        int even = 0;
+        while (even < nums.length && odd < nums.length) {
+
+            if (nums[odd] % 2 == 0) {
+                odd++;
+            }
+            if (nums[even] % 2 == 1) {
+                even++;
+            }
+
+            if (even < odd) {
+                even = odd;
+            }
+
+            if (odd == nums.length || even == nums.length){
+                break;
+            }
+
+            if ((nums[odd] % 2 == 1) && (nums[even] % 2 == 0)) {
+                int temp = nums[even];
+                nums[even] = nums[odd];
+                nums[odd] = temp;
+            }
+
+        }
+        return nums;
     }
 }
