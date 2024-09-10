@@ -19,9 +19,9 @@ public class LoveArrayList {
 //        int[] nums1 = {1, 2, 3, 0, 0, 0};
 //        int[] nums2 = {2, 5, 6};
 //        merge(nums1,3, nums2, 3);
-        int[] nums = {3,1,2,4};
+        int[] nums = {1,2,3,4,5,6,7};
 //        System.out.println(removeElement(nums, 2));
-        System.out.println(sortArrayByParity(nums));
+        rotate(nums, 3);
 
     }
 
@@ -241,4 +241,64 @@ public class LoveArrayList {
         }
         return nums;
     }
+
+    public static void rotate(int[] nums, int k) {
+        // Over Time Limit
+        //        if (nums.length == 0 || nums.length == 1) {
+        //            return;
+        //        }
+        //        k = k % nums.length;
+        //
+        //        for (int i = 0; i < k; i++) {
+        //            int front = nums[0];
+        //            int index = 1;
+        //            while (index < nums.length) {
+        //                int temp = nums[index];
+        //                nums[index] = front;
+        //                front = temp;
+        //                index++;
+        //
+        //            }
+        //            nums[0] = front;
+        //        }
+
+        k = k % nums.length;
+        int front = 0;
+        int back = nums.length - 1;
+        while (back > front) {
+            int temp = nums[front];
+            nums[front] = nums[back];
+            nums[back] = temp;
+            back--;
+            front++;
+        }
+
+        front = 0;
+        back = k - 1;
+        while (back > front) {
+            int temp = nums[front];
+            nums[front] = nums[back];
+            nums[back] = temp;
+            back--;
+            front++;
+        }
+
+        front = k;
+        back = nums.length - 1;
+        while (back > front) {
+            int temp = nums[front];
+            nums[front] = nums[back];
+            nums[back] = temp;
+            back--;
+            front++;
+        }
+
+
+
+
+
+    }
+
+
+
 }
