@@ -1,5 +1,8 @@
 package AlgBlog.lovearray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoveArrayList {
     public static void main(String[] args) {
 //        int[] nums = new int[]{1,2,3,4,5,6,7,8,9};
@@ -298,6 +301,54 @@ public class LoveArrayList {
 
 
     }
+
+    public static List<String> summaryRanges(int[] nums) {
+        List<String> res = new ArrayList<>();
+        int minIndex = 0;
+        int maxIndex = 0;
+        while (maxIndex < nums.length) {
+            if (maxIndex == nums.length - 1 || nums[maxIndex+1] == nums[maxIndex] + 1) {
+                maxIndex++;
+            } else {
+                res.add(nums[minIndex] + "->" + nums[maxIndex]);
+                maxIndex++;
+                minIndex = maxIndex;
+            }
+        }
+        return res;
+    }
+
+    public static int moreThanHalfNum(int[] array) {
+        if (array.length == 1) {
+            return array[0];
+        }
+        int res = array[0];
+        int times = 1;
+        for (int i = 1; i < array.length; i++) {
+            if (res == array[i]) {
+                times++;
+            } else {
+                times--;
+                if (times == 0) {
+                    res = array[i];
+                    times++;
+                }
+            }
+        }
+
+        int flag = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (res == array[i]) {
+                flag++;
+            }
+
+            if (flag > (array.length / 2)) {
+                return res;
+            }
+        }
+        return 0;
+    }
+
 
 
 
