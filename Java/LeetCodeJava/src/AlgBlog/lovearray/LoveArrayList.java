@@ -22,9 +22,14 @@ public class LoveArrayList {
 //        int[] nums1 = {1, 2, 3, 0, 0, 0};
 //        int[] nums2 = {2, 5, 6};
 //        merge(nums1,3, nums2, 3);
-        int[] nums = {1,2,3,4,5,6,7};
+        int[] nums = {0,0,0};
 //        System.out.println(removeElement(nums, 2));
-        rotate(nums, 3);
+        sortColors(nums);
+
+        for (int n: nums) {
+            System.out.println(n);
+
+        }
 
     }
 
@@ -356,6 +361,58 @@ public class LoveArrayList {
             res = res ^ num;
         }
         return res;
+    }
+
+    /*
+    Leetcode 75
+     */
+    public static void sortColors(int[] nums) {
+        if (nums.length < 2) {
+            return;
+        }
+        int head = 0;
+        int tail = nums.length - 1;
+
+        while (head < nums.length && nums[head] == 0) {
+            head++;
+        }
+        while (tail >= 0 && nums[tail] == 2) {
+            tail--;
+        }
+
+        int tmp;
+        int i = head;
+        while (i < nums.length && i <= tail) {
+            if (0 == nums[i]) {
+                tmp = nums[head];
+                nums[head] = nums[i];
+                nums[i] = tmp;
+                while (head < nums.length && nums[head] == 0) {
+                    head++;
+                }
+                while (tail > 0 && nums[tail] == 2) {
+                    tail--;
+                }
+                i = head;
+            } else if (2 == nums[i]) {
+                tmp = nums[tail];
+                nums[tail] = nums[i];
+                nums[i] = tmp;
+
+
+                while (head < nums.length && nums[head] == 0) {
+                    head++;
+                }
+                while (tail > 0 && nums[tail] == 2) {
+                    tail--;
+                }
+                i = head;
+
+            } else {
+                i++;
+            }
+
+        }
     }
 
 
