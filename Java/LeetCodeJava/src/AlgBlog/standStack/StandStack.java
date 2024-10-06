@@ -2,13 +2,45 @@ package AlgBlog.standStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class StandStack {
     public static void main(String[] args) {
-
+        System.out.println(isValid(""));
     }
 
+    public static boolean isValid(String s) {
+        char[] sArray = s.toCharArray();
+        if (sArray.length <= 1) {
+            return false;
+        }
+        Stack<Character> cStack = new Stack<>();
+        char curC;
+        for (char c: sArray) {
+            if (c == '(' || c == '[' || c == '{') {
+                cStack.push(c);
+            } else {
 
+                if (cStack.isEmpty()) {
+                    return false;
+                }
+                curC = cStack.pop();
+                if (!(c == ')' && curC == '(' || c == ']' && curC == '[' || c == '}' && curC == '{')) {
+                    return false;
+                }
+            }
+
+
+
+        }
+
+        if (cStack.isEmpty()) {
+            return true;
+        } else {
+         return false;
+        }
+
+    }
 }
 
 
