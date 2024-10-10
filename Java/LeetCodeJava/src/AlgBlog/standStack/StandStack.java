@@ -6,7 +6,15 @@ import java.util.Stack;
 
 public class StandStack {
     public static void main(String[] args) {
-        System.out.println(isValid(""));
+//        System.out.println(isValid(""));
+        MinStack ms = new MinStack();
+        ms.push(-2);
+        ms.push(0);
+        ms.push(-3);
+        System.out.println(ms.getMin());
+        ms.pop();
+        System.out.println(ms.top());
+        System.out.println(ms.getMin());
     }
 
     public static boolean isValid(String s) {
@@ -91,3 +99,71 @@ class MyStackArray<T>  {
         }
     }
 }
+
+class MinStack {
+
+    int minValue;
+
+    int index = 0;
+
+    ArrayList<Integer> stack;
+
+
+    ArrayList<Integer> minIndexArray;
+
+    public MinStack() {
+        stack = new ArrayList<>();
+        minIndexArray = new ArrayList<>(0);
+    }
+
+    public void push(int val) {
+        stack.add(val);
+        if (index != 0) {
+            minValue = stack.get(minIndexArray.get(index - 1));
+        } else {
+            minIndexArray.add(0);
+            index++;
+            return;
+        }
+
+        if (val < minValue) {
+            minIndexArray.add(index);
+        } else {
+            minIndexArray.add(minIndexArray.get(index - 1));
+        }
+
+        index++;
+
+
+
+
+
+    }
+
+    public void pop() {
+        if (index > 0) {
+            stack.remove(index - 1);
+            minIndexArray.remove(index - 1);
+            index--;
+        }
+
+
+    }
+
+    public int top() {
+        return stack.get(index - 1);
+    }
+
+    public int getMin() {
+        return stack.get(minIndexArray.get(index - 1));
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(val);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
