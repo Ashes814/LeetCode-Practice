@@ -7,14 +7,7 @@ import java.util.Stack;
 public class StandStack {
     public static void main(String[] args) {
 //        System.out.println(isValid(""));
-        MinStack ms = new MinStack();
-        ms.push(-2);
-        ms.push(0);
-        ms.push(-3);
-        System.out.println(ms.getMin());
-        ms.pop();
-        System.out.println(ms.top());
-        System.out.println(ms.getMin());
+        System.out.println(calculate(" 3+5 / 2 "));
     }
 
     public static boolean isValid(String s) {
@@ -47,6 +40,50 @@ public class StandStack {
         } else {
          return false;
         }
+
+    }
+
+    public static int calculate(String s) {
+        s = s.replaceAll(" ", "");
+        Stack<String> tempStack = new Stack<>();
+        String[] sArray = s.split("(?=[-+*/])|(?<=[-+*/])");
+        for (int i = 0; i < sArray.length; i++) {
+            int num;
+            int res;
+            String c = sArray[i];
+            if (c.equals("+") || c.equals("-")) {
+                tempStack.push(c);
+            } else if (c.equals("*")) {
+                num = Integer.parseInt(tempStack.pop());
+                res = num * Integer.parseInt(sArray[++i]);
+                tempStack.push(String.valueOf(res));
+            }  else if (c.equals("/")) {
+                num = Integer.parseInt(tempStack.pop());
+                res = num / Integer.parseInt(sArray[++i]);
+                tempStack.push(String.valueOf(res));
+            } else {
+                tempStack.push(c);
+            }
+
+        }
+
+        Stack<String> tempStack2 = new Stack<>();
+        while (!tempStack.isEmpty()) {
+            tempStack2.push(tempStack.pop());
+        }
+
+        int finRes = Integer.parseInt(tempStack2.pop());
+        while (!tempStack2.isEmpty()) {
+            String symbol = tempStack2.pop();
+            int num2 = Integer.parseInt(tempStack2.pop());
+            if (symbol.equals("+")) {
+                finRes = finRes + num2;
+            } else {
+                finRes = finRes - num2;
+            }
+
+        }
+        return finRes;
 
     }
 }
