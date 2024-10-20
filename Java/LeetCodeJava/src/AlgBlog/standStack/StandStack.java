@@ -7,8 +7,11 @@ import java.util.Stack;
 public class StandStack {
     public static void main(String[] args) {
 //        System.out.println(isValid(""));
-        System.out.println(calculate(" 3+5 / 2 "));
+//        System.out.println(calculate(" 3+5 / 2 "));
+        String[] tokens = {"4","13","5","/","+"};
+        System.out.println(evalRPN(tokens));
     }
+
 
     public static boolean isValid(String s) {
         char[] sArray = s.toCharArray();
@@ -85,6 +88,37 @@ public class StandStack {
         }
         return finRes;
 
+    }
+
+    public static int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        int num1;
+        int num2;
+        for (String t: tokens) {
+            if (t.equals("+")) {
+                num1 = stack.pop();
+                num2 = stack.pop();
+                stack.push(num1 + num2);
+            } else if (t.equals("-")) {
+                num1 = stack.pop();
+                num2 = stack.pop();
+                stack.push(num2 - num1);
+
+            } else if (t.equals("*")) {
+                num1 = stack.pop();
+                num2 = stack.pop();
+                stack.push(num2 * num1);
+            } else if (t.equals("/")) {
+                num1 = stack.pop();
+                num2 = stack.pop();
+                stack.push(num2 / num1);
+            } else {
+                stack.push(Integer.parseInt(t));
+            }
+
+        }
+
+        return stack.pop();
     }
 }
 
