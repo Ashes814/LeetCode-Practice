@@ -1,6 +1,8 @@
 package AlgBlog.BinaryTree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class BinaryTreeLeetcode {
     public static void main(String[] args) {
@@ -61,6 +63,32 @@ public class BinaryTreeLeetcode {
         rootNode.left = buildTree(convertArrayListToIntArray(preorderLeft), convertArrayListToIntArray(inorderLeft));
         rootNode.right = buildTree(convertArrayListToIntArray(preorderRight), convertArrayListToIntArray(inorderRight));
         return rootNode;
+
+    }
+
+    public static List<Integer> simpleLevelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<Integer>();
+        }
+
+        List<Integer> res = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+
+        while (queue.size() > 0) {
+            TreeNode t = queue.remove();
+            res.add(t.val);
+
+            if (t.left != null) {
+                queue.add(t.left);
+            }
+
+            if (t.right != null) {
+                queue.add(t.right);
+            }
+        }
+        return res;
+
 
     }
 }
