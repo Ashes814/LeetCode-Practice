@@ -135,6 +135,36 @@ public class BinaryTreeLeetcode {
 
 
     }
+
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+
+        List<List<Integer>> res = new LinkedList<List<Integer>>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> tempRes = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode t = queue.remove();
+                tempRes.add(t.val);
+                if (t.left != null) {
+                    queue.add(t.left);
+                }
+                if (t.right != null) {
+                    queue.add(t.right);
+                }
+            }
+
+            res.add(0, tempRes);
+        }
+        return res;
+
+
+    }
 }
 
 
