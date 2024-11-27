@@ -165,6 +165,55 @@ public class BinaryTreeLeetcode {
 
 
     }
+
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+
+        List<List<Integer>> res = new LinkedList<List<Integer>>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean leftToRight = true;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> tempRes = new ArrayList<>();
+
+            if (leftToRight) {
+                for (int i = 0; i < size; i++) {
+                    TreeNode t = queue.remove();
+                    tempRes.add(t.val);
+                    if (t.left != null) {
+                        queue.add(t.left);
+                    }
+                    if (t.right != null) {
+                        queue.add(t.right);
+                    }
+                }
+
+                res.add(tempRes);
+            } else {
+                for (int i = 0; i < size; i++) {
+                    TreeNode t = queue.remove();
+                    tempRes.add(0,t.val);
+                    if (t.left != null) {
+                        queue.add(t.left);
+                    }
+                    if (t.right != null) {
+                        queue.add(t.right);
+                    }
+                }
+
+                res.add( tempRes);
+            }
+
+            leftToRight = !leftToRight;
+
+
+        }
+        return res;
+    }
 }
 
 
