@@ -243,6 +243,38 @@ public class BinaryTreeLeetcode {
         }
         return res;
     }
+
+    public List<Integer> largestValues(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        List<Integer> res = new ArrayList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            int maxValue = Integer.MIN_VALUE;
+            for (int i = 0; i < size; i++) {
+                TreeNode t = queue.remove();
+
+                if (t.val > maxValue) {
+                    maxValue = t.val;
+                }
+
+                if (t.left != null ) {
+                    queue.add(t.left);
+                }
+
+                if (t.right != null) {
+                    queue.add(t.right);
+                }
+
+            }
+            res.add(maxValue);
+        }
+        return res;
+    }
 }
 
 
