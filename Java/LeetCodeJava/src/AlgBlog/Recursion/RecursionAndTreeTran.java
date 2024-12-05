@@ -1,9 +1,6 @@
 package AlgBlog.Recursion;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class RecursionAndTreeTran {
     public static void main(String[] args) {
@@ -49,6 +46,29 @@ public class RecursionAndTreeTran {
         return res;
 
 
+
+    }
+
+    public List<Integer> postorderTraversal(TreeNode root) {
+        // 翻转前序遍历得到后序便利
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                res.add(node.val);
+                stack.push(node);
+                node = node.right;
+            }
+            node = stack.pop();
+            node = node.left;
+        }
+        Collections.reverse(res);
+        return res;
 
     }
 }
