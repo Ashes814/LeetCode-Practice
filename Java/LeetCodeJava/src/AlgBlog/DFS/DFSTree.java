@@ -96,6 +96,32 @@ public class DFSTree {
 
     }
 
+    public static boolean hasPathSum(TreeNode root, int targetSum) {
+
+        return dfsPathNum(root, 0, targetSum);
+    }
+
+    public static boolean dfsPathNum(TreeNode root, int curSum, int targetSum) {
+
+        if (root == null) {
+            return false;
+        }
+
+        if (root.left == null && root.right == null) {
+            curSum += root.val;
+            if (targetSum == curSum) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return dfsPathNum(root.left, curSum + root.val, targetSum) || dfsPathNum(root.right, curSum + root.val, targetSum);
+
+
+
+    }
+
 //    public static TreeNode mergeTreeNode(TreeNode root1, TreeNode root2, TreeNode resTree) {
 //        if (root1 == null && root2 == null) {
 //            resTree = null;
