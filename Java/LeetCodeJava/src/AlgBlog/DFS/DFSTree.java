@@ -1,5 +1,6 @@
 package AlgBlog.DFS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DFSTree {
@@ -67,6 +68,31 @@ public class DFSTree {
         return merged;
 
 
+
+    }
+
+    public static List<String> binaryTreePaths(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+
+        List<String> res = new ArrayList<String>();
+        dfs(root, "", res);
+        return res;
+
+
+    };
+
+    public static void dfs(TreeNode root, String path, List<String> res) {
+        if (root == null) {
+            return;
+        }
+        if (root.left == null && root.right == null) {
+            // root is a leaf node
+            res.add(path + root.val);
+        }
+        dfs(root.left, path +root.val + "->", res);
+        dfs(root.right, path +root.val + "->", res);
 
     }
 
