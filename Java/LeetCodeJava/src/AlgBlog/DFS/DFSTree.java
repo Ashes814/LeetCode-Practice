@@ -1,6 +1,7 @@
 package AlgBlog.DFS;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DFSTree {
@@ -183,6 +184,25 @@ public class DFSTree {
         return minDepth + 1;
     }
 
+    public static int maxDepth(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.children.isEmpty()) {
+            return 1;
+        }
+
+        List<Integer> depthChild = new ArrayList<>();
+
+        for (Node node: root.children) {
+            depthChild.add(maxDepth(node));
+
+        }
+
+        int maxRes = Collections.max(depthChild);
+        return maxRes + 1;
+    }
 
 
 
