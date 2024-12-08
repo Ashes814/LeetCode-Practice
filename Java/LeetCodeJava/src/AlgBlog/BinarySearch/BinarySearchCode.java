@@ -34,4 +34,21 @@ public class BinarySearchCode {
         }
         return -1;
     }
+
+    public static int peakIndexInMountainArray(int[] arr) {
+        int left = 0;
+        int high = arr.length - 1;
+        while (left <= high) {
+            int mid = left + ((high - left) >> 1);
+            if (arr[mid - 1] <= arr[mid] && arr[mid] >= arr[mid + 1]) {
+                return mid;
+            } else if (arr[mid - 1] <= arr[mid]) {
+                left = mid + 1;
+            } else if (arr[mid] >= arr[mid + 1]) {
+                high = mid - 1;
+            }
+
+        }
+        return -1;
+    }
 }
