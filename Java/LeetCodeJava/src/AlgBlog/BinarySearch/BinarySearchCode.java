@@ -2,6 +2,9 @@ package AlgBlog.BinarySearch;
 
 public class BinarySearchCode {
     public static void main(String[] args) {
+        int[] test1 = {};
+        System.out.println(missingNumber(test1));
+
 
     }
 
@@ -66,5 +69,71 @@ public class BinarySearchCode {
 
         }
         return nums[left];
+    }
+
+    public static int sqrtOptimize(int x) {
+        int left = 1;
+        int right = x;
+        while (left < right){
+            int mid = left + ((right - left) >> 1);
+            if (x / mid > mid) {
+                left = mid + 1;
+            } else if (x / mid < mid) {
+                right = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return right;
+    }
+
+    public static int missingNumber(int[] a) {
+        int left  = 0;
+        int right = a.length - 1;
+        while (left < right) {
+            int mid = left + ((right - left) >> 1);
+            if (a[mid] == mid) {
+                left = mid + 1;
+            } else if (a[mid] != mid) {
+                right = mid;
+            }
+
+        }
+        return left;
+    }
+
+    public TreeNode searchBST(TreeNode root, int val) {
+        if (root == null) {
+            return null;
+        }
+
+        if (val == root.val) {
+            return root;
+        }
+
+        if (root.val < val) {
+            return searchBST(root.right, val);
+        }
+
+        if (root.val > val) {
+            return searchBST(root.left, val);
+        }
+
+        return null;
+
+    }
+}
+
+class TreeNode {
+    int val;
+    TreeNode left;
+
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
     }
 }
