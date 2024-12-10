@@ -4,10 +4,6 @@ public class BinarySearchCode {
     public static void main(String[] args) {
 //        int[] test1 = {};
 //        System.out.println(missingNumber(test1));
-        TreeNode root = new TreeNode(5);
-        root.left = new TreeNode(4);
-        root.right = new TreeNode(6);
-        root.right.left = new TreeNode(3)
 
 
     }
@@ -139,13 +135,30 @@ public class BinarySearchCode {
             return false;
         }
 
-        if (root.val < pre) {
+        if (root.val <= pre) {
             return false;
         }
 
         return isValidBST(root.right);
 
 
+    }
+
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return constructTree(nums, 0, nums.length - 1);
+    }
+
+    public TreeNode constructTree(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+
+        int mid = left + ((right - left) >> 1);
+
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = constructTree(nums, left, mid - 1);
+        root.right = constructTree(nums, mid + 1, right);
+        return root;
     }
 
 }
