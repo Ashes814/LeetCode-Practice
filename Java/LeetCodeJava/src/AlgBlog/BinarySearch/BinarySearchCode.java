@@ -2,8 +2,12 @@ package AlgBlog.BinarySearch;
 
 public class BinarySearchCode {
     public static void main(String[] args) {
-        int[] test1 = {};
-        System.out.println(missingNumber(test1));
+//        int[] test1 = {};
+//        System.out.println(missingNumber(test1));
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(4);
+        root.right = new TreeNode(6);
+        root.right.left = new TreeNode(3)
 
 
     }
@@ -122,6 +126,28 @@ public class BinarySearchCode {
         return null;
 
     }
+
+
+    Long pre = Long.MIN_VALUE;
+    public boolean isValidBST(TreeNode root) {
+
+        if (root == null) {
+            return true;
+        }
+
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+
+        if (root.val < pre) {
+            return false;
+        }
+
+        return isValidBST(root.right);
+
+
+    }
+
 }
 
 class TreeNode {
