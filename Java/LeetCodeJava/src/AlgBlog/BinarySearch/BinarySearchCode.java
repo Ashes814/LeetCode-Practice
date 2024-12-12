@@ -176,3 +176,86 @@ class TreeNode {
         this.right = right;
     }
 }
+
+class MyLinkedList {
+    Node dummyHead;
+    int size;
+
+    public MyLinkedList() {
+        size = 0;
+        dummyHead = new Node(0);
+    }
+
+    public int get(int index) {
+        Node res = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            res = res.next;
+            if (res == null) {
+                return -1;
+            }
+        }
+        return res.val;
+    }
+
+    public void addAtHead(int val) {
+        Node temp = new Node(val);
+        temp.next = dummyHead.next;
+        dummyHead.next = temp;
+        size++;
+    }
+
+    public void addAtTail(int val) {
+        Node cur = dummyHead;
+        while (cur.next != null) {
+            cur = cur.next;
+        }
+        cur.next = new Node(val);
+        size++;
+    }
+
+    public void addAtIndex(int index, int val) {
+
+        if(index > size){
+            return ;
+        }
+
+        Node cur = dummyHead;
+        for(int i= 0; i< index;i++){
+            cur  = cur .next;
+        }
+        Node newNode = new Node(val);
+        newNode.next = cur .next;
+        cur.next = newNode;
+        size++;
+
+
+    }
+
+    public void deleteAtIndex(int index) {
+        Node cur = dummyHead;
+        for (int i = 0; i < index; i++) {
+            cur =  cur.next;
+        }
+        cur.next =  cur.next.next;
+    }
+}
+
+class Node {
+    int val;
+    Node next;
+
+
+    public Node(int v) {
+        this.val = v;
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
