@@ -4,6 +4,9 @@ public class BinarySearchCode {
     public static void main(String[] args) {
 //        int[] test1 = {};
 //        System.out.println(missingNumber(test1));
+        int[] nums1 = {1,2,3,6, 7};
+        int[] nums2 = {1,3,4,5,9};
+        System.out.println(findMedianSortedArrays(nums1, nums2));
 
 
     }
@@ -161,6 +164,67 @@ public class BinarySearchCode {
         return root;
     }
 
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int length1 = nums1.length;
+        int lenght2 = nums2.length;
+        int totalLength = length1 + lenght2;
+        if (totalLength % 2 == 1) {
+            int k = totalLength / 2;
+            double median = getKthElement(nums1, nums2, k + 1);
+            return median;
+        } else {
+            int k1 = totalLength / 2 - 1;
+            int k2 = totalLength /2 ;
+            double median = (getKthElement(nums1, nums2, k1 + 1) + getKthElement(nums1, nums2, k2 + 1)) / 2.0;
+            return median;
+        }
+    };
+
+    public static double getKthElement(int[] nums1, int[] nums2, int k) {
+        int length1 = nums1.length;
+        int length2 = nums2.length;
+
+        int index1 = 0;
+        int index2 = 0;
+
+        while (true) {
+            if (index1 == length1) {
+                return nums2[index2 + k - 1];
+            }
+
+            if (index2 == length2) {
+                return nums1[index1 + k - 1];
+            }
+
+            if (k == 1) {
+                return Math.min(nums1[index1], nums2[index2]);
+            }
+
+
+            int halfK = k / 2;
+            int newIndex1 = Math.min(index1 + halfK, length1) - 1;
+            int newIndex2 = Math.min(index2 + halfK, length2) - 1;
+            int pivot1 = nums1[newIndex1];
+            int pivot2 = nums2[newIndex2];
+
+            if (pivot1 <= pivot2) {
+                k = k - (newIndex1 - index1 + 1);
+                index1 = newIndex1 + 1;
+
+            } else {
+                k = k - (newIndex2 - index2 + 1);
+                index2 = newIndex2 + 1;
+
+            }
+
+
+
+        }
+
+    }
+
+
+
 }
 
 class TreeNode {
@@ -177,78 +241,7 @@ class TreeNode {
     }
 }
 
-class MyLinkedList {
-    Node dummyHead;
-    int size;
 
-    public MyLinkedList() {
-        size = 0;
-        dummyHead = new Node(0);
-    }
-
-    public int get(int index) {
-        Node res = dummyHead.next;
-        for (int i = 0; i < index; i++) {
-            res = res.next;
-            if (res == null) {
-                return -1;
-            }
-        }
-        return res.val;
-    }
-
-    public void addAtHead(int val) {
-        Node temp = new Node(val);
-        temp.next = dummyHead.next;
-        dummyHead.next = temp;
-        size++;
-    }
-
-    public void addAtTail(int val) {
-        Node cur = dummyHead;
-        while (cur.next != null) {
-            cur = cur.next;
-        }
-        cur.next = new Node(val);
-        size++;
-    }
-
-    public void addAtIndex(int index, int val) {
-
-        if(index > size){
-            return ;
-        }
-
-        Node cur = dummyHead;
-        for(int i= 0; i< index;i++){
-            cur  = cur .next;
-        }
-        Node newNode = new Node(val);
-        newNode.next = cur .next;
-        cur.next = newNode;
-        size++;
-
-
-    }
-
-    public void deleteAtIndex(int index) {
-        Node cur = dummyHead;
-        for (int i = 0; i < index; i++) {
-            cur =  cur.next;
-        }
-        cur.next =  cur.next.next;
-    }
-}
-
-class Node {
-    int val;
-    Node next;
-
-
-    public Node(int v) {
-        this.val = v;
-    }
-}
 
 /**
  * Your MyLinkedList object will be instantiated and called as such:
