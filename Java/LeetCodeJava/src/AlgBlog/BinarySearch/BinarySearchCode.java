@@ -4,10 +4,10 @@ public class BinarySearchCode {
     public static void main(String[] args) {
 //        int[] test1 = {};
 //        System.out.println(missingNumber(test1));
-        int[] nums1 = {1,2,3,6, 7};
-        int[] nums2 = {1,3,4,5,9};
-        System.out.println(findMedianSortedArrays(nums1, nums2));
-
+        int[] nums1 = {1,2,2,2,2,2,2,2,2,6};
+        int[] nums2 = {-1,0,3,5,9,12};
+//        System.out.println(findMedianSortedArrays(nums1, nums2));
+        System.out.println(search(nums1, 2));
 
     }
 
@@ -224,6 +224,38 @@ public class BinarySearchCode {
     }
 
 
+    public static int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        return binarySearch(nums, target,left, right);
+
+    }
+
+    public static int binarySearch(int[] nums, int target, int left, int right) {
+        if (left > right) {
+            return -1;
+        }
+        int mid = left + ((right - left) >> 1);
+        if (target == nums[mid]) {
+            if (mid == left) {
+                return mid;
+            }
+
+            if (nums[mid] != nums[mid - 1]) {
+                return mid;
+            }
+
+            return binarySearch(nums, target, left, mid - 1);
+        }
+        if (target < nums[mid]) {
+            return binarySearch(nums, target, left, mid - 1);
+        } else if (target > nums[mid]) {
+            return binarySearch(nums, target, mid + 1, right);
+        }
+
+        return -1;
+
+    }
 
 }
 
