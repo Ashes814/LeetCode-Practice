@@ -2,8 +2,10 @@ package AlgBlog.QuickSort;
 
 public class QuickSortCode {
     public static void main(String[] args) {
-        int[] nums1 = {1,2,3,8,4,6,9};
-        quickSortImpl2(nums1, 0, 6);
+        int[] nums1 = {3,2,1,5,6,4};
+        int k = 2;
+//        quickSortImpl2(nums1, 0, 6);
+        System.out.println(findKthLargest(nums1, k));
 
     }
 
@@ -60,4 +62,42 @@ public class QuickSortCode {
         quickSortImpl2(nums, left, r);
         quickSortImpl2(nums, l, right);
     }
+
+    public static int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        return quickSelect(nums, 0, n - 1, n - k);
+    }
+
+    public static int quickSelect(int[] nums, int left, int right, int nK) {
+        if (left == right) {
+            return nums[left];
+        }
+
+        int i = left - 1;
+        int j = right + 1;
+        int pivot = nums[left];
+
+        while (i < j) {
+            do {
+                i++;
+            } while (nums[i] < pivot);
+
+            do {
+                j--;
+            } while (nums[j] > pivot);
+
+            if (i < j) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+            }
+        }
+
+        if (nK <= j) {
+            return quickSelect(nums, left, j, nK);
+        } else {
+            return quickSelect(nums, j + 1, right, nK);
+        }
+    }
+
  }
