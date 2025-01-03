@@ -1,11 +1,14 @@
 package AlgBlog.QuickSort;
 
+import java.sql.Array;
+
 public class QuickSortCode {
     public static void main(String[] args) {
-        int[] nums1 = {3,2,1,5,6,4};
-        int k = 2;
+        int[] nums1 = {6,3,2,1,4,5,8,7};
+        int[] temp = new int[nums1.length];
+        mergeSort(nums1, 0, nums1.length - 1, temp);
 //        quickSortImpl2(nums1, 0, 6);
-        System.out.println(findKthLargest(nums1, k));
+//        System.out.println(findKthLargest(nums1, k));
 
     }
 
@@ -98,6 +101,45 @@ public class QuickSortCode {
         } else {
             return quickSelect(nums, j + 1, right, nK);
         }
+    }
+
+    public static void mergeSort(int[] array, int start, int end, int temp[]) {
+        if (start >= end) {
+            return;
+        }
+        mergeSort(array, start, (start + end) >> 1, temp);
+        mergeSort(array, ((start + end) >> 1) + 1, end, temp);
+        merge(array, start, end, temp);
+
+    }
+
+    public static void merge(int[] array, int start, int end, int[] temp) {
+        int middle = (start + end) >> 1;
+        int left = start;
+        int right = middle + 1;
+        int index = left;
+        while (left <= middle && right <= end) {
+            if (array[left] < array[right]) {
+                temp[index++] = array[left++];
+            } else {
+                temp[index++] = array[right++];
+            }
+        }
+
+        while (left <= middle) {
+            temp[index++] = array[left++];
+        }
+
+        while (right <= end) {
+            temp[index++] = array[right++];
+        }
+
+        for (int i = start; i <= end; i++) {
+            array[i] = temp[i];
+        }
+
+
+
     }
 
  }
