@@ -31,4 +31,17 @@ public class DigitCal {
         }
         return res;
     }
+
+    public int reverseBits(int n) {
+        int res = 0;
+        int power = 31;
+        while (power >= 0) {
+            int lastDigit = n & 1;
+            int newDigit = lastDigit << power;
+            res += newDigit;
+            n = n >>> 1;
+            power--;
+        }
+        return res;
+    }
 }
