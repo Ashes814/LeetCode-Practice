@@ -53,4 +53,24 @@ public class DigitCal {
         }
         return a;
     }
+
+
+    public int multiply(int A, int B) {
+        int min = Math.min(A,B);
+        int max = Math.max(A,B);
+        int res = 0;
+
+        while (min != 0) {
+
+            if ((min & 1) == 1) {
+                res += max;
+            }
+            min = min >> 1;
+            max += max;
+
+
+        }
+        return res;
+    }
+
 }
