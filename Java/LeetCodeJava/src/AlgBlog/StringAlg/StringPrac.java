@@ -2,7 +2,8 @@ package AlgBlog.StringAlg;
 
 public class StringPrac {
     public static void main(String[] args) {
-
+        String testStr = "the sky is blue";
+        System.out.println(reverseWords(testStr));
 
     }
 
@@ -76,7 +77,7 @@ public class StringPrac {
         return new String(chars);
     }
 
-    public void reverse(char[] s, int left, int right) {
+    public static void reverse(char[] s, int left, int right) {
         while (left < right) {
             char temp = s[left];
             s[left] = s[right];
@@ -107,4 +108,47 @@ public class StringPrac {
         }
         return new String(chars);
     }
+
+    public static String reverseWords(String s) {
+        int start = 0;
+        int end = s.length() - 1;
+        char[] chars = s.toCharArray();
+        while (chars[start] == ' ') {
+            start++;
+        }
+        while (chars[end] == ' ') {
+            end--;
+        }
+        reverse(chars, start, end);
+        for (int i = start; i <= end; i++) {
+            if (chars[i] == ' ') {
+                continue;
+            }
+            int left = i;
+            while (i <= end && chars[i] != ' '   ) {
+                i++;
+            }
+            int right = i - 1;
+            if (i == end) {
+                right = i;
+            }
+
+            reverse(chars, left, right);
+
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while (start <= end) {
+            if (chars[start] != ' ') {
+                sb.append(chars[start]);
+            } else if (chars[start] == ' ' && chars[start - 1] != ' ') {
+                sb.append(' ');
+            }
+            start++;
+        }
+        return sb.toString();
+
+
+    }
+
 }
