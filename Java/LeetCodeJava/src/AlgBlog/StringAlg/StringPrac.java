@@ -218,4 +218,32 @@ public class StringPrac {
         }
         return true;
     }
+
+    public String longestCommonPrefix(String[] strs) {
+        int strsLength = strs.length;
+        if (strsLength == 1) {
+            return strs[0];
+        }
+        int minLength = Integer.MAX_VALUE;
+        for (String str: strs) {
+            minLength = Math.min(str.length(), minLength);
+        }
+
+        for (int i = 0; i < minLength; i++) {
+            for (int j = 0; j < strsLength - 1; j++) {
+                if (strs[j].charAt(i) == strs[j + 1].charAt(i)) {
+                    continue;
+                } else {
+                    if (i == 0) {
+                        return "";
+                    } else {
+                        return strs[j].substring(0, i);
+                    }
+
+                }
+
+            }
+        }
+        return "";
+    }
 }
