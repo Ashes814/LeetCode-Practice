@@ -1,5 +1,6 @@
 package AlgBlog.StringAlg;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class StringPrac {
@@ -200,5 +201,21 @@ public class StringPrac {
         }
         return -1;
 
+    }
+
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        char[] charsA = s.toCharArray();
+        char[] charsB = t.toCharArray();
+        Arrays.sort(charsA);
+        Arrays.sort(charsB);
+        for (int i = 0; i < charsA.length; i++) {
+            if (charsA[i] != charsB[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 }
