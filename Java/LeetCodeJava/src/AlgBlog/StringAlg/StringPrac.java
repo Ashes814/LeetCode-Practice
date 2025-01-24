@@ -1,5 +1,7 @@
 package AlgBlog.StringAlg;
 
+import java.util.HashMap;
+
 public class StringPrac {
     public static void main(String[] args) {
         String testStr = "the sky is blue";
@@ -176,5 +178,27 @@ public class StringPrac {
 
         }
         return true;
+    }
+
+    public int firstUniqChar(String s) {
+        if (s == null) {
+            return -1;
+        }
+
+        HashMap<Character, Integer> freq = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            freq.put(ch, freq.getOrDefault(ch, 0) + 1);
+
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (freq.get(ch) == 1) {
+                return i;
+            }
+        }
+        return -1;
+
     }
 }
