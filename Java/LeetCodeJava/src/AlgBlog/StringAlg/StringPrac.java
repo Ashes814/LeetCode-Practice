@@ -151,4 +151,30 @@ public class StringPrac {
 
     }
 
+    public boolean isPalindrome(String s) {
+
+
+        int left = 0;
+        int right = s.length() - 1;
+        char[] chars = s.toCharArray();
+        while (left < right) {
+            if (Character.isLetterOrDigit(chars[left]) && Character.isLetterOrDigit(chars[right])) {
+                if (Character.toLowerCase(chars[left]) != Character.toLowerCase(chars[right])) {
+                    return false;
+                }
+                left++;
+                right--;
+            }
+
+            if (!Character.isLetterOrDigit(chars[left])) {
+                left++;
+            }
+            if (!Character.isLetterOrDigit(chars[right])) {
+                right--;
+            }
+
+
+        }
+        return true;
+    }
 }
