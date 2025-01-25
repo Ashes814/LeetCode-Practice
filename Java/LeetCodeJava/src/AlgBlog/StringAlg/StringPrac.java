@@ -5,9 +5,10 @@ import java.util.HashMap;
 
 public class StringPrac {
     public static void main(String[] args) {
-        String testStr = "the sky is blue";
-        System.out.println(reverseWords(testStr));
-
+//        String testStr = "the sky is blue";
+//        System.out.println(reverseWords(testStr));
+        char[] cs = {'a'};
+        System.out.println(compress(cs));
     }
 
     public String toLowerCase(String s) {
@@ -246,4 +247,42 @@ public class StringPrac {
         }
         return "";
     }
+
+    public static int compress(char[] chars) {
+        int left = 0;
+        int writer = 0;
+        int right = 0;
+        int num = 0;
+        while (left < chars.length) {
+
+            while (chars[left] == chars[right]) {
+                right++;
+                if (right == chars.length) {
+                    break;
+                }
+            }
+
+
+            num = right - left;
+            if (num == 1) {
+                chars[writer] = chars[left];
+                writer++;
+            } else {
+                char[] numChars = Integer.toString(num).toCharArray();;
+                chars[writer] = chars[left];
+                writer++;
+                for (int i = 0; i < numChars.length; i++) {
+                    chars[writer] = numChars[i];
+                    writer++;
+                }
+
+            }
+            left = right;
+
+        }
+        return writer;
+
+
+    }
 }
+
