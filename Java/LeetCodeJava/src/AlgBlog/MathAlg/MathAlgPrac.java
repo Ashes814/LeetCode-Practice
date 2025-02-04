@@ -63,4 +63,27 @@ public class MathAlgPrac {
 
 
     }
+
+    public String convertToBase7(int num) {
+        if (num == 0) {
+            return "0";
+        }
+        StringBuilder sb = new StringBuilder();
+        int sign = 0;
+        if (num < 0) {
+            num = -num;
+            sign = -1;
+        }
+
+        while (num > 0) {
+            sb.append(num % 7 + "");
+            num /= 7;
+        }
+
+        if (sign == -1) {
+            sb.append("-");
+        }
+
+        return sb.reverse().toString();
+    }
 }
