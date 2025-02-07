@@ -1,5 +1,7 @@
 package AlgBlog.MathAlg;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 public class MathAlgPrac {
     public static void main(String[] args) {
 
@@ -85,5 +87,27 @@ public class MathAlgPrac {
         }
 
         return sb.reverse().toString();
+    }
+
+    public String convert(int M, int N) {
+        String[] F = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
+        Boolean flag = false;
+        if (M < 0) {
+            flag = true;
+            M = -M;
+        }
+        StringBuffer sb = new StringBuffer();
+        int temp;
+        while (M != 0) {
+            temp = M % N;
+            sb.append(F[temp]);
+            M /= N;
+        }
+        sb.reverse();
+        if (flag) {
+            return "-" + sb.toString();
+        } else {
+            return sb.toString();
+        }
     }
 }
