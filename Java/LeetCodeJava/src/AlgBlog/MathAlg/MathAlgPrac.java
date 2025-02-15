@@ -4,7 +4,8 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class MathAlgPrac {
     public static void main(String[] args) {
-
+        int[] testInt = {9};
+        plusOne(testInt);
     }
 
     public int arraySign(int[] nums) {
@@ -109,5 +110,31 @@ public class MathAlgPrac {
         } else {
             return sb.toString();
         }
+    }
+
+    public static int[] plusOne(int[] digits) {
+        int finalPosition = digits.length - 1;
+        int flag = 1;
+        while (finalPosition >= 0 && flag == 1) {
+            int newDigits = digits[finalPosition] + 1;
+            if (newDigits >= 10) {
+                digits[finalPosition--] = 0;
+
+            } else {
+                digits[finalPosition--] = newDigits;
+                flag = 0;
+            }
+
+        }
+        if (flag == 1) {
+           int[] newArray = new int[digits.length + 1];
+           newArray[0] = 1;
+           for (int i = 1; i < newArray.length; i++) {
+                newArray[i] = digits[i - 1];
+           }
+           return newArray;
+
+        }
+        return digits;
     }
 }
