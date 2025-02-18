@@ -9,7 +9,7 @@ public class HeapPrac {
         ListNode node2 = new ListNode(1, new ListNode(3, new ListNode(4)));
         ListNode node3 = new ListNode(2, new ListNode(6));
         ListNode[] lists = {node1, node2, node3};
-        mergeKLists(lists);
+//        mergeKLists(lists);
     }
 
     // Using heap to find Ktg largest
@@ -59,6 +59,8 @@ public class HeapPrac {
 
         return dummy.next;
     }
+
+
 }
 
 class ListNode {
@@ -66,4 +68,41 @@ class ListNode {
         ListNode() {}
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) { this.val = val; this.next = next;}
+}
+
+class MedianFinder {
+    PriorityQueue<Integer> minHeap;
+    PriorityQueue<Integer> maxHeap;
+
+
+    public MedianFinder() {
+        this.minHeap = new PriorityQueue<>();
+        this.maxHeap = new PriorityQueue<>((a, b) -> b - a);
+
+
+    }
+
+    public void addNum(int num) {
+        if (minHeap.isEmpty() || num > minHeap.peek()) {
+            minHeap.offer(num);
+            if (minHeap.size() - maxHeap.size() > 1) {
+                maxHeap.offer(minHeap.poll());
+            }
+        } else {
+            maxHeap.offer(num);
+            if (maxHeap.size() - minHeap.size() > 1) {
+                minHeap.offer(maxHeap.poll());
+            }
+        }
+    }
+
+    public double findMedian() {
+        if (minHeap.size() > maxHeap.size()) {
+            return minHeap.peek();
+        } else if (maxHeap.size() > minHeap.size()) {
+            return maxHeap.peek();
+        } else {
+            return (minHeap.peek() + maxHeap.peek()) / 2.0;
+        }
+    }
 }
