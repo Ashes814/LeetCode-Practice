@@ -32,4 +32,27 @@ public class MovingWindowCode {
         }
         return avg;
     }
+
+    public int findLengthOfLCIS(int[] nums) {
+        int left = 0;
+        int right = 0;
+        int len = nums.length;
+        if (len <= 1) {
+            return len;
+        }
+
+        int maxLength = 1;
+
+        while (right < len - 1) {
+            if (nums[right + 1] > nums[right]) {
+                right++;
+                maxLength = Math.max(maxLength, right - left + 1);
+            } else {
+                right++;
+                left = right;
+
+            }
+        }
+        return maxLength;
+    }
 }
