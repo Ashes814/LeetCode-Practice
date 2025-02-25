@@ -121,4 +121,27 @@ public class MovingWindowCode {
         return maxLen;
 
     }
+
+    public int minSubArrayLen(int target, int[] nums) {
+        if (Arrays.stream(nums).sum() < target) {
+            return 0;
+        }
+        int left = 0, right = 0;
+        int cur = 0, curLen = 0;
+        int minLen = Integer.MAX_VALUE;
+        while (cur >= target || right < nums.length) {
+            if ( cur < target) {
+                cur += nums[right++];
+                curLen++;
+            }
+
+            if (cur >= target) {
+                minLen = Math.min(minLen, curLen);
+                cur -= nums[left++];
+                curLen--;
+            }
+
+        }
+        return minLen;
+    }
 }
