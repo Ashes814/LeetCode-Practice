@@ -1,6 +1,7 @@
 package AlgBlog.MovingWindow;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class MovingWindowCode {
@@ -70,5 +71,28 @@ public class MovingWindowCode {
             max = Math.max(max, right - left + 1);
         }
         return max;
+    }
+
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        if (s.length() < 3) {
+            return s.length();
+        }
+        int left = 0, right = 0;
+        HashMap<Character, Integer> hashmap = new HashMap<>();
+        int maxLen = 2;
+         while (right < s.length() {
+             if (hashmap.size() < 3) {
+                 hashmap.put(s.charAt(right), right++);
+             }
+
+             if (hashmap.size() == 3) {
+                 int del_idx = Collections.min(hashmap.values());
+                 hashmap.remove(s.charAt(del_idx));
+                 left = del_idx + 1;
+             }
+
+             maxLen = Math.max(maxLen, right - left);
+        }
+        return maxLen;
     }
 }
