@@ -80,7 +80,7 @@ public class MovingWindowCode {
         int left = 0, right = 0;
         HashMap<Character, Integer> hashmap = new HashMap<>();
         int maxLen = 2;
-         while (right < s.length() {
+         while (right < s.length()) {
              if (hashmap.size() < 3) {
                  hashmap.put(s.charAt(right), right++);
              }
@@ -94,5 +94,31 @@ public class MovingWindowCode {
              maxLen = Math.max(maxLen, right - left);
         }
         return maxLen;
+    }
+
+    public int lengthOfLongestSubstringTwoDistinct(String s, int k) {
+        if (s.length() < k + 1) {
+            return s.length();
+        }
+        int left = 0, right = 0;
+        HashMap<Character, Integer> hashmap = new HashMap<>();
+        int maxLen = k;
+        while (right < s.length()) {
+            if (hashmap.size() < k + 1) {
+                hashmap.put(s.charAt(right), right++);
+            }
+
+            if (hashmap.size() == k + 1) {
+                int del_idx = Collections.min(hashmap.values());
+                hashmap.remove(s.charAt(del_idx));
+                left = del_idx + 1;
+            }
+
+            maxLen = Math.max(maxLen, right - left);
+
+        }
+
+        return maxLen;
+
     }
 }
