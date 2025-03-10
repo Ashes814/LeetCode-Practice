@@ -123,3 +123,68 @@ class Partition {
         return true;
     }
 }
+
+class Subsets {
+    List<List<Integer>> res = new ArrayList<>();
+    LinkedList<Integer> temp = new LinkedList<>();
+    public List<List<Integer>> subsets(int[] nums) {
+        if (nums.length == 0) {
+            res.add(new ArrayList<>());
+            return res;
+        }
+
+        subsetsHelper(nums, 0);
+        return res;
+
+    }
+
+    public void subsetsHelper(int[] nums, int startIndex) {
+        res.add(new ArrayList<>(temp));
+        if (startIndex >= nums.length) {
+            return;
+        }
+        for (int i = startIndex; i < nums.length; i++) {
+            temp.add(nums[i]);
+            subsetsHelper(nums, i + 1);
+            temp.removeLast();
+
+        }
+    }
+}
+
+class Permute {
+    List<List<Integer>> res = new ArrayList<>();
+    LinkedList<Integer> temp = new LinkedList<>();
+    boolean[] used;
+    public List<List<Integer>> permute(int[] nums) {
+        if (nums.length == 0) {
+            return res;
+        }
+        used = new boolean[nums.length];
+        permuteHelper(nums);
+        return res;
+
+    }
+
+    public void permuteHelper(int[] nums) {
+        res.add(new ArrayList<>(temp));
+        if (temp.size() == nums.length) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+            used[i] = true;
+            temp.add(nums[i]);
+
+            permuteHelper(nums);
+
+
+            temp.removeLast();
+            used[i] = false;
+
+        }
+    }
+}
