@@ -167,7 +167,6 @@ class Permute {
     }
 
     public void permuteHelper(int[] nums) {
-        res.add(new ArrayList<>(temp));
         if (temp.size() == nums.length) {
             res.add(new ArrayList<>(temp));
             return;
@@ -187,4 +186,30 @@ class Permute {
 
         }
     }
+}
+
+class ABCPermute {
+
+    public List<String> letterCasePermutation(String s) {
+        List<String> ans = new ArrayList<String>();
+        helper(s.toCharArray(), 0, ans);
+        return ans;
+    }
+
+    public void helper(char[] arr, int pos, List<String> res) {
+        while (pos < arr.length && Character.isDigit(arr[pos])) {
+            pos++;
+        }
+
+        if (pos == arr.length) {
+            res.add(new String(arr));
+            return;
+        }
+        arr[pos] ^= 32;
+        helper(arr, pos + 1, res);
+        arr[pos] ^= 32;
+        helper(arr, pos + 1, res);
+
+    }
+
 }
