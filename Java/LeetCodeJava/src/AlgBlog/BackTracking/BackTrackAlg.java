@@ -247,3 +247,121 @@ class FindWord {
         return res;
     }
 }
+
+class RestoreIdAddresses {
+    List<String> result = new ArrayList<>();
+
+    public List<String> restoreIpAddress(String s) {
+        if (s.length() < 4 || s.length() > 12)
+            return result;
+
+        backTrack(s, 0, 0);
+        return result;
+    }
+
+    private void backTrack(String s, int startIndex, int pointNum) {
+        if (pointNum == 3) {
+            if (isValid(s, startIndex, s.length() - 1)) {
+                result.add(s);
+            }
+            return;
+        }
+
+        for (int i = startIndex; i < s.length(); i++) {
+            if (isValid(s, startIndex, i)) {
+                s = s.substring(0,  i + 1) + "." + s.substring(i + 1);
+                pointNum++;
+                backTrack(s, i + 2, pointNum);
+                pointNum--;
+                s = s.substring(0, i + 1) + s.substring(i + 2);
+
+            } else {
+                break;
+            }
+
+        }
+    }
+
+    private Boolean isValid(String s, int start, int end) {
+        if (start > end) {
+            return false;
+        }
+
+        if (s.charAt(start) == '0' && start != end) {
+            return false;
+        }
+
+        int num = 0;
+        for (int i = start; i <= end ; i++) {
+            if (s.charAt(i) > '9' || s.charAt(i) < '0') {
+                return false;
+            }
+
+            num = num * 10 + (s.charAt(i) - '0');
+            if (num > 255) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+class Solution17 {
+    List<String> list = new ArrayList<>();
+
+    public List<String> letterCombinations(String digits) {
+        if (digits == null || digits.length() == 0) {
+            return list;
+        }
+        String[] numString = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        backTracking(digits, numString, 0);
+        return list;
+    }
+
+    StringBuilder temp = new StringBuilder();
+
+    public void backTracking(String digits, String[] numString, int num) {
+        if (num == digits.length()) {
+            list.add(temp.toString());
+            return;
+        }
+
+        String str = numString[digits.charAt(num) - '0'];
+        for (int i = 0; i < str.length(); i++) {
+            temp.append(str.charAt(i));
+            backTracking(digits, numString, num + 1);
+            temp.deleteCharAt(temp.length() - 1);
+
+        }
+    }
+}
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList<String>();
+
+        backTrack(ans, new StringBuilder(), 0, 0, n);
+        return ans;
+
+    }
+
+    public void backTrack(List<String> ans, StringBuilder cur, int open, int close, int max) {
+        if (cur.length() == max*2) {
+            ans.add(cur.toString());
+            return;
+        }
+
+        if (open < max) {
+            cur.append('(');
+            backTrack(ans, cur, open + 1,  close, max);
+            cur.deleteCharAt(cur.length() - 1);
+        }
+
+        if (close < open) {
+            cur.append(')');
+            backTrack(ans, cur, open, close + 1, max);
+            cur.deleteCharAt(cur.length() - 1);
+        }
+    }
+}
