@@ -114,4 +114,24 @@ public class DynamicCode {
         }
         return dp[amount] > amount ? -1 : dp[amount];
     }
+
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        if (n == 0) {
+            return 0;
+        }
+        int[] f = new int[n];
+        int i, j, res = 0;
+        for (j = 0; j < n; j++) {
+            f[j] = 1;
+            for (i = 0; i < j; i++) {
+                if (nums[i] < nums[j] && f[i] + 1 > f[j]) {
+                    f[j] = f[i] + 1;
+                }
+            }
+            res = Math.max(res, f[j]);
+        }
+        return res;
+
+    }
 }
