@@ -1,5 +1,6 @@
 package AlgBlog.Dynamic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -199,4 +200,37 @@ public class DynamicCode {
         }
         return dp[m - 1];
     }
+
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> row = new ArrayList<Integer>();
+        row.add(1);
+        for (int i = 1; i <= rowIndex ; i++) {
+            row.add(0);
+            for (int j = i; j > 0 ; j--) {
+                row.set(j, row.get(j) + row.get(j - 1));
+
+            }
+        }
+        return row;
+    }
+
+    public static String longestPalindrome(String s) {
+        int sLen = s.length();
+        if (sLen <= 1) {
+            return s;
+        }
+
+        int[] dp = new int[sLen];
+        dp[0] = 0;
+        for (int i = 1; i < sLen; i++) {
+            dp[i] = 0;
+            for (int j = 0; j < i; j++) {
+
+            }
+
+        }
+    }
 }
+
+
+
