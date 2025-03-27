@@ -253,6 +253,52 @@ public class DynamicCode {
         }
         return s.substring(begin, begin + maxLen);
     }
+
+    public int minCut(String s) {
+        char[] sc = s.toCharArray();
+        int n = sc.length;
+        if (n == 0) {
+            return 0;
+        }
+
+        boolean[][] isPalin = new boolean[n][n];
+        int[] f = new int[n + 1];
+        int i, j, t;
+        for (i = 0; i < n; i++) {
+            for (j = i; j < n; j++) {
+                isPalin[i][j] = false;
+            }
+
+        }
+        for (t = 0; t < n; t++) {
+            i = j = t;
+            while (i >= 0 && j < n && sc[i] == sc[j]) {
+                isPalin[i][j] = true;
+                i--;
+                j++;
+            }
+
+            i = t;
+            j = t + 1;
+            while (i >= 0 && j < n && sc[i] == sc[j]) {
+                isPalin[i][j] = true;
+                i--;
+                j++;
+            }
+        }
+
+        f[0] = 0;
+        for (i = 1; i <= n ; i++) {
+            f[i] = Integer.MAX_VALUE;
+            for (j = 0; j < i; j++)  {
+                if (isPalin[j][i - 1]) {
+                    f[i] = Math.min(f[i], f[j] + 1);
+                }
+            }
+
+        }
+        return f[n] - 1;
+    }
 }
 
 
