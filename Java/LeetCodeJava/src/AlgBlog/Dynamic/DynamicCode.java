@@ -6,7 +6,8 @@ import java.util.List;
 
 public class DynamicCode {
     public static void main(String[] args) {
-        longestCommonSubsequence("jianyang", "lijiang");
+//        longestCommonSubsequence("jianyang", "lijiang");
+//        minDistance("horse", "ros");
     }
 
     public int uniquePaths(int m, int n) {
@@ -324,6 +325,59 @@ public class DynamicCode {
                 }
             }
             return f[now][n];
+    }
+
+    public static int minDistance(String word1, String word2) {
+        char[] s1 = word1.toCharArray();
+        char[] s2 = word2.toCharArray();
+        int m = s1.length;
+        int n = s2.length;
+        int i, j, k;
+        int[][] f = new int[m + 1][n + 1];
+        for (j = 0; j <= n; j++) {
+            f[0][j] = j;
+        }
+        for (i = 1; i <= m; i++) {
+            f[i][0] = i;
+            for (j = 1; j <= n; j++) {
+                f[i][j] = Math.min(f[i - 1][j] + 1, f[i - 1][j - 1] + 1);
+                f[i][j] = Math.min(f[i][j], f[i][j - 1] + 1);
+
+                if (s1[i - 1] == s2[j - 1]) {
+                    f[i][j] = Math.min(f[i][j], f[i - 1][j - 1]);
+                }
+            }
+        }
+
+        return f[m][n];
+    }
+
+    public boolean isMatch(String ss1, String ss2) {
+        char[] s1 = ss1.toCharArray();
+        char[] s2 = ss2.toCharArray();
+        int m = s1.length;
+        int n = s2.length;
+        int i, j;
+        boolean[][] f = new boolean[m + 1][n + 1];
+        for (i = 0; i <= m; i++) {
+            f[i][0] = (i == 0);
+            for (j = 1; j <= n; j++) {
+                f[i][j] = false;
+                if (s2[j - 1] != '*') {
+                    if (i > 0 && (s2[j - 1] == '.' || s2[j - 1] == s1[i - 1])) {
+                        f[i][j] |= f[i - 1][j - 1];
+                    }
+                } else {
+                    if (j - 2 >= 0) {
+                        f[i][j] |= f[i][j - 2];
+                    }
+                    if (i > 0 && j - 2 >= 0 && (s2[j - 2] == '.' || s2[j - 2] == s1[i - 1])) {
+                        f[i][j] |= f[i - 1][j];
+                    }
+                }
+            }
+        }
+        return f[m][n];
     }
 
 
