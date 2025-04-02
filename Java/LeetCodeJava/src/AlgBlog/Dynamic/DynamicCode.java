@@ -380,6 +380,41 @@ public class DynamicCode {
         return f[m][n];
     }
 
+    public int maxProduct(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int[] curMax = new int[nums.length];
+        int[] curMin = new int[nums.length];
+        int res = nums[0];
+        curMax[0] = nums[0];
+        curMin[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            curMax[i] = Math.max(Math.max(curMax[i - 1] * nums[i], nums[i]),curMin[i - 1] * nums[i]);
+            curMin[i] = Math.min(Math.min(curMax[i - 1] * nums[i], nums[i]),curMin[i - 1] * nums[i]);
+            if (curMax[i] > res) {
+                res = curMax[i];
+            }
+        }
+        return res;
+
+    }
+
+    public int maxProfit(int[] prices) {
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice) {
+                minprice = prices[i];
+            } else if (prices[i] - minprice > maxprofit) {
+                maxprofit = prices[i] - minprice;
+            }
+
+        }
+
+        return maxprofit;
+    }
+
 
 }
 
