@@ -1,11 +1,16 @@
 package DailyAlg;
 
+import java.util.ArrayList;
+
 public class DailyAlg202504 {
     public static void main(String[] args) {
-        ListNode node1 = new ListNode(7, new ListNode(1, new ListNode(6)));
-        ListNode node2 = new ListNode(5, new ListNode(9, new ListNode(2,new ListNode(9))));
+//        ListNode node1 = new ListNode(7, new ListNode(1, new ListNode(6)));
+//        ListNode node2 = new ListNode(5, new ListNode(9, new ListNode(2,new ListNode(9))));
 
-        addTwoNumbers(node1, node2);
+//        addTwoNumbers(node1, node2);
+        int[] testArray = {1,2,2,3};
+        int[] testArray2 = {2,2};
+        System.out.println(intersection(testArray, testArray2));
     }
 
     // 面试题02.05. 链表求和
@@ -66,6 +71,26 @@ public class DailyAlg202504 {
             res.next = new ListNode(1);
         }
         return dummyHead.next;
+    }
+
+    public static int[] intersection(int[] nums1, int[] nums2) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for (int i = 0; i < nums1.length; i++) {
+            if (res.contains(nums1[i])) {
+                continue;
+            } else {
+                for (int j = 0; j < nums2.length; j++) {
+                    if (nums1[i] == nums2[j]) {
+                        res.add(nums1[i]);
+                        break;
+                    }
+
+                }
+            }
+
+        }
+        return res.stream().mapToInt(Integer::intValue).toArray();
+
     }
 }
 
