@@ -92,6 +92,12 @@ public class DailyAlg202504 {
         return res.stream().mapToInt(Integer::intValue).toArray();
 
     }
+
+    public void rotate(int[][] matrix) {
+
+
+    }
+
 }
 
 
