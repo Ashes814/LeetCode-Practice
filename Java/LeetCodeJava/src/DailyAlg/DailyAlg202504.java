@@ -8,9 +8,12 @@ public class DailyAlg202504 {
 //        ListNode node2 = new ListNode(5, new ListNode(9, new ListNode(2,new ListNode(9))));
 
 //        addTwoNumbers(node1, node2);
-        int[] testArray = {1,2,2,3};
-        int[] testArray2 = {2,2};
-        System.out.println(intersection(testArray, testArray2));
+//        int[] testArray = {1,2,2,3};
+//        int[] testArray2 = {2,2};
+//        System.out.println(intersection(testArray, testArray2));
+
+        int[][] test1 = {{1,2,3},{4,5,6},{7,8,9}};
+        rotate(test1);
     }
 
     // 面试题02.05. 链表求和
@@ -93,7 +96,18 @@ public class DailyAlg202504 {
 
     }
 
-    public void rotate(int[][] matrix) {
+    public static void rotate(int[][] matrix) {
+        int n = matrix.length;
+
+        for (int i = 0; i < n / 2; i++) {
+            for (int j = 0; j < (n + 1) / 2; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - 1 - j][i];
+                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
+                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
+                matrix[j][n - 1 - i] = temp;
+            }
+        }
 
 
     }
