@@ -1,6 +1,7 @@
 package DailyAlg;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DailyAlg202504 {
     public static void main(String[] args) {
@@ -12,8 +13,10 @@ public class DailyAlg202504 {
 //        int[] testArray2 = {2,2};
 //        System.out.println(intersection(testArray, testArray2));
 
-        int[][] test1 = {{1,2,3},{4,5,6},{7,8,9}};
-        rotate(test1);
+//        int[][] test1 = {{1,2,3},{4,5,6},{7,8,9}};
+//        rotate(test1);
+        int[] test = {3,0,3,2,4,2,1,1,0,4};
+        findSmallestInteger(test, 5);
     }
 
     // 面试题02.05. 链表求和
@@ -108,6 +111,32 @@ public class DailyAlg202504 {
                 matrix[j][n - 1 - i] = temp;
             }
         }
+
+
+    }
+
+    public static int findSmallestInteger(int[] nums, int value) {
+        int n = nums.length;
+        boolean[] vis = new boolean[n + 1];
+        int[] cnt = new int[value];
+
+        for (int i = 0; i < n; i++) {
+            int t = (nums[i] % value + value) % value;
+            int y = cnt[t] * value + t;
+            if (y < n) {
+                vis[y] = true;
+            }
+            cnt[t]++;
+
+        }
+
+        for (int i = 0; i <= n ; i++) {
+            if (!vis[i]) {
+                return i;
+            }
+
+        }
+        return -1;
 
 
     }
