@@ -151,3 +151,31 @@ class ListNode {
     ListNode(int val) { this.val = val; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 }
+
+class LUPrefix {
+
+    private int videoLength;
+    private boolean[] uploadedCode;
+    private int curRes = 0;
+
+    public LUPrefix(int n) {
+        videoLength = n;
+        uploadedCode = new boolean[n];
+    }
+
+    public void upload(int video) {
+
+        if (video <= videoLength && uploadedCode[video - 1] == false) {
+            uploadedCode[video - 1] = true;
+        }
+
+        while (curRes < videoLength && uploadedCode[curRes] == true) {
+            curRes++;
+        }
+
+    }
+
+    public int longest() {
+        return curRes;
+    }
+}
