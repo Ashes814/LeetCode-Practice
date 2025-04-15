@@ -141,6 +141,61 @@ public class DailyAlg202504 {
 
     }
 
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        int flag = 0;
+        ListNode resNode = new ListNode();
+        ListNode dummyHead = resNode;
+        while (l1 != null && l2 != null) {
+            int num = l1.val + l2.val + flag;
+            if (num >= 10) {
+                num = num - 10;
+                flag = 1;
+            } else {
+                flag = 0;
+            }
+            resNode.next = new ListNode(num);
+            l1 = l1.next;
+            l2 = l2.next;
+            resNode = resNode.next;
+
+        }
+
+
+        while (l1 != null) {
+            int num = l1.val + flag;
+            if (num >= 10) {
+                num = num - 10;
+                flag = 1;
+            } else {
+                flag = 0;
+            }
+            resNode.next = new ListNode(num);
+            l1 = l1.next;
+            resNode = resNode.next;
+        }
+
+        while (l2 != null) {
+            int num = l2.val + flag;
+            if (num >= 10) {
+                num = num - 10;
+                flag = 1;
+            } else {
+                flag = 0;
+            }
+            resNode.next = new ListNode(num);
+            l2 = l2.next;
+            resNode = resNode.next;
+        }
+
+        if (flag == 1) {
+            resNode.next = new ListNode(1);
+        }
+
+        return dummyHead.next;
+
+
+    }
+
 }
 
 
