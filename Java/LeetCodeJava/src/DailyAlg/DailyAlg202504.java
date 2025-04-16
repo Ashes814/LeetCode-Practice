@@ -15,8 +15,10 @@ public class DailyAlg202504 {
 
 //        int[][] test1 = {{1,2,3},{4,5,6},{7,8,9}};
 //        rotate(test1);
-        int[] test = {3,0,3,2,4,2,1,1,0,4};
-        findSmallestInteger(test, 5);
+//        int[] test = {3,0,3,2,4,2,1,1,0,4};
+//        findSmallestInteger(test, 5);
+        ListNode testNode = new ListNode(1, new ListNode(4, new ListNode(3, new ListNode(2))));
+        partition(testNode, 3);
     }
 
     // 面试题02.05. 链表求和
@@ -192,6 +194,35 @@ public class DailyAlg202504 {
         }
 
         return dummyHead.next;
+
+
+    }
+
+    public static ListNode partition(ListNode head, int x) {
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+
+        ListNode preNode = new ListNode();
+        ListNode preHead = preNode;
+        ListNode postNode = new ListNode();
+        ListNode postHead = postNode;
+        dummyHead = dummyHead.next;
+        do {
+
+            if (dummyHead.val < x) {
+                preNode.next = dummyHead;
+                preNode = preNode.next;
+                dummyHead = dummyHead.next;
+                preNode.next = null;
+            } else if (dummyHead.val >= x) {
+                postNode.next = dummyHead;
+                postNode = postNode.next;
+                dummyHead = dummyHead.next;
+                postNode.next = null;
+            }
+        } while (dummyHead != null);
+        preNode.next = postHead.next;
+        return preHead.next;
 
 
     }
