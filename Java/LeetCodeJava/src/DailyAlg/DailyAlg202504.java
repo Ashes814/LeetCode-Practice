@@ -2,6 +2,7 @@ package DailyAlg;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class DailyAlg202504 {
     public static void main(String[] args) {
@@ -17,8 +18,8 @@ public class DailyAlg202504 {
 //        rotate(test1);
 //        int[] test = {3,0,3,2,4,2,1,1,0,4};
 //        findSmallestInteger(test, 5);
-        ListNode testNode = new ListNode(1, new ListNode(4, new ListNode(3, new ListNode(2))));
-        partition(testNode, 3);
+        ListNode testNode = new ListNode(-10, new ListNode(-3, new ListNode(0, new ListNode(5, new ListNode(9)))));
+        TreeNode res = sortedListToBST(testNode);
     }
 
     // 面试题02.05. 链表求和
@@ -227,6 +228,30 @@ public class DailyAlg202504 {
 
     }
 
+    public static TreeNode sortedListToBST(ListNode head) {
+        List<Integer> nodeArr = new ArrayList<Integer>();
+        int nodeLength = 0;
+        ListNode temp = head;
+        while (temp != null) {
+            nodeArr.add(nodeLength, temp.val);
+            nodeLength++;
+            temp = temp.next;
+        }
+        return generateAVL(nodeArr, 0, nodeLength - 1);
+
+    }
+
+    public static TreeNode generateAVL(List<Integer> arr, int left, int right) {
+        if (right < left) {
+            return null;
+        }
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(arr.get(mid));
+        root.left = generateAVL(arr, left,  mid - 1);
+        root.right = generateAVL(arr, mid + 1, right);
+        return root;
+    }
+
 }
 
 
@@ -237,6 +262,19 @@ class ListNode {
     ListNode(int val) { this.val = val; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 }
+
+class TreeNode {
+     int val;
+     TreeNode left;
+     TreeNode right;
+     TreeNode() {}
+     TreeNode(int val) { this.val = val; }
+     TreeNode(int val, TreeNode left, TreeNode right) {
+         this.val = val;
+         this.left = left;
+         this.right = right;
+     }
+ }
 
 class LUPrefix {
 
