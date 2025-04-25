@@ -18,9 +18,12 @@ public class DailyAlg202504 {
 //        rotate(test1);
 //        int[] test = {3,0,3,2,4,2,1,1,0,4};
 //        findSmallestInteger(test, 5);
-        ListNode testNode = new ListNode(-10, new ListNode(-3, new ListNode(0, new ListNode(5, new ListNode(9)))));
-        TreeNode res = sortedListToBST(testNode);
+//        ListNode testNode = new ListNode(-10, new ListNode(-3, new ListNode(0, new ListNode(5, new ListNode(9)))));
+//        TreeNode res = sortedListToBST(testNode);
+        TreeNode testTree = new TreeNode(1,new TreeNode(2, new TreeNode(3), new TreeNode(4)), new TreeNode(5, null, new TreeNode(6)));
+        flatten(testTree);
     }
+
 
     // 面试题02.05. 链表求和
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -250,6 +253,26 @@ public class DailyAlg202504 {
         root.left = generateAVL(arr, left,  mid - 1);
         root.right = generateAVL(arr, mid + 1, right);
         return root;
+    }
+
+    public static void flatten(TreeNode root) {
+        List<TreeNode> list = new ArrayList<TreeNode>();
+        flatPre(list, root);
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode prev = list.get(i - 1), curr = list.get(i);
+            prev.left = null;
+            prev.right = curr;
+
+        }
+
+    }
+
+    public static void flatPre(List<TreeNode> list, TreeNode root) {
+       if (root != null) {
+           list.add(root);
+           flatPre(list, root.left);
+           flatPre(list, root.right);
+       }
     }
 
 }
