@@ -1,8 +1,6 @@
 package DailyAlg;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class DailyAlg202504 {
     public static void main(String[] args) {
@@ -20,8 +18,18 @@ public class DailyAlg202504 {
 //        findSmallestInteger(test, 5);
 //        ListNode testNode = new ListNode(-10, new ListNode(-3, new ListNode(0, new ListNode(5, new ListNode(9)))));
 //        TreeNode res = sortedListToBST(testNode);
-        TreeNode testTree = new TreeNode(1,new TreeNode(2, new TreeNode(3), new TreeNode(4)), new TreeNode(5, null, new TreeNode(6)));
-        flatten(testTree);
+//        TreeNode testTree = new TreeNode(1,new TreeNode(2, new TreeNode(3), new TreeNode(4)), new TreeNode(5, null, new TreeNode(6)));
+//        flatten(testTree);
+        Node testNode = new Node(1);
+        testNode.left = new Node(2);
+        testNode.right = new Node(3);
+
+        testNode.left.left = new Node(4);
+        testNode.left.right = new Node(5);
+
+        testNode.right.left = new Node(6);
+        testNode.right.right = new Node(7);
+        connect(testNode);
     }
 
 
@@ -275,6 +283,37 @@ public class DailyAlg202504 {
        }
     }
 
+    public static Node connect(Node root) {
+        if (root == null) {
+            return root;
+        }
+
+        Queue<Node> levelNodeList = new LinkedList<Node>();
+        levelNodeList.add(root);
+        while (!levelNodeList.isEmpty()) {
+            int levelLen = levelNodeList.size();
+
+            while (levelLen > 0) {
+                Node curNode = levelNodeList.poll();
+                levelLen--;
+                if (levelLen == 0) {
+                    curNode.next = null;
+                } else {
+                    curNode.next = levelNodeList.peek();
+
+                }
+
+                if (curNode.left != null && curNode.right != null) {
+                    levelNodeList.add(curNode.left);
+                    levelNodeList.add(curNode.right);
+                }
+            }
+
+        }
+        return root;
+
+    }
+
 }
 
 
@@ -298,6 +337,27 @@ class TreeNode {
          this.right = right;
      }
  }
+
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node next;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
+    }
+};
+
 
 class LUPrefix {
 
