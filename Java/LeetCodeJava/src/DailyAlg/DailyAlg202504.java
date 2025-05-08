@@ -340,6 +340,49 @@ public class DailyAlg202504 {
 
     }
 
+    public void reorderList(ListNode head) {
+        ListNode cur = head;
+        LinkedList<ListNode> nodeList = new LinkedList<>();
+        int nodeLength = 0;
+        while (cur != null) {
+            nodeList.add(cur);
+            cur = cur.next;
+            nodeLength++;
+        }
+
+        if (nodeLength % 2 == 0) {
+            for (int i = 0; i < nodeLength / 2; i++) {
+                nodeList.get(i).next = nodeList.get(nodeLength - i - 1);
+
+                if (i == nodeLength / 2 - 1) {
+                    nodeList.get(i).next.next = null;
+                } else {
+                    nodeList.get(i).next.next = nodeList.get(i + 1);
+                }
+
+
+            }
+        } else {
+            for (int i = 0; i <= nodeLength / 2; i++) {
+                nodeList.get(i).next = nodeList.get(nodeLength - i - 1);
+
+                if (i == nodeLength / 2) {
+                    nodeList.get(i).next = null;
+                } else {
+                    nodeList.get(i).next = nodeList.get(nodeLength - i - 1);
+                    nodeList.get(i).next.next = nodeList.get(i + 1);
+                }
+
+
+            }
+        }
+
+
+
+
+
+    }
+
 }
 
 
