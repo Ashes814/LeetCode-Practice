@@ -467,3 +467,58 @@ class LUPrefix {
         return curRes;
     }
 }
+
+class LRUCache {
+    class DLinkedNode {
+        int key;
+        int value;
+        DLinkedNode prev;
+        DLinkedNode next;
+        public DLinkedNode() {}
+        public DLinkedNode(int _key, int _value) {key = _key; value = _value;}
+    }
+
+
+
+    private int cap;
+    private HashMap<Integer, DLinkedNode> hashMap = new HashMap<>();
+    private DLinkedNode head, tail;
+
+    public LRUCache(int capacity) {
+        this.cap = capacity;
+        head = new DLinkedNode();
+        tail = new DLinkedNode();
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    public int get(int key) {
+
+    }
+
+    public void put(int key, int value) {
+        if (hashMap.containsKey(key)) {
+            hashMap.
+        }
+    }
+
+    private void addToHead(DLinkedNode node) {
+
+    }
+
+    private void removeNode(DLinkedNode node) {
+
+    }
+
+    private void moveToHead(DLinkedNode node) {
+
+    }
+
+    private DLinkedNode removeTail() {
+
+    }
+
+
+}
+
+ d
