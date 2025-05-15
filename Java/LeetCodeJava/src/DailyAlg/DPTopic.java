@@ -1,5 +1,7 @@
 package DailyAlg;
 
+import java.util.List;
+
 public class DPTopic {
     public int uniquePaths(int m, int n) {
         int[] dp = new int[n];
@@ -42,5 +44,29 @@ public class DPTopic {
             }
         }
         return f[m-1][n-1];
+    }
+
+    public int minimumTotal(List<List<Integer>> tri) {
+        int n = tri.size();
+        int[][] f = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            int m = tri.get(i).size();
+            for (int j = 0; j < m; j++) {
+                if (i == 0) {
+                    f[i][j] = tri.get(i).get(j);
+                } else if (j == 0) {
+                    f[i][j] = tri.get(i - 1).get(j) + tri.get(i).get(j);
+                } else {
+                    f[i][j] = Math.min(tri.get(i - 1).get(j - 1),tri.get(i - 1).get(j)) + + tri.get(i).get(j);
+                }
+            }
+        }
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (f[n-1][i] < ans) {
+                ans = f[n-1][i];
+            }
+        }
+        return ans;
     }
 }
