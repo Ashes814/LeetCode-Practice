@@ -283,40 +283,7 @@ public class DailyAlg202504 {
        }
     }
 
-    public static Node connect(Node root) {
-        if (root == null) {
-            return root;
-        }
 
-        Queue<Node> levelNodeList = new LinkedList<Node>();
-        levelNodeList.add(root);
-        while (!levelNodeList.isEmpty()) {
-            int levelLen = levelNodeList.size();
-
-            while (levelLen > 0) {
-                Node curNode = levelNodeList.poll();
-                levelLen--;
-                if (levelLen == 0) {
-                    curNode.next = null;
-                } else {
-                    curNode.next = levelNodeList.peek();
-
-                }
-
-                if (curNode.left != null) {
-                    levelNodeList.add(curNode.left);
-                }
-                if (curNode.right != null) {
-                    levelNodeList.add(curNode.right);
-                }
-
-
-            }
-
-        }
-        return root;
-
-    }
 
     public Node copyRandomList(Node head) {
         if (head == null) {
@@ -381,6 +348,23 @@ public class DailyAlg202504 {
 
 
 
+    }
+
+    public static boolean isMonotonic(int[] nums) {
+        if (nums.length <= 1) {
+            return true;
+        }
+        int diff = nums[1] - nums[0];
+        for (int i = 0; i < nums.length - 1; i++) {
+            int diff2 = nums[i + 1] - nums[i];
+            if ((diff >= 0 && diff2 >= 0) || (diff <= 0 && diff2 <= 0)) {
+                diff = diff2;
+            } else {
+                return false;
+            }
+
+        }
+        return true;
     }
 
 }
