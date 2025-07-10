@@ -354,15 +354,37 @@ public class DailyAlg202504 {
         if (nums.length <= 1) {
             return true;
         }
-        int diff = nums[1] - nums[0];
+        int flag = 0;
+        int index = -1;
         for (int i = 0; i < nums.length - 1; i++) {
-            int diff2 = nums[i + 1] - nums[i];
-            if ((diff >= 0 && diff2 >= 0) || (diff <= 0 && diff2 <= 0)) {
-                diff = diff2;
+            int diff = nums[i + 1] - nums[i];
+            if (diff == 0) {
+                continue;
+            }
+            if (diff > 0) {
+                flag = 0;
+                index = i;
+                break;
+            } else {
+                flag = -1;
+                index = i;
+                break;
+            }
+
+
+        }
+
+        if (index == -1) {
+            return true;
+        }
+
+        for (int i = index; i < nums.length - 1; i++) {
+            if ((flag == 0 && (nums[i + 1] - nums[i] >= 0)) || (flag == -1 && (nums[i + 1] - nums[i] <= 0))) {
+                continue;
+
             } else {
                 return false;
             }
-
         }
         return true;
     }
