@@ -3,6 +3,10 @@ package DailyAlg;
 import java.util.List;
 
 public class DPTopic {
+    public static void main(String[] args) {
+        int[][] matrix = {{-19,57},{-40, 5}};
+        minFallingPathSum(matrix);
+    }
     public int uniquePaths(int m, int n) {
         int[] dp = new int[n];
         for (int i = 0; i < n; i++) {
@@ -71,7 +75,33 @@ public class DPTopic {
     }
 
     // leetcode 931
-    public int minFallingPathSum(int[][] matrix) {
+    public static int minFallingPathSum(int[][] matrix) {
+        int n = matrix.length;
+        int[][] f = new int[n][n];
 
+        for (int i = 0; i < n; i++) {
+            f[0][i] = matrix[0][i];
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int m = matrix[i][j];
+                if (j == 0) {
+                    f[i][j] = Math.min(f[i-1][j], f[i-1][j+1]) + m;
+                } else if (j == n - 1) {
+                    f[i][j] = Math.min(f[i-1][j], f[i-1][j-1]) + m;
+                }
+                else {
+                    f[i][j] = Math.min(Math.min(f[i-1][j], f[i-1][j-1]),  f[i-1][j+1]) + m;
+                }
+            }
+        }
+
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            res = Math.min(res, f[n - 1][i]);
+        }
+
+        return res;
     }
 }
