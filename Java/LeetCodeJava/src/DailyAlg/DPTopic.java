@@ -1,5 +1,6 @@
 package DailyAlg;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DPTopic {
@@ -103,5 +104,21 @@ public class DPTopic {
         }
 
         return res;
+    }
+
+    public static int coinChange(int[] coins, int M) {
+        int max = M + 1;
+        int[] dp = new int[M + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i < max; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+
+        }
+        return dp[M] > M ? -1 : dp[M];
     }
 }
