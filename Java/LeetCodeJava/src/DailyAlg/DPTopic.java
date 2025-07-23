@@ -121,4 +121,24 @@ public class DPTopic {
         }
         return dp[M] > M ? -1 : dp[M];
     }
+
+    public static int findLengthOfLCIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        int res = 1;
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0) {
+                dp[i] = 1;
+            }
+            if (i > 0 && nums[i - 1] < nums[i]) {
+                dp[i] = dp[i - 1] + 1;
+            } else {
+                dp[i] = 1;
+            }
+            res = Math.max(res, dp[i]);
+        }
+
+        return res;
+    }
+
+
 }
