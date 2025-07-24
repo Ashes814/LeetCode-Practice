@@ -140,5 +140,24 @@ public class DPTopic {
         return res;
     }
 
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        if (n == 0) {
+            return 0;
+        }
+        int[] dp = new int[n];
+        int i, j, res = 0;
+        for (j = 0; j < n; j++) {
+            dp[j] = 1;
+            for (i = 0; i < j; i++) {
+                if (nums[i] < nums[j] && dp[i] + 1 > dp[j]) {
+                    dp[j] = dp[i] + 1;
+                }
+            }
+            res = Math.max(res, dp[j]);
+        }
+        return res;
+
+    }
 
 }
