@@ -156,6 +156,7 @@ public class DPTopic {
             }
             res = Math.max(res, dp[j]);
         }
+
         return res;
 
     }
