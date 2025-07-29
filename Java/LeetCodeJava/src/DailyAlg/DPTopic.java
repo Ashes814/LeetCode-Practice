@@ -177,4 +177,20 @@ public class DPTopic {
         return f[n];
     }
 
+    public boolean canJump(int[] nums) {
+        boolean[] f = new boolean[nums.length];
+        f[0] = true;
+        int i = 0;
+        while (i < nums.length && f[i]) {
+            for (int j = 0; j <= nums[i]; j++) {
+                if (i + j < nums.length) {
+                    f[i + j] = true;
+                }
+
+            }
+            i++;
+        }
+        return f[nums.length - 1];
+    }
+
 }
