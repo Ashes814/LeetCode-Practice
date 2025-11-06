@@ -2,8 +2,8 @@ package DailyAlg;
 
 public class BinarySearchLC {
     public static void main(String[] args) {
-        int[] nums = {3, 1};
-        search(nums, 0);
+        int[] nums = {5, 7, 7, 8, 8, 10};
+        searchRange(nums, 8);
     }
     public static int search(int[] nums, int target) {
         int n = nums.length;
@@ -54,5 +54,32 @@ public class BinarySearchLC {
             res = binarySearch(nums, low, mid - 1, target);
         }
         return res;
+    }
+
+    public static int[] searchRange(int[] nums, int target) {
+        int initialIndex = binarySearch(nums, 0, nums.length - 1, target);
+        int[] res = {-1, -1};
+        if (initialIndex == -1) {
+            return res;
+        }
+        int startIndex = initialIndex;
+        int endIndex = initialIndex;
+
+        while ((startIndex > 0 && nums[startIndex - 1] == target) || nums[endIndex] == target) {
+            if (startIndex > 0 && nums[startIndex - 1] == target) {
+                startIndex--;
+            }
+
+            if (endIndex < nums.length - 1) {
+                endIndex++;
+            }
+        }
+        if (nums[startIndex] == target && startIndex > 0) {
+            startIndex--;
+        }
+        if (nums[endIndex] == target && endIndex < nums.length - 1) {
+            endIndex++;
+        }
+        return null;
     }
 }
