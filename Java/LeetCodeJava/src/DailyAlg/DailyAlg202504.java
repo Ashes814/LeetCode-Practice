@@ -239,7 +239,7 @@ public class DailyAlg202504 {
 
     }
 
-    public static TreeNode sortedListToBST(ListNode head) {
+    public static TreeNodeT sortedListToBST(ListNode head) {
         List<Integer> nodeArr = new ArrayList<Integer>();
         int nodeLength = 0;
         ListNode temp = head;
@@ -252,22 +252,22 @@ public class DailyAlg202504 {
 
     }
 
-    public static TreeNode generateAVL(List<Integer> arr, int left, int right) {
+    public static TreeNodeT generateAVL(List<Integer> arr, int left, int right) {
         if (right < left) {
             return null;
         }
         int mid = (left + right) / 2;
-        TreeNode root = new TreeNode(arr.get(mid));
+        TreeNodeT root = new TreeNodeT(arr.get(mid));
         root.left = generateAVL(arr, left,  mid - 1);
         root.right = generateAVL(arr, mid + 1, right);
         return root;
     }
 
-    public static void flatten(TreeNode root) {
-        List<TreeNode> list = new ArrayList<TreeNode>();
+    public static void flatten(TreeNodeT root) {
+        List<TreeNodeT> list = new ArrayList<TreeNodeT>();
         flatPre(list, root);
         for (int i = 1; i < list.size(); i++) {
-            TreeNode prev = list.get(i - 1), curr = list.get(i);
+            TreeNodeT prev = list.get(i - 1), curr = list.get(i);
             prev.left = null;
             prev.right = curr;
 
@@ -275,7 +275,7 @@ public class DailyAlg202504 {
 
     }
 
-    public static void flatPre(List<TreeNode> list, TreeNode root) {
+    public static void flatPre(List<TreeNodeT> list, TreeNodeT root) {
        if (root != null) {
            list.add(root);
            flatPre(list, root.left);
@@ -402,11 +402,11 @@ class ListNode {
 
 class TreeNode {
      int val;
-     TreeNode left;
-     TreeNode right;
+     TreeNodeT left;
+     TreeNodeT right;
      TreeNode() {}
      TreeNode(int val) { this.val = val; }
-     TreeNode(int val, TreeNode left, TreeNode right) {
+     TreeNode(int val, TreeNodeT left, TreeNodeT right) {
          this.val = val;
          this.left = left;
          this.right = right;
