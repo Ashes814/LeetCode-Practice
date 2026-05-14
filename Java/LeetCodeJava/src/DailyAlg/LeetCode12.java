@@ -3,7 +3,7 @@ package DailyAlg;
 public class LeetCode12 {
     public static void main(String[] args) {
         System.out.println("Hello Java!");
-        System.out.println(new LeetCode12().inToRoman(1994));
+        System.out.println(new LeetCode12().inToRoman(58));
     }
 
     String inToRoman(int num) {
