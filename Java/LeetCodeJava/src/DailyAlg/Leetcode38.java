@@ -114,3 +114,5 @@ public class Leetcode38 {
 //        cout << countAndSay(4) << endl; // 输出 1211
 //        return 0;
 //        }
+
+
