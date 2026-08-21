@@ -6,7 +6,7 @@ public class LeetCode148 {
         test.next = new ListNode(2);
         test.next.next = new ListNode(1);
         test.next.next.next = new ListNode(3);
-        sortList(test);
+//        sortList(test);
     }
 
     public ListNode sortList(ListNode head) {
