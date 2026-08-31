@@ -10,22 +10,32 @@ public class LeetCode179 {
     }
 
     public static String largestNumber(int[] nums) {
-        int maxNum = Arrays.stream(nums).max().getAsInt();
-        String numString = String.valueOf(maxNum);
-        int maxNumLen = numString.length();
-        Double maxN = Math.pow(10, maxNumLen);
-        ArrayList<Double> buffer = new ArrayList<>();
-        for (int num: nums) {
-            String numS = String.valueOf(num);
-            int curNumLen = numS.length();
-            int gap = maxNumLen - curNumLen;
-            Double newNum = num * Math.pow(10, gap);
-            buffer.add(newNum);
-
+        int  n = nums.length;
+        Integer[] numsArr = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            numsArr[i] = nums[i];
         }
 
-        buffer.sort(Comparator.reverseOrder());
+        Arrays.sort(numsArr, (x, y) -> {
+            long sx = 10, sy = 10;
+            while (sx <= x) {
+                sx *= 10;
+            }
+            while (sy <= y) {
+                sy *= 10;
+            }
 
+            return (int) (-sy * x - y + sx * y + x);
+        });
+
+        if (numsArr[0] == 0) {
+            return "0";
+        }
+        StringBuilder ret = new StringBuilder();
+        for (int num : numsArr) {
+            ret.append(num);
+        };
+        return ret.toString();
 
     }
 }
