@@ -25,7 +25,7 @@ public class LeetCode179 {
                 sy *= 10;
             }
 
-            return (int) (-sy * x - y + sx * y + x);
+            return Long.compare(sx * y + x, sy * x + y);
         });
 
         if (numsArr[0] == 0) {
