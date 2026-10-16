@@ -2,6 +2,27 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "LeetCode378",
+      "request": "launch",
+      "mainClass": "DailyAlg.LeetCode378",
+      "projectName": "LeetCode-Practice_a8a218b2"
+    },
+    {
+      "type": "java",
+      "name": "LeetCode368",
+      "request": "launch",
+      "mainClass": "DailyAlg.LeetCode368",
+      "projectName": "LeetCode-Practice_a8a218b2"
+    },
+    {
+      "type": "java",
+      "name": "LeetCode324",
+      "request": "launch",
+      "mainClass": "DailyAlg.LeetCode324",
+      "projectName": "LeetCode-Practice_a8a218b2"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
