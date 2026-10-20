@@ -15,6 +15,7 @@ public class LeetCode378 {
         ArrayList<Integer> temp = new ArrayList<>();
         int rows = matrix.length;
         int cols = matrix[0].length;
+<<<<<<< HEAD
         int t = 0;
         for (int i = 0; i < rows; i++) {
             if (t >= k) {
@@ -27,6 +28,15 @@ public class LeetCode378 {
                 } else {
                     break;
                 }
+=======
+ 
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+
+                temp.add(matrix[i][j]);
+
+
+>>>>>>> 993b461 (pass 389)
             }
         }
 

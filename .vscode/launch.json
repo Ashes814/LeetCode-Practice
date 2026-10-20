@@ -3,6 +3,7 @@
   "configurations": [
     {
       "type": "java",
+<<<<<<< HEAD
       "name": "LeetCode378",
       "request": "launch",
       "mainClass": "DailyAlg.LeetCode378",
@@ -20,6 +21,11 @@
       "name": "LeetCode324",
       "request": "launch",
       "mainClass": "DailyAlg.LeetCode324",
+=======
+      "name": "LeetCode389",
+      "request": "launch",
+      "mainClass": "DailyAlg.LeetCode389",
+>>>>>>> 993b461 (pass 389)
       "projectName": "LeetCode-Practice_a8a218b2"
     },
     {
